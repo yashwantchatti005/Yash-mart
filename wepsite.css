@@ -1,0 +1,276 @@
+/* Global Styles */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+  background: linear-gradient(90deg, #03021a 100%, #090979 100%, #00d4ff 100%);
+}
+
+/* Navbar */
+.navbar-brand {
+  color: rgb(236, 9, 9) !important;
+  padding-left: 10px;
+  font-size: 22px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  position: static;
+}
+
+.navbar-brand:hover {
+  text-shadow: 2px 2px 7px black;
+}
+
+.nav-link {
+  font-size: 20px;
+  font-weight: 600;
+  color: white !important;
+  margin: 0 10px;
+  text-decoration: wavy;
+  position: sticky;
+}
+
+.nav-link:hover {
+  color: rgb(248, 238, 238) !important;
+  text-decoration: underline;
+}
+
+/* Section */
+section {
+  background: linear-gradient(to top, #1F1C18, #8E0E00);
+  color: white;
+}
+
+.banner-text {
+  animation: fadeInDown 1.5s ease-in-out;
+}
+
+.banner-text:hover {
+  font-size: large;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+.btn.btn-outline-success {
+  color: blue !important;
+}
+
+.btn.btn-outline-success:hover {
+  color: rgb(92, 92, 227) !important;
+}
+
+/* Container */
+.container-fluid {
+  padding: 15px;
+  background: linear-gradient(to top, #1F1C18, #8E0E00);
+  position: relative;
+}
+
+/* Cards */
+.card {
+  display: grid;
+  grid-template-columns: auto auto; /* default 2-column layout */
+  height: 750px;
+  color: #000;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  background-image: linear-gradient(174.2deg, rgba(255,244,228,1) 7.1%, rgba(240,246,238,1) 67.4%);
+  color: rgb(8, 0, 0);
+  transform: scale(1.03);
+  box-shadow: 6px 6px 20px rgba(0,0,0,0.2);
+}
+
+.col {
+  padding: 7px;
+}
+
+/* Links */
+.hi {
+  color: white;
+  text-decoration: none;
+}
+
+.hi:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .card {
+    grid-template-columns: 1fr; /* single column */
+    height: auto;
+  }
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr; /* keep single column */
+    height: auto;
+  }
+  .container, .container-fluid {
+    padding: 10px;
+  }
+}
+
+/* Text resize for small mobile screens */
+@media (max-width: 600px) {
+  .navbar-brand {
+    font-size: 18px;
+  }
+  .nav-link {
+    font-size: 16px;
+  }
+  .banner-text {
+    font-size: small;
+  }
+}
+/* RESPONSIVE DESIGN */
+
+/* For tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+
+  .banner-text h1 {
+    font-size: 28px;
+  }
+
+  .banner-text p {
+    font-size: 16px;
+  }
+}
+
+/* For mobiles (≤768px) */
+@media (max-width: 768px) {
+  /* Navbar adjustments */
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 15px;
+  }
+
+  /* Search form */
+  #searchForm {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  #searchInput {
+    width: 80%;
+  }
+
+  /* Banner */
+  section {
+    padding: 40px 15px;
+  }
+
+  .banner-text h1 {
+    font-size: 24px;
+  }
+
+  .banner-text p {
+    font-size: 14px;
+  }
+
+  /* Cards */
+  .card img {
+    height: auto !important;
+  }
+
+  .card h5 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 14px;
+  }
+
+  /* Offer section */
+  .bg-warning h3 {
+    font-size: 18px;
+  }
+
+  /* Why Shop With Us */
+  .row.text-center .col-md-3 {
+    flex: 1 1 100%;
+    margin-bottom: 15px;
+  }
+
+  /* Subscribe section */
+  #subscribeForm {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #subscribeEmail {
+    width: 80% !important;
+    margin-bottom: 10px;
+  }
+
+  /* Footer */
+  footer p {
+    font-size: 14px;
+  }
+}
+
+/* For very small phones (≤480px) */
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 16px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .banner-text h1 {
+    font-size: 20px;
+  }
+
+  .banner-text p {
+    font-size: 13px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .card h5 {
+    font-size: 15px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .bg-warning h3 {
+    font-size: 16px;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
+}
+

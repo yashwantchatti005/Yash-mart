@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Welcome to Yashmart</title>
+    <link rel="icon" type="image/svg" href="bag-fill.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="wepsite.css">
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <body>
+<!-- Navbar -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
+
+    <!-- Hamburger button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Everything visible on all screen sizes -->
+    <div class="d-flex align-items-center ms-auto gap-3">
+      <!-- Search -->
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+
+      <!-- Profile -->
+      <div class="d-flex flex-column align-items-center">
+        <a href="profile.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
+        <span class="hi">Profile</span>
+      </div>
+
+      <!-- Cart -->
+      <div class="d-flex flex-column align-items-center">
+        <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
+        <span class="hi" id="cartCount">0</span>
+      </div>
+    </div>
+
+    <!-- Collapsible menu for links -->
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="all.html">All</a></li>
+        <li class="nav-item"><a class="nav-link" href="cafe.html">Cafe</a></li>
+        <li class="nav-item"><a class="nav-link" href="toys.html">Toys</a></li>
+        <li class="nav-item"><a class="nav-link" href="fresh.html">Fresh</a></li>
+        <li class="nav-item"><a class="nav-link" href="electronic.html">Electronic</a></li>
+        <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
+        <li class="nav-item"><a class="nav-link" href="fashion.html">Fashion</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br><br><br><br>
+
+    <!-- Heading -->
+    <section class="bg-dark text-white text-center p-5">
+       <div class="banner-text">
+      <h1>FASHION</h1>
+      <p>Order now for instant delivery</p>
+      </div>
+    </section>
+
+    <div class="container my-5">
+  <h1 class="text-center mb-4">NEW MODEL'S</h1>
+  <div class="row g-4 justify-content-center text-center">
+
+    <div class="col-12 col-md-4">
+      <div class="position-relative">
+        <img src="shirt.webp" class="img-fluid rounded" alt="Men's T-shirt" style="height: 300px; width: 100%; object-fit: cover;">
+        <div class="position-absolute bottom-0 w-100 bg-dark bg-opacity-50 text-white py-2">
+          Men's T-shirt
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="position-relative">
+        <img src="kids.webp" class="img-fluid rounded" alt="Kids Dress" style="height: 300px; width: 100%; object-fit: cover;">
+        <div class="position-absolute bottom-0 w-100 bg-dark bg-opacity-50 text-white py-2">
+          Kids Dress
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="position-relative">
+        <img src="w dress.avif" class="img-fluid rounded" alt="Women's Dress" style="height: 300px; width: 100%; object-fit: cover;">
+        <div class="position-absolute bottom-0 w-100 bg-dark bg-opacity-50 text-white py-2">
+          Women's Dress
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+    <div class="container my-5">
+      <h1 class="text-center mb-4">FOR KID'S</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+        
+        <div class="col">
+          <div class="card h-100">
+            <img src="k1.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Baby blue shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹229</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="K2.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Baby white striped shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹599</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="k3.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Baby white shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹499</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="k4.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Baby beige shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹899</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="k5.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Red spiderman shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹589</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="k6.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Denim blue shirt</h5>
+              <p class="card-text">For kids.</p>
+              <p class="card-text">₹460</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+       
+
+      </div>
+    </div><br>
+
+    
+    <div class="container my-5">
+      <h1 class="text-center mb-4">FOR BOY'S</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+        
+        <div class="col">
+          <div class="card h-100">
+            <img src="t1.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹229</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t2.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹299</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t3.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹399</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t4.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹799</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t5.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹999</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t6.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹899</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t7.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">For Boys.</p>
+              <p class="card-text">₹689</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="t8.webp" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Men's T-shirt</h5>
+              <p class="card-text">Charge anytime any where.</p>
+              <p class="card-text">₹129</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><br>
+
+
+    <div class="container my-5">
+      <h1 class="text-center mb-4">FOR GIRL'S</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+        
+        <div class="col">
+          <div class="card h-100">
+            <img src="g1.jpg" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Women's t-shirts</h5>
+              <p class="card-text">For GIRLS.</p>
+              <p class="card-text">₹439</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="g2.jpeg" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Women's t-shirt</h5>
+              <p class="card-text">For GIRLS.</p>
+              <p class="card-text">₹289</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="g3.jpeg" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Women's t-shirt</h5>
+              <p class="card-text">For GIRLS.</p> 
+              <p class="card-text">₹299</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="g4.jpeg" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Women's t-shirt</h5>
+              <p class="card-text">For GIRLS.</p>
+              <p class="card-text">₹399</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="col">
+          <div class="card h-100">
+            <img src="g5.jpeg" class="card-img-top" alt="Coffee" height="205">
+            <div class="card-body">
+              <h5 class="card-title">Women's t-shirt</h5>
+              <p class="card-text">For GIRLS.</p>
+              <p class="card-text">₹499</p>
+              <a href="#" class="btn btn-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+         
+          
+
+      </div>
+     </div>
+
+
+          <!-- Footer -->
+    <footer class="bg-light text-center text-dark mt-4">
+      <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
+    </footer><br>
+
+
+    <script>
+// ✅ CART SYSTEM
+const cartCount = document.getElementById("cartCount");
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cartCount.textContent = cart.length;
+
+// Grab all Add to Cart buttons
+document.querySelectorAll(".btn.btn-primary.w-100").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    const card = btn.closest(".card");
+    const name = card.querySelector(".card-title").textContent.trim();
+    const priceText = card.querySelector(".card-text:nth-of-type(2)").textContent.trim();
+    const price = parseInt(priceText.replace("₹", ""));
+    const image = card.querySelector("img").getAttribute("src");
+
+    // Add to cart
+    const item = { name, price, image };
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartCount.textContent = cart.length;
+
+    // Show temporary success feedback
+    btn.textContent = "✅ Added!";
+    btn.classList.replace("btn-primary", "btn-success");
+    setTimeout(() => {
+      btn.textContent = "Add to cart";
+      btn.classList.replace("btn-success", "btn-primary");
+    }, 1500);
+  });
+});
+
+// 🔍 SEARCH FUNCTION
+const searchForm = document.querySelector("form");
+const searchInput = searchForm.querySelector("input[type='search']");
+const cards = document.querySelectorAll(".card");
+
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const query = searchInput.value.toLowerCase().trim();
+  let found = false;
+
+  cards.forEach(card => {
+    const name = card.querySelector(".card-title").textContent.toLowerCase();
+    if (name.includes(query)) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("border", "border-success");
+      setTimeout(() => card.classList.remove("border", "border-success"), 2000);
+      found = true;
+    }
+  });
+
+  if (!found) {
+    alert("❌ Product not found!");
+  }
+});
+</script>
+
+
+  </body>
+</html>

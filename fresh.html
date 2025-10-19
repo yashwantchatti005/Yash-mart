@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Yashmart</title>
+    <link rel="icon" type="image/svg" href="bag-fill.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="wepsite.css">
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <body>
+<!-- Navbar -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
+
+    <!-- Hamburger button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Everything visible on all screen sizes -->
+    <div class="d-flex align-items-center ms-auto gap-3">
+      <!-- Search -->
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+
+      <!-- Profile -->
+      <div class="d-flex flex-column align-items-center">
+        <a href="profile.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
+        <span class="hi">Profile</span>
+      </div>
+
+      <!-- Cart -->
+      <div class="d-flex flex-column align-items-center">
+        <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
+        <span class="hi" id="cartCount">0</span>
+      </div>
+    </div>
+
+    <!-- Collapsible menu for links -->
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="all.html">All</a></li>
+        <li class="nav-item"><a class="nav-link" href="cafe.html">Cafe</a></li>
+        <li class="nav-item"><a class="nav-link" href="toys.html">Toys</a></li>
+        <li class="nav-item"><a class="nav-link" href="fresh.html">Fresh</a></li>
+        <li class="nav-item"><a class="nav-link" href="electronic.html">Electronic</a></li>
+        <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
+        <li class="nav-item"><a class="nav-link" href="fashion.html">Fashion</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br><br><br><br>
+
+    <!-- Heading -->
+    <section class="bg-dark text-white text-center p-5">
+       <div class="banner-text">
+      <h1>FRESH</h1>
+      <p>Order now for instant delivery</p>
+       </div>
+    </section><br>
+
+     <div class="container my-5">
+      <h1 class="text-center mb-4">Fresh Vegetables</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+
+                         <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="3-tomato-png-image-picture-download.png" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Tomato</h5>
+              <p class="card-text">"Adds taste to every dish."<br><strong>₹40/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+           <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="3-cauliflower-png-image.png" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Cauliflower</h5>
+              <p class="card-text">"A flower you can eat."<br><strong>₹55/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+           <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="8-onion-png-image.png" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Onion</h5>
+              <p class="card-text">"Brings flavor and tears."<br><strong>₹30/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+           <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="12-broccoli-png-image-with-transparent-background.png" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Broccoli</h5>
+              <p class="card-text">"Little green trees."<br><strong>₹120/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+           <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="carrot.jpg" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Carrot</h5>
+              <p class="card-text">"Crunchy and sweet."<br><strong>₹60/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+           <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="14-eggplant-png-images-download.png" class="card-img-top" alt="Blocks" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Brinjal</h5>
+              <p class="card-text">"The purple king."<br><strong>₹45/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+
+
+        </div>
+     </div>
+
+
+         <!--image slides-->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+ <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="vegetables.webp" class="d-block w-100" alt="..." height="400">
+      <div class="carousel-caption d-none d-md-block text-white">
+        <h2>Vegetables and Fruits</h2>
+        <p>Order now for instand delivery.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="fruits.jpg" class="d-block w-100" alt="..." height="400">
+    </div>
+    <div class="carousel-item">
+      <img src="leaf.webp" class="d-block w-100" alt="..." height="400">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+<!--fruits-->
+ <div class="container my-5">
+      <h1 class="text-center mb-4">Fresh Fruits</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+
+              <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="24454-5-apple-fruit-transparent-image.png" class="card-img-top" alt="Apple" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Apple</h5>
+              <p class="card-text">"An apple a day."<br><strong>₹150/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+               <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="31668-7-banana-icon.png" class="card-img-top" alt="Banana" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Banana</h5>
+              <p class="card-text">"Energy on the go."<br><strong>₹60/dozen</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+               <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="34386-3-blueberry-transparent.png" class="card-img-top" alt="Blueberry" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Blueberry</h5>
+              <p class="card-text">"Tiny but mighty."<br><strong>₹250/box</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+               <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="24424-7-papaya-transparent-background.png" class="card-img-top" alt="Papaya" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Papaya</h5>
+              <p class="card-text">"Good for digestion."<br><strong>₹45/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+               <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="23102-2-artichokes-transparent.png" class="card-img-top" alt="Sitaphal" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Sitaphal</h5>
+              <p class="card-text">"Sweet and creamy."<br><strong>₹180/kg</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+               <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="22588-9-transparent-pineapple.png" class="card-img-top" alt="Pineapple" height="200">
+            <div class="card-body">
+              <h5 class="card-title">Pineapple</h5>
+              <p class="card-text">"Tropical sweetness."<br><strong>₹90/piece</strong></p>
+              <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+         </div>
+
+      </div>
+    </div>
+
+
+         </div>
+    </div>
+
+    <!--Leafy, Herbs & Seasonings-->
+      <div class="container my-5">
+      <h1 class="text-center mb-4">Leafy and Flowers</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+
+             <div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="1-tree-png-image-download-picture.png" class="card-img-top" alt="Mango Tree" height="145">
+    <div class="card-body">
+      <h5 class="card-title">Mango Tree</h5>
+      <p class="card-text">"King of fruits’ home."<br><strong>₹1200/plant</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="20-tree-png-image-download-picture.png" class="card-img-top" alt="Neem Tree" height="145">
+    <div class="card-body">
+      <h5 class="card-title">Neem Tree</h5>
+      <p class="card-text">"Nature’s medicine."<br><strong>₹900/plant</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="leaf.webp" class="card-img-top" alt="Green Leaf"  height="164">
+    <div class="card-body">
+      <h5 class="card-title">Green Leaf</h5>
+      <p class="card-text">"Fresh and natural."<br><strong>₹30/bunch</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="leaf1.webp" class="card-img-top" alt="Tulsi Leaves"  height="164">
+    <div class="card-body">
+      <h5 class="card-title">Tulsi Leaves</h5>
+      <p class="card-text">"Sacred & healing."<br><strong>₹50/bunch</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="flow.webp" class="card-img-top" alt="Rose Flower" height="164">
+    <div class="card-body">
+      <h5 class="card-title">Rose Flower</h5>
+      <p class="card-text">"Symbol of love."<br><strong>₹20/piece</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img src="lotus.webp" class="card-img-top" alt="Lotus Flower"  height="164">
+    <div class="card-body">
+      <h5 class="card-title">Lotus Flower</h5>
+      <p class="card-text">"Pure and divine."<br><strong>₹40/piece</strong></p>
+      <a href="fresh.html" class="btn btn-primary">Add to cart</a>
+    </div>
+  </div>
+</div>
+
+
+         </div>
+    </div>
+
+
+     <!-- Footer -->
+    <footer class="bg-light text-center text-dark mt-4">
+      <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
+    </footer>
+
+
+<script>
+// CART SYSTEM
+const cartCount = document.getElementById("cartCount");
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cartCount.textContent = cart.length;
+
+// Grab all Add to Cart buttons
+document.querySelectorAll(".btn.btn-primary").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent page reload
+
+    const card = btn.closest(".card");
+    const name = card.querySelector(".card-title").textContent.trim();
+
+    // Get price from <strong> inside <p>
+    const priceText = card.querySelector(".card-text strong").textContent.trim();
+    const price = parseInt(priceText.replace(/[^0-9]/g, "")); // remove non-digit chars
+
+    const image = card.querySelector("img").getAttribute("src");
+
+    // Add to cart
+    const item = { name, price, image };
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartCount.textContent = cart.length;
+
+    // Feedback
+    btn.textContent = "✅ Added!";
+    btn.classList.replace("btn-primary", "btn-success");
+    setTimeout(() => {
+      btn.textContent = "Add to cart";
+      btn.classList.replace("btn-success", "btn-primary");
+    }, 1500);
+  });
+});
+
+// 🔍 SEARCH FUNCTION
+const searchForm = document.querySelector("form");
+const searchInput = searchForm.querySelector("input[type='search']");
+const cards = document.querySelectorAll(".card");
+
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const query = searchInput.value.toLowerCase().trim();
+  let found = false;
+
+  cards.forEach(card => {
+    const name = card.querySelector(".card-title").textContent.toLowerCase();
+    if (name.includes(query)) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("border", "border-success");
+      setTimeout(() => card.classList.remove("border", "border-success"), 2000);
+      found = true;
+    }
+  });
+
+  if (!found) {
+    alert("❌ Product not found!");
+  }
+});
+</script>
+
+
+  </body>
+</html>
