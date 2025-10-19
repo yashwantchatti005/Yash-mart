@@ -1,27 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Yashmart</title>
-    <link rel="icon" type="image/svg" href="bag-fill.svg">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="wepsite.css">
-  </head>
-  <body>
-<!-- Navbar -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Yashmart</title>
+  <link rel="icon" type="image/svg" href="bag-fill.svg">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="website.css">
+</head>
+<body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
   <div class="container-fluid">
-    <!-- Brand -->
     <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
-
-    <!-- Hamburger button for mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Everything visible on all screen sizes -->
     <div class="d-flex align-items-center ms-auto gap-3">
       <!-- Search -->
       <form class="d-flex" role="search">
@@ -42,7 +39,6 @@
       </div>
     </div>
 
-    <!-- Collapsible menu for links -->
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
@@ -99,7 +95,7 @@
       <div class="card h-100">
         <img src="c29.webp" class="card-img-top" alt="Smart Watch">
         <div class="card-body text-center">
-          <h5>Smart Watch</h5>
+          <h5 class="card-title">Smart Watch</h5>
           <p>₹2,999</p>
           <button class="btn btn-dark add-cart" data-name="Smart Watch" data-price="2999" data-image="c29.webp">Add to Cart</button>
         </div>
@@ -109,7 +105,7 @@
       <div class="card h-100">
         <img src="c34.webp" class="card-img-top" alt="Teddy" height="230">
         <div class="card-body text-center">
-          <h5>Teddy Bear</h5>
+          <h5 class="card-title">Teddy Bear</h5>
           <p>₹799</p>
           <button class="btn btn-dark add-cart" data-name="Teddy Bear" data-price="799" data-image="c34.webp">Add to Cart</button>
         </div>
@@ -119,7 +115,7 @@
       <div class="card h-100">
         <img src="c35.webp" class="card-img-top" alt="Shoes" height="270">
         <div class="card-body text-center">
-          <h5>Casual Shoes</h5>
+          <h5 class="card-title">Casual Shoes</h5>
           <p>₹1,499</p>
           <button class="btn btn-dark add-cart" data-name="Casual Shoes" data-price="1499" data-image="c35.webp">Add to Cart</button>
         </div>
@@ -129,7 +125,7 @@
       <div class="card h-100">
         <img src="c30.jpg" class="card-img-top" alt="Face Cream" height="270">
         <div class="card-body text-center">
-          <h5>Face Cream</h5>
+          <h5 class="card-title">Face Cream</h5>
           <p>₹499</p>
           <button class="btn btn-dark add-cart" data-name="Face Cream" data-price="499" data-image="c30.jpg">Add to Cart</button>
         </div>
@@ -184,9 +180,12 @@
   <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
 </footer>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
 <script>
-// ✅ CART SYSTEM
+// CART SYSTEM
 const cartCount = document.getElementById("cartCount");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 cartCount.textContent = cart.length;
@@ -203,6 +202,11 @@ document.querySelectorAll(".add-cart").forEach(btn => {
     cartCount.textContent = cart.length;
   });
 });
+
+// SEARCH SYSTEM
+const searchForm = document.querySelector("form[role='search']");
+const searchInput = searchForm.querySelector("input[type='search']");
+const cards = document.querySelectorAll("#productList .card");
 
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
