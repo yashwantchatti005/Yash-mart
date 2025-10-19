@@ -36,25 +36,7 @@
   <span class="hi" id="profileName">Profile</span>
 </div>
 
-<script>
-const profileName = document.getElementById('profileName');
-const profileSection = document.getElementById('profileSection');
-const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-if(currentUser) {
-  profileName.textContent = `Hi, ${currentUser.username}`;
-} else {
-  profileName.textContent = 'Profile';
-}
-
-profileSection.querySelector('a').addEventListener('click', (e) => {
-  if(!currentUser) {
-    e.preventDefault();
-    alert('Please login first!');
-    window.location.href = 'login.html';
-  }
-});
-</script>
 
 
       <!-- Cart -->
