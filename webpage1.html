@@ -8,53 +8,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="wepsite.css">
   </head>
+  <style>
+    .profile-icon {
+  font-size: 24px;
+  color: white;
+}
+
+.username {
+  margin: 0;
+  color: white;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+  </style>
   <body>
 <!-- Navbar -->
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-light fixed-top">
+<!-- Navbar Section Example -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #8B0000, #000); padding: 10px;">
   <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
+    <a class="navbar-brand fw-bold text-danger" href="#">YASH-MART</a>
 
-    <!-- Hamburger button for mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="d-flex align-items-center ms-auto">
+      <input type="text" class="form-control me-2" placeholder="Search">
+      <button class="btn btn-dark me-3">Search</button>
 
-    <!-- Everything visible on all screen sizes -->
-    <div class="d-flex align-items-center ms-auto gap-3">
-      <!-- Search -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
-      </form>
-
-      <!-- Profile -->
-    <!-- Profile Section in Navbar -->
-<div class="d-flex flex-column align-items-center" id="profileSection">
-  <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-  <span class="hi" id="profileName">Profile</span>
-</div>
-
-<script>
-const profileName = document.getElementById('profileName');
-const profileSection = document.getElementById('profileSection');
-const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-if(currentUser) {
-  profileName.textContent = `Hi, ${currentUser.username}`;
-} else {
-  profileName.textContent = 'Profile';
-}
-
-profileSection.querySelector('a').addEventListener('click', (e) => {
-  if(!currentUser) {
-    e.preventDefault();
-    alert('Please login first!');
-    window.location.href = 'login.html';
-  }
-});
-</script>
+      <!-- Profile Section -->
+      <div id="profileSection" class="text-center me-3">
+        <i class="bi bi-person-circle profile-icon"></i>
+        <p class="username">Hi,<br><span id="profileName">yashwant_chatti</span></p>
+      </div>
 
 
       <!-- Cart -->
