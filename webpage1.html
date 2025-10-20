@@ -23,13 +23,17 @@
 
   </style>
   <body>
-<!-- Navbar -->
-<!-- Navbar -->
-<!-- Navbar Section Example -->
+<!-- ✅ Fixed Navbar with Menu Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #8B0000, #000); padding: 10px;">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold text-danger" href="#">YASH-MART</a>
 
+    <!-- 🔹 Hamburger / Menu Toggle Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- 🔹 Right-side items -->
     <div class="d-flex align-items-center ms-auto">
       <input type="text" class="form-control me-2" placeholder="Search">
       <button class="btn btn-dark me-3">Search</button>
@@ -40,7 +44,6 @@
         <p class="username">Hi,<br><span id="profileName">yashwant_chatti</span></p>
       </div>
 
-
       <!-- Cart -->
       <div class="d-flex flex-column align-items-center">
         <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
@@ -48,7 +51,7 @@
       </div>
     </div>
 
-    <!-- Collapsible menu for links -->
+    <!-- 🔹 Collapsible Menu Links -->
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
@@ -63,8 +66,6 @@
     </div>
   </div>
 </nav>
-
-<br><br><br><br>
 
 
     <section class="bg-dark text-white text-center p-5">
