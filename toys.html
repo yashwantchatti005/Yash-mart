@@ -15,28 +15,25 @@
     
 <!-- Navbar -->
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-light fixed-top">
+<!-- ✅ Fixed Navbar with Menu Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #8B0000, #000); padding: 10px;">
   <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
+    <a class="navbar-brand fw-bold text-danger" href="#">YASH-MART</a>
 
-    <!-- Hamburger button for mobile -->
+    <!-- 🔹 Hamburger / Menu Toggle Button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Everything visible on all screen sizes -->
-    <div class="d-flex align-items-center ms-auto gap-3">
-      <!-- Search -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
-      </form>
+    <!-- 🔹 Right-side items -->
+    <div class="d-flex align-items-center ms-auto">
+      <input type="text" class="form-control me-2" placeholder="Search">
+      <button class="btn btn-dark me-3">Search</button>
 
-      <!-- Profile -->
-      <div class="d-flex flex-column align-items-center">
-        <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-        <span class="hi">Profile</span>
+      <!-- Profile Section -->
+      <div id="profileSection" class="text-center me-3">
+        <i class="bi bi-person-circle profile-icon"></i>
+        <p class="username">Hi,<br><span id="profileName">yashwant_chatti</span></p>
       </div>
 
       <!-- Cart -->
@@ -46,23 +43,6 @@
       </div>
     </div>
 
-    <!-- Collapsible menu for links -->
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="all.html">All</a></li>
-        <li class="nav-item"><a class="nav-link" href="cafe.html">Cafe</a></li>
-        <li class="nav-item"><a class="nav-link" href="toys.html">Toys</a></li>
-        <li class="nav-item"><a class="nav-link" href="fresh.html">Fresh</a></li>
-        <li class="nav-item"><a class="nav-link" href="electronic.html">Electronic</a></li>
-        <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
-        <li class="nav-item"><a class="nav-link" href="fashion.html">Fashion</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<br><br><br><br>
 
     <!-- Heading -->
     <section class="bg-dark text-white text-center p-5">
