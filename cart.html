@@ -23,20 +23,22 @@
       font-weight: bold;
     }
 
-    /* Labels in address form black */
+    /* Form labels black */
     #orderForm label {
       color: #000 !important;
     }
 
-    /* Text inside input fields and textarea blue */
+    /* Input text blue */
     #orderForm input,
     #orderForm textarea {
       color: #007bff !important;
     }
 
-    /* Discount modal text blue */
+    /* Discount modal text black */
+    #discountModal .modal-title,
+    #discountModal h5,
     #discountDetails {
-      color: #007bff !important;
+      color: #000 !important;
     }
   </style>
 </head>
@@ -115,7 +117,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <h5>You got a 10% discount on your order!</h5>
+        <h5 class="fw-bold mt-3">You got a 10% discount on your order!</h5>
         <p id="discountDetails" class="fw-bold mt-3"></p>
       </div>
     </div>
@@ -230,7 +232,7 @@
         discountDetails.innerHTML = `
           <p>Original Total: ₹${total.toFixed(2)}</p>
           <p>Discount (10%): -₹${discount.toFixed(2)}</p>
-          <h5>Final Total: ₹${finalTotal.toFixed(2)}</h5>`;
+          <h5 class="text-success">Final Total: ₹${finalTotal.toFixed(2)}</h5>`;
         discountModal.show();
         discountShown = true;
       }
@@ -283,6 +285,10 @@
     }
   });
 
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+  const addressInput = document.getElementById('address');
+
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = nameInput.value.trim();
@@ -320,10 +326,6 @@
       showToast("🗑️ Cart cleared!");
     }
   });
-
-  const nameInput = document.getElementById('name');
-  const phoneInput = document.getElementById('phone');
-  const addressInput = document.getElementById('address');
 
   displayCart();
 </script>
