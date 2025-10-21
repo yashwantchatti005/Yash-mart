@@ -1,73 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart | Yashmart</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" type="image/svg" href="cart-dash.svg">
-  <link rel="stylesheet" href="wepsite.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    #successMessage {
-      color: red;
-      font-weight: bold;
-    }
-
-    /* Form labels black */
-    #orderForm label {
-      color: #000 !important;
-    }
-
-    /* Input text blue */
-    #orderForm input,
-    #orderForm textarea {
-      color: #007bff !important;
-    }
-
-    /* Discount modal text black */
-    #discountModal .modal-title,
-    #discountModal h5,
-    #discountDetails {
-      color: #000 !important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart | Yashmart</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="wepsite.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
-    <a href="cart.html" class="btn btn-warning">Cart</a>
-  </div>
-</nav>
-
-<!-- Main Container -->
 <div class="container my-5">
-
-  <!-- Personalized Greeting -->
-  <div id="greeting" class="text-center text-info mb-3"></div>
-
   <h2 class="text-center mb-4">🛒 Your Shopping Cart</h2>
   <div id="cartContainer" class="row g-3"></div>
-
-  <!-- Free Delivery Progress -->
-  <div class="mt-4">
-    <div class="progress" style="height: 25px;">
-      <div id="progressBar" class="progress-bar bg-success" style="width: 0%">0%</div>
-    </div>
-    <p id="deliveryMsg" class="mt-2 text-center fw-bold"></p>
-  </div>
 
   <div class="text-center mt-4">
     <h4 id="totalAmount">Total: ₹0</h4>
@@ -77,257 +21,82 @@
   </div>
 </div>
 
-<!-- Address Modal -->
-<div class="modal fade" id="addressModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title">Enter Your Delivery Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form id="orderForm">
-          <div class="mb-3">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" id="name" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" id="phone" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
-            <textarea id="address" class="form-control" rows="2" required></textarea>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-success">Place Order</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Discount Modal -->
-<div class="modal fade" id="discountModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" style="color:#000 !important;">🎉 Discount Applied!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <h5 class="fw-bold mt-3" style="color:#000 !important;">You got a 10% discount on your order!</h5>
-        <p id="discountDetails" class="fw-bold mt-3" style="color:#000 !important;"></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title">Order Status</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <h5 id="successMessage"></h5>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Toast Notification -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert">
-    <div class="d-flex">
-      <div class="toast-body" id="toastMsg">Action done</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-3">
-  <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  const cartContainer = document.getElementById('cartContainer');
-  const totalAmount = document.getElementById('totalAmount');
-  const finalAmount = document.getElementById('finalAmount');
-  const discountDetails = document.getElementById('discountDetails');
-  const successMessage = document.getElementById('successMessage');
-  const progressBar = document.getElementById('progressBar');
-  const deliveryMsg = document.getElementById('deliveryMsg');
-  const greeting = document.getElementById('greeting');
-  const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+let discountShown = false;
 
-  const discountModal = new bootstrap.Modal(document.getElementById('discountModal'));
-  const addressModal = new bootstrap.Modal(document.getElementById('addressModal'));
-  const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-
-  let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  let discountShown = false;
+function displayCart() {
+  const container = document.getElementById('cartContainer');
+  container.innerHTML = '';
   let total = 0;
-  let finalTotal = 0;
 
-  // Personalized greeting
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  if (currentUser) {
-    greeting.innerHTML = `Hi <b>${currentUser.username}</b> 👋, here's your cart!`;
+  if(cartItems.length === 0){
+    container.innerHTML = '<p class="text-center text-danger">Your cart is empty 🛍️</p>';
+    document.getElementById('totalAmount').textContent = "Total: ₹0";
+    document.getElementById('finalAmount').textContent = "";
+    return;
   }
 
-  // Toast Function
-  function showToast(msg, type = "success") {
-    const toastEl = document.getElementById('liveToast');
-    toastEl.classList.remove('bg-success', 'bg-danger');
-    toastEl.classList.add(type === "error" ? 'bg-danger' : 'bg-success');
-    document.getElementById('toastMsg').textContent = msg;
-    toast.show();
-  }
+  cartItems.forEach((item, index) => {
+    if(!item.quantity) item.quantity = 1;
+    total += item.price * item.quantity;
 
-  function displayCart() {
-    cartContainer.innerHTML = '';
-    total = 0;
-
-    if (cartItems.length === 0) {
-      cartContainer.innerHTML = '<h5 class="text-center text-danger">Your cart is empty 🛍️</h5>';
-      totalAmount.textContent = "Total: ₹0";
-      finalAmount.textContent = "";
-      updateProgress();
-      return;
-    }
-
-    cartItems.forEach((item, index) => {
-      if (!item.quantity) item.quantity = 1;
-      total += item.price * item.quantity;
-
-      const col = document.createElement('div');
-      col.className = 'col-md-4';
-      col.innerHTML = `
-        <div class="card h-100 shadow-sm">
-          <img src="${item.image}" class="card-img-top" alt="${item.name}" height="200">
-          <div class="card-body text-center">
-            <h5>${item.name}</h5>
-            <p>₹${item.price} x ${item.quantity}</p>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, -1)">-</button>
-              <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, 1)">+</button>
-            </div>
-            <button class="btn btn-danger btn-sm mt-2" onclick="removeItem(${index})">Remove</button>
+    const col = document.createElement('div');
+    col.className = 'col-md-4';
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm text-center">
+        <img src="${item.image}" class="card-img-top" alt="${item.name}" height="180">
+        <div class="card-body">
+          <h5>${item.name}</h5>
+          <p>₹${item.price} x ${item.quantity}</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, -1)">-</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, 1)">+</button>
           </div>
-        </div>`;
-      cartContainer.appendChild(col);
-    });
-
-    // Discount logic
-    if (total >= 499) {
-      const discount = total * 0.10;
-      finalTotal = total - discount;
-      if (!discountShown) {
-        discountDetails.innerHTML = `
-          <p>Original Total: ₹${total.toFixed(2)}</p>
-          <p>Discount (10%): -₹${discount.toFixed(2)}</p>
-          <h5 class="text-success">Final Total: ₹${finalTotal.toFixed(2)}</h5>`;
-        discountModal.show();
-        discountShown = true;
-      }
-    } else {
-      finalTotal = total;
-      discountShown = false;
-    }
-
-    totalAmount.textContent = "Total: ₹" + total.toFixed(2);
-    finalAmount.textContent = total >= 499 
-      ? "Final Total: ₹" + finalTotal.toFixed(2)
-      : "";
-
-    updateProgress();
-  }
-
-  function changeQuantity(index, delta) {
-    cartItems[index].quantity = Math.max(1, cartItems[index].quantity + delta);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    displayCart();
-  }
-
-  function removeItem(index) {
-    showToast(`${cartItems[index].name} removed from cart`, "error");
-    cartItems.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    displayCart();
-  }
-
-  function updateProgress() {
-    const percent = Math.min((total / 499) * 100, 100);
-    progressBar.style.width = percent + "%";
-    progressBar.textContent = Math.floor(percent) + "%";
-    deliveryMsg.textContent = total >= 499
-      ? "🎉 You unlocked Free Delivery!"
-      : `Add ₹${(499 - total).toFixed(2)} more for Free Delivery.`;
-  }
-
-  document.getElementById('checkoutBtn').addEventListener('click', () => {
-    if (cartItems.length === 0) {
-      showToast("Your cart is empty!", "error");
-    } else {
-      const saved = JSON.parse(localStorage.getItem('savedAddress'));
-      if (saved) {
-        document.getElementById('name').value = saved.name;
-        document.getElementById('phone').value = saved.phone;
-        document.getElementById('address').value = saved.address;
-      }
-      addressModal.show();
-    }
+          <button class="btn btn-danger btn-sm mt-2" onclick="removeItem(${index})">Remove</button>
+        </div>
+      </div>`;
+    container.appendChild(col);
   });
 
-  const nameInput = document.getElementById('name');
-  const phoneInput = document.getElementById('phone');
-  const addressInput = document.getElementById('address');
-
-  document.getElementById('orderForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = nameInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const address = addressInput.value.trim();
-
-    if (!name || !phone || !address) {
-      showToast("Please fill all details!", "error");
-      return;
+  let finalTotal = total;
+  if(total >= 499){
+    const discount = total * 0.10;
+    finalTotal = total - discount;
+    if(!discountShown){
+      alert(`🎉 10% Discount Applied! Final Total: ₹${finalTotal.toFixed(2)}`);
+      discountShown = true;
     }
+  } else {
+    discountShown = false;
+  }
 
-    localStorage.setItem('savedAddress', JSON.stringify({ name, phone, address }));
-    addressModal.hide();
+  document.getElementById('totalAmount').textContent = "Total: ₹" + total.toFixed(2);
+  document.getElementById('finalAmount').textContent = total >= 499 ? "Final Total: ₹" + finalTotal.toFixed(2) : "";
+}
 
-    successMessage.innerHTML = `<div class="spinner-border text-success" role="status"></div><p class="mt-3">Processing your order...</p>`;
-    successModal.show();
-
-    setTimeout(() => {
-      successMessage.innerHTML = `🎉 Thank you, <b>${name}</b>! Your order has been placed successfully.`;
-      localStorage.removeItem('cart');
-      cartItems = [];
-      displayCart();
-    }, 2500);
-  });
-
-  document.getElementById('clearCartBtn').addEventListener('click', () => {
-    if (cartItems.length === 0) {
-      showToast("Your cart is already empty!", "error");
-      return;
-    }
-    if (confirm("Are you sure you want to clear the cart?")) {
-      localStorage.removeItem('cart');
-      cartItems = [];
-      displayCart();
-      showToast("🗑️ Cart cleared!");
-    }
-  });
-
+function changeQuantity(index, delta){
+  cartItems[index].quantity = Math.max(1, cartItems[index].quantity + delta);
+  localStorage.setItem('cart', JSON.stringify(cartItems));
   displayCart();
+}
+
+function removeItem(index){
+  cartItems.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+  displayCart();
+}
+
+document.getElementById('clearCartBtn').addEventListener('click', ()=>{
+  if(confirm("Are you sure you want to clear the cart?")){
+    cartItems = [];
+    localStorage.removeItem('cart');
+    displayCart();
+  }
+});
+
+displayCart();
 </script>
+
 </body>
 </html>
