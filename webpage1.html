@@ -209,21 +209,104 @@
 <!-- Customer Reviews Section -->
 <div class="container my-5" id="reviewsSection">
   <h2 class="text-center mb-4">💬 Customer Reviews</h2>
+  
+  <!-- Reviews List -->
   <div id="reviewsList" class="row g-4 justify-content-center">
-    <!-- Existing reviews will show here -->
+    <!-- Existing reviews will appear here -->
   </div>
 
   <!-- Add Your Own Review -->
   <div class="mt-5 text-center">
     <h4>Write Your Review</h4>
     <form id="reviewForm" class="mt-3">
-      <input type="text" id="reviewName" class="form-control w-50 mx-auto mb-2" placeholder="Your Name" required>
-      <textarea id="reviewText" class="form-control w-50 mx-auto mb-2" placeholder="Write your review..." required></textarea>
+      <input type="text" id="reviewName" class="form-control w-50 mx-auto mb-2" 
+             placeholder="Your Name" required>
+
+      <div class="mb-2">
+        <label>Rating:</label>
+        <select id="reviewRating" class="form-select w-50 mx-auto">
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+      </div>
+
+      <textarea id="reviewText" class="form-control w-50 mx-auto mb-2" 
+                placeholder="Write your review..." rows="3" maxlength="200" required></textarea>
+
       <button type="submit" class="btn btn-dark">Submit Review</button>
     </form>
-    <p id="reviewMessage" class="text-success mt-3"></p>
+    <p id="reviewMessage" class="text-success mt-3 fw-bold"></p>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewName = document.getElementById('reviewName');
+  const reviewText = document.getElementById('reviewText');
+  const reviewRating = document.getElementById('reviewRating');
+  const reviewMessage = document.getElementById('reviewMessage');
+  const reviewsList = document.getElementById('reviewsList');
+
+  // Load saved reviews from localStorage
+  let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+  function displayReviews() {
+    reviewsList.innerHTML = '';
+    if (reviews.length === 0) {
+      reviewsList.innerHTML = `<p class="text-center text-muted">No reviews yet. Be the first to share your experience!</p>`;
+      return;
+    }
+
+    reviews.forEach(r => {
+      const col = document.createElement('div');
+      col.className = 'col-md-4';
+      col.innerHTML = `
+        <div class="card shadow-sm h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">${'⭐'.repeat(r.rating)}</h5>
+            <p class="card-text">"${r.text}"</p>
+            <h6 class="text-muted">– ${r.name}</h6>
+          </div>
+        </div>
+      `;
+      reviewsList.appendChild(col);
+    });
+  }
+
+  // Display reviews on page load
+  displayReviews();
+
+  // Handle review submission
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = reviewName.value.trim();
+    const text = reviewText.value.trim();
+    const rating = parseInt(reviewRating.value);
+
+    if (name && text && rating) {
+      const newReview = { name, text, rating };
+      reviews.push(newReview);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+      displayReviews();
+
+      reviewMessage.textContent = `✅ Thank you, ${name}! Your review has been added.`;
+      reviewName.value = "";
+      reviewText.value = "";
+      reviewRating.value = "5";
+
+      // Scroll to the latest review
+      reviewsList.lastChild.scrollIntoView({ behavior: 'smooth' });
+
+      // Clear message after 4 seconds
+      setTimeout(() => reviewMessage.textContent = "", 4000);
+    }
+  });
+});
+</script>
 
 
 <!-- Newsletter -->
@@ -312,41 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     subscribeEmail.value = "";
   });
 
-  // -------- Customer Reviews (Saved in LocalStorage) --------
-  const reviewForm = document.getElementById('reviewForm');
-  const reviewName = document.getElementById('reviewName');
-  const reviewText = document.getElementById('reviewText');
-  const reviewMessage = document.getElementById('reviewMessage');
-  const reviewsList = document.getElementById('reviewsList');
-
-  // Load saved reviews from localStorage
-  let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-
-  function displayReviews() {
-    reviewsList.innerHTML = '';
-    if (reviews.length === 0) {
-      reviewsList.innerHTML = `<p class="text-center text-muted">No reviews yet. Be the first to share your experience!</p>`;
-      return;
-    }
-
-    reviews.forEach(r => {
-      const col = document.createElement('div');
-      col.className = 'col-md-4';
-      col.innerHTML = `
-        <div class="card shadow-sm h-100">
-          <div class="card-body text-center">
-            <h5 class="card-title">⭐️⭐️⭐️⭐️⭐️</h5>
-            <p class="card-text">"${r.text}"</p>
-            <h6 class="text-muted">– ${r.name}</h6>
-          </div>
-        </div>
-      `;
-      reviewsList.appendChild(col);
-    });
-  }
-
-  // Display existing reviews on page load
-  displayReviews();
+ 
 
   // Handle review submission
   reviewForm.addEventListener('submit', (e) => {
