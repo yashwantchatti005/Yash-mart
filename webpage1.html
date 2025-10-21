@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +7,9 @@
 <title>Welcome to Yashmart</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="wepsite.css">
-<style>
-  /* --- Make all cards smaller --- */
-  #productList .card, .container .card { width: 100%; max-width: 220px; margin: auto; transition: transform 0.3s ease; }
-  /* --- Shrink the image height --- */
-  #productList .card img, .container .card img { height: 180px !important; object-fit: cover; }
-  /* --- Keep spacing neat --- */
-  .row-cols-md-4 > .col { display: flex; justify-content: center; }
-  /* --- Optional: hover effect --- */
-  #productList .card:hover { transform: scale(1.05); }
-</style>
 </head>
+
+
 <body>
 
 <!-- Navbar -->
@@ -26,23 +19,27 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="d-flex align-items-center ms-auto gap-3">
       <!-- Search -->
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search">
         <button class="btn btn-dark" type="submit">Search</button>
       </form>
+
       <!-- Profile -->
       <div class="d-flex flex-column align-items-center" id="profileSection">
         <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
         <span class="hi" id="profileName">Profile</span>
       </div>
+
       <!-- Cart -->
       <div class="d-flex flex-column align-items-center">
         <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
         <span class="hi" id="cartCount">0</span>
       </div>
     </div>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
@@ -58,14 +55,19 @@
   </div>
 </nav>
 
+
+
 <br><br><br><br><br>
 
-<section class="bg-dark text-white text-center p-5">
-  <div class="banner-text">
-    <h1>WELCOME TO YASH-MART</h1>
-    <p>Your one-stop shop for quality, convenience, and style.</p>
-  </div>
-</section>
+  <section class="bg-dark text-white text-center p-5">
+       <div class="banner-text">
+      <h1>WELCOME TO YASH-MART</h1>
+<p>Your one-stop shop for quality, convenience, and style.</p>
+       </div>
+    </section>
+
+
+
 
 <!-- Featured Categories -->
 <div class="container my-5">
@@ -176,6 +178,23 @@
     <div class="col-md-3"><h4>📞 24/7 Support</h4><p>We’re always here for you</p></div>
   </div>
 </div>
+<div class="container mt-5">
+  <h3 class="text-center mb-4">💬 Customer Reviews</h3>
+  
+  <!-- Review Input Card -->
+  <div class="card p-3 shadow-sm mx-auto" style="max-width:500px; border-radius:12px;">
+    <div class="input-group">
+      <input type="text" id="reviewText" class="form-control" placeholder="Write your review..." style="border-radius:12px 0 0 12px;">
+      <button id="saveReviewBtn" class="btn btn-primary" style="border-radius:0 12px 12px 0;">Submit</button>
+    </div>
+  </div>
+
+  <!-- Reviews List -->
+  <div class="mt-4 mx-auto" style="max-width:500px;">
+    <ul id="reviewList" class="list-group"></ul>
+  </div>
+</div>
+
 
 <!-- Newsletter -->
 <div class="bg-dark text-white text-center p-4">
@@ -185,6 +204,7 @@
     <button class="btn btn-warning" type="submit">Subscribe</button>
   </form>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -213,16 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll(".add-cart").forEach(btn => {
     btn.addEventListener("click", () => {
-      const item = { name: btn.dataset.name, price: parseInt(btn.dataset.price), image: btn.dataset.image };
-      const existingItem = cart.find(p => p.name === item.name);
-      if (existingItem) {
-        existingItem.quantity = (existingItem.quantity || 1) + 1;
-        alert(`Increased quantity of ${item.name}!`);
-      } else {
-        item.quantity = 1;
-        cart.push(item);
-        alert(`${item.name} added to cart!`);
-      }
+      const item = {
+        name: btn.dataset.name,
+        price: parseInt(btn.dataset.price),
+        image: btn.dataset.image
+      };
+      cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
       cartCount.textContent = cart.length;
     });
@@ -232,10 +248,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('form[role="search"]');
   const searchInput = searchForm.querySelector('input[type="search"]');
   const cards = document.querySelectorAll('#productList .card');
+
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const query = searchInput.value.toLowerCase().trim();
     let found = false;
+
     cards.forEach(card => {
       const name = card.querySelector("h5").textContent.toLowerCase();
       if (name.includes(query)) {
@@ -245,20 +263,46 @@ document.addEventListener('DOMContentLoaded', () => {
         found = true;
       }
     });
+
     if (!found) alert("❌ Product not found!");
   });
 
   // -------- Subscribe Form --------
   const subscribeForm = document.getElementById('subscribeForm');
   const subscribeEmail = document.getElementById('subscribeEmail');
+
   subscribeForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = subscribeEmail.value.trim();
-    if (email === "") { alert("Please enter your email!"); return; }
+    if (email === "") {
+      alert("Please enter your email!");
+      return;
+    }
     alert(`🎉 Thank you for subscribing, ${email}!`);
     subscribeEmail.value = "";
   });
+
+
+  // Handle review submission
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = reviewName.value.trim();
+    const text = reviewText.value.trim();
+
+    if (name && text) {
+      const newReview = { name, text };
+      reviews.push(newReview);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+      displayReviews();
+      reviewMessage.textContent = `✅ Thank you, ${name}! Your review has been added.`;
+      reviewName.value = "";
+      reviewText.value = "";
+      setTimeout(() => reviewMessage.textContent = "", 4000);
+    }
+  });
 });
 </script>
+
+
 </body>
 </html>
