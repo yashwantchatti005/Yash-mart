@@ -1,79 +1,42 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Yashmart</title>
-    <link rel="icon" type="image/svg" href="bag-fill.svg">
-        
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="wepsite.css">
-  </head>
- <style>
-/* ====== Card Style ====== */
-#productList .card,
-.container .card {
-  width: 100%;
-  max-width: 280px; /* increased for desktop */
-  margin: auto;
-  transition: transform 0.3s ease;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome to Yashmart</title>
+<link rel="icon" type="image/svg" href="bag-fill.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="wepsite.css">
+</head>
+<style>
+/* --- Make all cards smaller --- */
+#productList .card, .container .card { 
+  width: 100%; 
+  max-width: 220px; /* adjust card width */ 
+  margin: auto; 
+  transition: transform 0.3s ease; 
 }
-
-/* ====== Card Image ====== */
-#productList .card img,
-.container .card img {
-  width: 100%;
-  height: 250px; /* larger image height for desktop */
-  object-fit: cover;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+/* --- Shrink the image height --- */
+#productList .card img, .container .card img { 
+  height: 180px !important; /* reduce image height */ 
+  object-fit: cover; 
 }
-
-/* ====== Hover Effect ====== */
-#productList .card:hover,
-.container .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-/* ====== Responsive Adjustments ====== */
-@media (max-width: 992px) {
-  #productList .card img,
-  .container .card img {
-    height: 220px;
-  }
-}
-
-@media (max-width: 768px) {
-  #productList .card,
-  .container .card {
-    max-width: 100%;
-  }
-
-  #productList .card img,
-  .container .card img {
-    height: 180px;
-  }
-}
+/* --- Keep spacing neat --- */
+.row-cols-md-4 > .col { display: flex; justify-content: center; }
+/* --- Optional: hover effect --- */
+#productList .card:hover { transform: scale(1.05); }
 </style>
+<body>
 
-
-  <body>
-<!-- Navbar -->
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
   <div class="container-fluid">
     <!-- Brand -->
     <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
-
     <!-- Hamburger button for mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <!-- Everything visible on all screen sizes -->
     <div class="d-flex align-items-center ms-auto gap-3">
       <!-- Search -->
@@ -81,22 +44,17 @@
         <input class="form-control me-2" type="search" placeholder="Search">
         <button class="btn btn-dark" type="submit">Search</button>
       </form>
-
       <!-- Profile -->
-  <!-- Profile -->
-<div class="d-flex flex-column align-items-center" id="profileSection">
-  <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-  <span class="hi" id="profileName">Profile</span>
-</div>
-
-
+      <div class="d-flex flex-column align-items-center" id="profileSection">
+        <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
+        <span class="hi" id="profileName">Profile</span>
+      </div>
       <!-- Cart -->
       <div class="d-flex flex-column align-items-center">
         <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
         <span class="hi" id="cartCount">0</span>
       </div>
     </div>
-
     <!-- Collapsible menu for links -->
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
@@ -112,17 +70,18 @@
     </div>
   </div>
 </nav>
+
 <br><br><br><br>
 
-    <!-- Heading -->
-    <section class="bg-dark text-white text-center p-5">
-       <div class="banner-text">
-      <h1>All Products</h1>
-      <p>Explore all categories in one place</p>
-       </div>
-    </section>
+<!-- Heading -->
+<section class="bg-dark text-white text-center p-5">
+  <div class="banner-text">
+    <h1>All Products</h1>
+    <p>Explore all categories in one place</p>
+  </div>
+</section>
 
-    <div class="container my-5">
+<div class="container my-5">
   <h2 class="mb-4">🔥 Deals of the Day</h2>
   <div class="row row-cols-1 row-cols-md-3 g-1">
     <div class="col">
@@ -131,22 +90,20 @@
         <div class="card-body">
           <h5 class="card-title">Wireless Headphones</h5>
           <p><span class="text-success fw-bold">₹1,499</span> <del>₹2,999</del></p>
-           <a href="#" class="btn btn-primary w-100">Add to cart</a>
+          <a href="#" class="btn btn-primary w-100">Add to cart</a>
         </div>
       </div>
     </div>
-
     <div class="col">
       <div class="card h-100">
         <img src="c24.webp" class="card-img-top" alt="Product" height="300">
         <div class="card-body">
           <h5 class="card-title">Casual T-Shirt</h5>
           <p><span class="text-success fw-bold">₹499</span> <del>₹999</del></p>
-         <a href="#" class="btn btn-primary w-100">Add to cart</a>
+          <a href="#" class="btn btn-primary w-100">Add to cart</a>
         </div>
       </div>
     </div>
-    
     <div class="col">
       <div class="card h-100">
         <img src="c35.webp" class="card-img-top" alt="Product" height="300">
@@ -160,250 +117,88 @@
   </div>
 </div>
 
-
-
-       <!-- Toys -->
- <div class="container my-5">
-    <h1 class="text-center mb-4">ALL PRODUCTS</h1>
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-            <img src="c20.webp" class="card-img-top" alt="Blocks" height="200">
-            <div class="card-body">
-            <h5 class="card-title">Remote Car</h5>
-        <p class="card-text">"Zoom into fun!"</p>
-        <p class="card-text">₹1,200</p>
-        <a href="toys.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-    
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-             <img src="c21.webp" class="card-img-top" alt="Blocks" height="200">
-              <div class="card-body">
-              <h5 class="card-title">Building Blocks</h5>
-              <p class="card-text">"Build your imagination."</p>
-             <p class="card-text">₹549</p>
-             <a href="toys.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cafe -->
-         <div class="col">
-          <div class="card h-100 shadow-sm">
-          <img src="c22.webp" class="card-img-top" alt="Ice Cream" height="200">
-      <div class="card-body">
-        <h5 class="card-title">Ice Cream</h5>
-          <p class="card-text">"Chill & thrill."</p>
-      <p class="card-text">₹60</p>
-      <a href="cafe.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-         <img src="c23.webp" class="card-img-top" alt="Biscuits" height="200">
-     <div class="card-body">
-      <h5 class="card-title">Biscuits & Cookies</h5>
-      <p class="card-text">"Crunchy happiness."</p>
-      <p class="card-text">₹120</p>
-      <a href="cafe.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fashion -->
-              <div class="col">
-          <div class="card h-100 shadow-sm">
-               <img src="c24.webp" class="card-img-top" alt="T-Shirt" height="200">
-      <div class="card-body">
-      <h5 class="card-title">Men's T-Shirt</h5>
-      <p class="card-text">"Wear your style."</p>
-      <p class="card-text">₹499</p>
-      <a href="fashion.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-     <img src="c25.webp" class="card-img-top" alt="Dress"  height="200">
-      <div class="card-body">
-      <h5 class="card-title">Women's Dress</h5>
-      <p class="card-text">"Look fabulous."</p>
-      <p class="card-text">₹699</p>
-      <a href="fashion.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-      <!-- Fresh -->
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-    <img src="3-tomato-png-image-picture-download.png" class="card-img-top" alt="Tomato" height="240">
-    <div class="card-body">
-      <h5 class="card-title">Tomatoes</h5>
-      <p class="card-text">"Farm fresh taste."</p>
-      <p class="card-text">₹30</p>
-      <a href="fresh.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-              <div class="col">
-          <div class="card h-100 shadow-sm">
-        <img src="24454-5-apple-fruit-transparent-image.png" class="card-img-top" alt="Apple" height="230">
-    <div class="card-body">
-      <h5 class="card-title">Apples</h5>
-      <p class="card-text">"Juicy & healthy."</p>
-      <p class="card-text">₹55</p>
-      <a href="fresh.html" class="btn btn-primary">Buy Now</a>
-    </div>
-          </div>
-        </div>
-
-        <!-- Electronics -->
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-     <img src="c28.webp" class="card-img-top" alt="Headphones" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Headphones</h5>
-      <p class="card-text">"Hear every beat."</p>
-      <p class="card-text">₹1,200</p>
-      <a href="electronic.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-    <img src="c29.webp" class="card-img-top" alt="Smartwatch" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Smartwatch</h5>
-      <p class="card-text">"Track your day."</p>
-      <p class="card-text">₹2,300</p>
-      <a href="electronic.html" class="btn btn-primary">Buy Now</a>
-    </div>
-          </div>
-        </div>
-        <!--beauty-->
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-    <img src="c30.jpg" class="card-img-top" alt="Face Wash" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Face Wash</h5>
-      <p class="card-text">"Glow naturally."</p>
-      <p class="card-text">₹150</p>
-      <a href="beauty.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-        
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-    <img src="c31.avif" class="card-img-top" alt="Hair Oil" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Hair Oil</h5>
-      <p class="card-text">"Nourish your hair."</p>
-      <p class="card-text">₹200</p>
-      <a href="beauty.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-    <!-- Jewellery -->
-                                 <div class="col">
-          <div class="card h-100 shadow-sm">
-      <img src="c32.webp" class="card-img-top" alt="Earrings" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Earrings</h5>
-      <p class="card-text">"Elegance in style."</p>
-      <p class="card-text">₹1,300</p>
-      <a href="beauty.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-
-
-        
-                         <div class="col">
-          <div class="card h-100 shadow-sm">
-    <img src="c33.webp" class="card-img-top" alt="Bracelet" height="200">
-    <div class="card-body">
-      <h5 class="card-title">Bracelet</h5>
-      <p class="card-text">"Shine every moment."</p>
-      <p class="card-text">₹2,999</p>
-      <a href="beauty.html" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
+<!-- Toys -->
+<div class="container my-5">
+  <h1 class="text-center mb-4">ALL PRODUCTS</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-5">
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="c20.webp" class="card-img-top" alt="Blocks" height="200">
+        <div class="card-body">
+          <h5 class="card-title">Remote Car</h5>
+          <p class="card-text">"Zoom into fun!"</p>
+          <p class="card-text">₹1,200</p>
+          <a href="toys.html" class="btn btn-primary">Buy Now</a>
         </div>
       </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="c21.webp" class="card-img-top" alt="Blocks" height="200">
+        <div class="card-body">
+          <h5 class="card-title">Building Blocks</h5>
+          <p class="card-text">"Build your imagination."</p>
+          <p class="card-text">₹549</p>
+          <a href="toys.html" class="btn btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+    <!-- Cafe -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="c22.webp" class="card-img-top" alt="Ice Cream" height="200">
+        <div class="card-body">
+          <h5 class="card-title">Ice Cream</h5>
+          <p class="card-text">"Chill & thrill."</p>
+          <p class="card-text">₹60</p>
+          <a href="cafe.html" class="btn btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="c23.webp" class="card-img-top" alt="Biscuits" height="200">
+        <div class="card-body">
+          <h5 class="card-title">Biscuits & Cookies</h5>
+          <p class="card-text">"Crunchy happiness."</p>
+          <p class="card-text">₹120</p>
+          <a href="cafe.html" class="btn btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-
- <!-- Footer -->
-    <footer class="bg-light text-center text-dark mt-4">
-      <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
-    </footer>
-
+<!-- Footer -->
+<footer class="bg-light text-center text-dark mt-4">
+  <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-// ✅ CART SYSTEM - Duplicate Prevention + Quantity Support
+// ✅ CART SYSTEM - Fixed for all sections including Deals of the Day
 const cartCount = document.getElementById("cartCount");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+cartCount.textContent = cart.length;
 
 document.querySelectorAll(".btn.btn-primary.w-100").forEach(btn => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-
     const card = btn.closest(".card");
     const name = card.querySelector(".card-title").textContent.trim();
-    
-    // Universal price selector
     let priceText;
     const priceSpan = card.querySelector("span.text-success");
-    if (priceSpan) {
-      priceText = priceSpan.textContent.trim();
-    } else {
-      const priceP = card.querySelectorAll("p")[1]; // second <p>
-      priceText = priceP ? priceP.textContent.trim() : "0";
-    }
-
+    if (priceSpan) { priceText = priceSpan.textContent.trim(); }
+    else { const priceP = card.querySelectorAll("p")[1]; priceText = priceP ? priceP.textContent.trim() : "0"; }
     const price = parseInt(priceText.replace(/[^0-9]/g, ""));
     const image = card.querySelector("img").getAttribute("src");
-
-    const existingItem = cart.find(p => p.name === name);
-    if (existingItem) {
-      existingItem.quantity = (existingItem.quantity || 1) + 1;
-      alert(`Increased quantity of ${name}!`);
-    } else {
-      cart.push({ name, price, image, quantity: 1 });
-      alert(`${name} added to cart!`);
-    }
-
+    const item = { name, price, image };
+    cart.push(item);
     localStorage.setItem("cart", JSON.stringify(cart));
-    cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-
-    // Button animation feedback
+    cartCount.textContent = cart.length;
     btn.textContent = "✅ Added!";
     btn.classList.replace("btn-primary", "btn-success");
-    setTimeout(() => {
-      btn.textContent = "Add to cart";
-      btn.classList.replace("btn-success", "btn-primary");
-    }, 1500);
+    setTimeout(() => { btn.textContent = "Add to cart"; btn.classList.replace("btn-success", "btn-primary"); }, 1500);
   });
 });
 
@@ -411,28 +206,21 @@ document.querySelectorAll(".btn.btn-primary.w-100").forEach(btn => {
 const searchForm = document.querySelector("form");
 const searchInput = searchForm.querySelector("input[type='search']");
 const cards = document.querySelectorAll(".card");
-
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const query = searchInput.value.toLowerCase().trim();
   let found = false;
-
   cards.forEach(card => {
     const name = card.querySelector(".card-title").textContent.toLowerCase();
     if (name.includes(query)) {
       card.scrollIntoView({ behavior: "smooth", block: "center" });
-      card.classList.add("border", "border-success", "border-3");
-      setTimeout(() => card.classList.remove("border", "border-success", "border-3"), 2000);
+      card.classList.add("border", "border-success");
+      setTimeout(() => card.classList.remove("border", "border-success"), 2000);
       found = true;
     }
   });
-
-  if (!found) {
-    alert("❌ Product not found!");
-  }
+  if (!found) { alert("❌ Product not found!"); }
 });
 </script>
-
-
-  </body>
+</body>
 </html>
