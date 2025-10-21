@@ -8,33 +8,53 @@
 <link rel="stylesheet" href="wepsite.css">
 </head>
 <style>
-/* --- Make all cards smaller --- */
+/* --- Card Styling --- */
 #productList .card,
 .container .card {
   width: 100%;
-  max-width: 220px;
+  max-width: 280px; /* increased from 220px */
   margin: auto;
   transition: transform 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* --- Shrink the image height --- */
+/* --- Card Images --- */
 #productList .card img,
 .container .card img {
-  height: 180px !important;
+  height: 220px !important; /* larger image for desktop */
   object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-/* --- Keep spacing neat --- */
+/* --- Hover Effect --- */
+#productList .card:hover,
+.container .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* --- Grid spacing --- */
 .row-cols-md-4 > .col {
   display: flex;
   justify-content: center;
 }
 
-/* --- Optional: hover effect --- */
-#productList .card:hover {
-  transform: scale(1.05);
+/* --- Responsive Fixes --- */
+@media (max-width: 768px) {
+  #productList .card,
+  .container .card {
+    max-width: 100%;
+  }
+
+  #productList .card img,
+  .container .card img {
+    height: 180px !important;
+  }
 }
 </style>
+
 
 <body>
 
