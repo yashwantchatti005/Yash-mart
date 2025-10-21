@@ -36,7 +36,7 @@
     <div class="modal-content text-center">
       <div class="modal-header bg-success text-white">
         <h5 class="modal-title">🎉 Discount Applied!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <h5>You got a 10% discount on your order!</h5>
@@ -44,6 +44,35 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Awesome!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal (Address + Contact Form) -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">📝 Enter Delivery Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm">
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contact Number</label>
+            <input type="tel" class="form-control" id="contact" maxlength="10" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Delivery Address</label>
+            <textarea class="form-control" id="address" rows="2" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Confirm Order</button>
+        </form>
       </div>
     </div>
   </div>
@@ -61,9 +90,11 @@
   const finalAmount = document.getElementById('finalAmount');
   const discountModal = new bootstrap.Modal(document.getElementById('discountModal'));
   const discountDetails = document.getElementById('discountDetails');
+  const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
 
   let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   let discountShown = false;
+  let finalTotal = 0;
 
   function displayCart() {
     cartContainer.innerHTML = '';
@@ -94,13 +125,11 @@
       cartContainer.appendChild(col);
     });
 
-    // ✅ Discount logic with popup
     let discount = 0;
     if (total >= 499) {
-      discount = total * 0.10; // 10% discount
-      const finalTotal = total - discount;
+      discount = total * 0.10;
+      finalTotal = total - discount;
 
-      // Show modal once when discount is applicable
       if (!discountShown) {
         discountDetails.innerHTML = `
           <p>Original Total: ₹${total.toFixed(2)}</p>
@@ -117,6 +146,7 @@
       totalAmount.textContent = "Total: ₹" + total.toFixed(2);
       finalAmount.textContent = "";
       discountShown = false;
+      finalTotal = total;
     }
   }
 
@@ -126,14 +156,32 @@
     displayCart();
   }
 
+  // 🧾 Checkout button opens form modal
   document.getElementById('checkoutBtn').addEventListener('click', () => {
     if (cartItems.length === 0) {
       alert("Your cart is empty!");
     } else {
-      alert("✅ Order placed successfully!");
+      checkoutModal.show();
+    }
+  });
+
+  // ✅ Submit checkout form
+  document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    if (name && contact && address) {
+      alert(`✅ Order placed successfully!\n\nName: ${name}\nContact: ${contact}\nAddress: ${address}\nTotal Paid: ₹${finalTotal.toFixed(2)}`);
+
+      checkoutModal.hide();
       localStorage.removeItem('cart');
       cartItems = [];
       displayCart();
+    } else {
+      alert("⚠️ Please fill in all details.");
     }
   });
 
