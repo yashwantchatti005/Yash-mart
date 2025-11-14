@@ -358,38 +358,100 @@
 
       </div>
      </div>
+<!-- Add to Cart Modal -->
+<div class="modal fade custom-modal" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-zoom">
+    <div class="modal-content text-white gradient-bg shadow-lg" id="cartModalContent">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="cartModalLabel">🛒 Item Added to Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="cartModalBody"></div>
+      <div class="modal-footer border-0">
+        <a href="cart.html" class="btn btn-dark px-4">Go to Cart</a>
+        <button type="button" class="btn btn-light text-dark px-4" data-bs-dismiss="modal">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-          <!-- Footer -->
+
+     <!-- Footer -->
     <footer class="bg-light text-center text-dark mt-4">
       <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
-    </footer><br>
+    </footer>
 
 
-    <script>
-// ✅ CART SYSTEM
+<script>
+// ✅ CART SYSTEM WITH POPUP
 const cartCount = document.getElementById("cartCount");
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cartCount.textContent = cart.length;
+const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+const cartModalBody = document.getElementById("cartModalBody");
 
-// Grab all Add to Cart buttons
-document.querySelectorAll(".btn.btn-primary.w-100").forEach(btn => {
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+function updateCartTotal() {
+  let total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  localStorage.setItem("cartTotal", total);
+  return total;
+}
+
+document.querySelectorAll(".btn.btn-primary").forEach(btn => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-    
     const card = btn.closest(".card");
-    const name = card.querySelector(".card-title").textContent.trim();
-    const priceText = card.querySelector(".card-text:nth-of-type(2)").textContent.trim();
-    const price = parseInt(priceText.replace("₹", ""));
-    const image = card.querySelector("img").getAttribute("src");
+    if (!card) return;
 
-    // Add to cart
-    const item = { name, price, image };
-    cart.push(item);
+    const name = card.querySelector(".card-title")?.textContent.trim() || "Unknown";
+// ✅ FIXED PRICE PICKER — pick the LAST .card-text (the one containing ₹)
+const priceTexts = card.querySelectorAll(".card-text");
+const lastText = priceTexts[priceTexts.length - 1].textContent;
+const priceValue = lastText.match(/₹[0-9,]+/);
+const price = priceValue ? parseInt(priceValue[0].replace(/[₹,]/g, "")) : 0;
+
+    const image = card.querySelector("img")?.getAttribute("src") || "";
+
+    let existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      cart.push({ name, price, image, quantity: 1 });
+    }
+
     localStorage.setItem("cart", JSON.stringify(cart));
-    cartCount.textContent = cart.length;
+    const total = updateCartTotal();
 
-    // Show temporary success feedback
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    cartModalBody.innerHTML = `
+      <div class="d-flex align-items-center gap-3">
+        <img src="${image}" alt="${name}" width="80" height="80" class="rounded">
+        <div>
+          <h6 class="mb-1">${name}</h6>
+          <p class="mb-0">Price: ₹${price}</p>
+          <small class="text-light">Added to your cart successfully!</small>
+        </div>
+      </div>
+      <hr>
+      <p class="mt-2 mb-0"><b>Total Cart Value:</b> ₹${total}</p>
+    `;
+    // 🟢 Random gradient color each time modal shows
+const modalContent = document.getElementById("cartModalContent");
+const colors = ["gradient-red", "gradient-blue", "gradient-green", "gradient-purple", "gradient-orange"];
+const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+// Remove any old gradient color classes
+colors.forEach(c => modalContent.classList.remove(c));
+
+// Add new one
+modalContent.classList.add(randomColor);
+
+// Show the modal
+cartModal.show();
+
+
     btn.textContent = "✅ Added!";
     btn.classList.replace("btn-primary", "btn-success");
     setTimeout(() => {
@@ -398,6 +460,8 @@ document.querySelectorAll(".btn.btn-primary.w-100").forEach(btn => {
     }, 1500);
   });
 });
+
+
 
 // 🔍 SEARCH FUNCTION
 const searchForm = document.querySelector("form");
