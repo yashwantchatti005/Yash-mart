@@ -374,6 +374,24 @@
       </div>
     </div><br><br>  
 
+<!-- Add to Cart Modal -->
+<div class="modal fade custom-modal" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-zoom">
+    <div class="modal-content text-white gradient-bg shadow-lg" id="cartModalContent">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="cartModalLabel">🛒 Item Added to Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="cartModalBody"></div>
+      <div class="modal-footer border-0">
+        <a href="cart.html" class="btn btn-dark px-4">Go to Cart</a>
+        <button type="button" class="btn btn-light text-dark px-4" data-bs-dismiss="modal">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
  <!-- Footer -->
     <footer class="bg-light text-center text-dark mt-4">
       <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
@@ -381,64 +399,113 @@
 
 
 <script>
-  // Cart Section with duplicate prevention
-  const cartCount = document.getElementById("cartCount");
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const updateCartCount = () => cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-  updateCartCount();
+// ✅ CART SYSTEM WITH POPUP
+const cartCount = document.getElementById("cartCount");
+const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+const cartModalBody = document.getElementById("cartModalBody");
 
-  document.querySelectorAll(".add-cart").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const itemName = btn.dataset.name;
-      const existingItem = cart.find(item => item.name === itemName);
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        cart.push({ name: itemName, price: parseInt(btn.dataset.price), image: btn.dataset.image, quantity: 1 });
-      }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount();
-     const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-const cartModalBody = document.getElementById('cartModalBody');
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
-cartModalBody.innerHTML = `
-  <div class="d-flex align-items-center">
-    <img src="${btn.dataset.image}" alt="${itemName}" width="60" class="me-3">
-    <div>
-      <p class="mb-1"><strong>${itemName}</strong></p>
-      <p class="mb-0">Quantity: ${existingItem ? existingItem.quantity : 1}</p>
-    </div>
-  </div>
-`;
+function updateCartTotal() {
+  let total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  localStorage.setItem("cartTotal", total);
+  return total;
+}
+
+document.querySelectorAll(".btn.btn-primary").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const card = btn.closest(".card");
+    if (!card) return;
+
+    const name = card.querySelector(".card-title")?.textContent.trim() || "Unknown";
+// ✅ FIXED PRICE PICKER — pick the LAST .card-text (the one containing ₹)
+const priceTexts = card.querySelectorAll(".card-text");
+const lastText = priceTexts[priceTexts.length - 1].textContent;
+const priceValue = lastText.match(/₹[0-9,]+/);
+const price = priceValue ? parseInt(priceValue[0].replace(/[₹,]/g, "")) : 0;
+
+    const image = card.querySelector("img")?.getAttribute("src") || "";
+
+    let existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      cart.push({ name, price, image, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    const total = updateCartTotal();
+
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    cartModalBody.innerHTML = `
+      <div class="d-flex align-items-center gap-3">
+        <img src="${image}" alt="${name}" width="80" height="80" class="rounded">
+        <div>
+          <h6 class="mb-1">${name}</h6>
+          <p class="mb-0">Price: ₹${price}</p>
+          <small class="text-light">Added to your cart successfully!</small>
+        </div>
+      </div>
+      <hr>
+      <p class="mt-2 mb-0"><b>Total Cart Value:</b> ₹${total}</p>
+    `;
+    // 🟢 Random gradient color each time modal shows
+const modalContent = document.getElementById("cartModalContent");
+const colors = ["gradient-red", "gradient-blue", "gradient-green", "gradient-purple", "gradient-orange"];
+const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+// Remove any old gradient color classes
+colors.forEach(c => modalContent.classList.remove(c));
+
+// Add new one
+modalContent.classList.add(randomColor);
+
+// Show the modal
 cartModal.show();
 
-    });
+
+    btn.textContent = "✅ Added!";
+    btn.classList.replace("btn-primary", "btn-success");
+    setTimeout(() => {
+      btn.textContent = "Add to cart";
+      btn.classList.replace("btn-success", "btn-primary");
+    }, 1500);
   });
+});
 
-// 🔍 SEARCH FUNCTION
-const searchForm = document.querySelector("form");
-const searchInput = searchForm.querySelector("input[type='search']");
-const cards = document.querySelectorAll(".card");
+// 🟢 SEARCH FUNCTIONALITY
+document.querySelector('form[role="search"]').addEventListener('submit', function (e) {
+  e.preventDefault(); // Stop page reload
 
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const query = searchInput.value.toLowerCase().trim();
+  const query = this.querySelector('input[type="search"]').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.card');
+
   let found = false;
 
   cards.forEach(card => {
-    const name = card.querySelector(".card-title").textContent.toLowerCase();
-    if (name.includes(query)) {
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-      card.classList.add("border", "border-success");
-      setTimeout(() => card.classList.remove("border", "border-success"), 2000);
+    const title = card.querySelector('.card-title')?.textContent.toLowerCase() || "";
+    const text = card.querySelector('.card-text')?.textContent.toLowerCase() || "";
+
+    if (title.includes(query) || text.includes(query)) {
+      card.parentElement.style.display = 'block'; // show the product
       found = true;
+    } else {
+      card.parentElement.style.display = 'none'; // hide the product
     }
   });
 
-  if (!found) {
-    alert("❌ Product not found!");
+  if (!found && query !== "") {
+    alert(`No results found for "${query}" 😕`);
+  } else if (query === "") {
+    // Reset if search is empty
+    cards.forEach(card => card.parentElement.style.display = 'block');
   }
 });
+
+
 </script>
 
   </body>
