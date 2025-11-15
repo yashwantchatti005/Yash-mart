@@ -1,280 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Yashmart | Register & Login</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    padding: 15px;
-    font-family: 'Poppins', sans-serif;
+  :root{
+    --g1: #8e2de2; /* purple */
+    --g2: #ff6ec4; /* pink */
+    --glass: rgba(255,255,255,0.06);
+    --glass-strong: rgba(255,255,255,0.12);
+    --accent: rgba(255,255,255,0.9);
+    --danger: #ff6b6b;
+    --success: #2ecc71;
   }
 
-  .container {
-    background: rgba(255,255,255,0.1);
-    padding: 35px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 420px;
-    color: #fff;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    box-sizing: border-box;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.8s ease-in-out;
+  /* ---------- Page & animated background ---------- */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, sans-serif}
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background: linear-gradient(135deg,var(--g1),var(--g2));
+    overflow:hidden;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* moving gradient overlay for subtle motion */
+  .bg-motion {
+    position:fixed;
+    inset:-20%;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.03), transparent 10%),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.03), transparent 15%);
+    pointer-events:none;
+    mix-blend-mode: overlay;
+    animation: motion 12s linear infinite;
+    z-index:0;
+  }
+  @keyframes motion {
+    0%{ transform: rotate(0deg) translateY(0) scale(1)}
+    50%{ transform: rotate(6deg) translateY(-8px) scale(1.02)}
+    100%{ transform: rotate(0deg) translateY(0) scale(1)}
   }
 
-  h3 { text-align: center; margin-bottom: 20px; font-weight: 700; }
-
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.3s ease;
-  }
-
-  input:focus {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background: rgba(255,255,255,0.2);
-  }
-
-  button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #ff7e5f;
-    color: white;
-    font-weight: 600;
-    margin-top: 10px;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-  button:hover { background-color: #feb47b; transform: translateY(-2px); }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .tabs span {
-    cursor: pointer;
-    font-weight: 600;
-    padding-bottom: 5px;
-    font-size: 1.1rem;
-    transition: color 0.3s;
-  }
-  .tabs .active { border-bottom: 2px solid #ff7e5f; color: #ffb88c; }
-
-  .message { font-size: 0.85rem; color: #ffd700; margin-top: 5px; }
-
-  .strength {
-    font-size: 0.9rem;
-    margin-top: 5px;
-  }
-  .weak { color: red; }
-  .medium { color: orange; }
-  .strong { color: lightgreen; }
-
-  .show-password {
+  /* soft floating blobs in background (decorative) */
+  .blob {
     position: absolute;
-    right: 15px;
-    top: 35%;
-    cursor: pointer;
+    filter: blur(34px) saturate(120%);
+    opacity: 0.22;
+    pointer-events: none;
+    z-index:0;
+  }
+  .blob.a { width:420px;height:420px; background:linear-gradient(45deg,var(--g1), #5b2bbf); left:-80px; top:-120px; animation: float1 9s ease-in-out infinite; }
+  .blob.b { width:360px;height:360px; background:linear-gradient(45deg,#ff8cc7,var(--g2)); right:-90px; bottom:-130px; animation: float2 11s ease-in-out infinite; }
+  @keyframes float1 { 0%{transform:translateY(0)rotate(0)}50%{transform:translateY(-18px)rotate(8deg)}100%{transform:translateY(0)rotate(0)}}
+  @keyframes float2 { 0%{transform:translateY(0)rotate(0)}50%{transform:translateY(14px)rotate(-6deg)}100%{transform:translateY(0)rotate(0)}}
+
+  /* ---------- Card/container (full gradient box) ---------- */
+  .card {
+    position: relative;
+    width: 420px;
+    max-width: calc(100% - 40px);
+    border-radius: 18px;
+    padding: 28px;
+    z-index: 2;
+    color: var(--accent);
+    overflow: hidden;
+    /* full gradient inside card to match page (Box: B) */
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+    backdrop-filter: blur(10px);
   }
 
-  .input-group { position: relative; }
+  /* gradient border glow */
+  .card::before{
+    content:"";
+    position:absolute;
+    inset: -2px;
+    background: linear-gradient(90deg,var(--g1), #b25df5, var(--g2));
+    filter: blur(18px);
+    opacity: 0.45;
+    z-index: -1;
+    transform: scale(1.02);
+  }
 
-  /* Toast notifications */
-  #toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #222;
+  /* ---------- Logo ---------- */
+  .logo {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom: 8px;
+  }
+  .logo svg{height:44px;width:44px;flex-shrink:0}
+  .logo h1{font-size:20px;margin:0;color:white;letter-spacing:0.6px;font-weight:700;}
+
+  /* subtitle / small tagline */
+  .tag { font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:14px }
+
+  /* tabs */
+  .tabs { display:flex; gap:18px; margin-bottom:16px; align-items:center; justify-content:center }
+  .tab { cursor:pointer; padding-bottom:6px; font-weight:600; color:rgba(255,255,255,0.9); opacity:0.92 }
+  .tab.active{ border-bottom: 2px solid rgba(255,255,255,0.95); color:white; padding-bottom:4px }
+
+  /* forms layout */
+  .forms { position:relative; min-height:360px; }
+  form { width:100%; transition: transform .45s cubic-bezier(.2,.9,.28,1), opacity .35s; position:absolute; left:0; top:0; }
+  form.hidden { opacity:0; pointer-events:none; transform: translateX(30px) scale(.995) }
+
+  /* floating label style inputs */
+  .field {
+    position:relative;
+    margin:14px 0;
+  }
+  .field input {
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: white;
+    outline: none;
+    font-size:15px;
+    transition: box-shadow .18s, border-color .18s, background .18s;
+  }
+  .field input::placeholder { color:transparent }
+  .field label {
+    position:absolute;
+    left:14px;
+    top:12px;
+    color: rgba(255,255,255,0.7);
+    pointer-events:none;
+    font-size:13px;
+    transition: transform .18s ease, top .18s ease, font-size .18s;
+    transform-origin:left top;
+  }
+  .field input:focus { box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 12px rgba(255,255,255,0.06) inset; border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.045) }
+  .field input:focus + label,
+  .field input:not(:placeholder-shown) + label {
+    top:-8px; font-size:11px; transform: translateY(-2px);
     color: #fff;
-    padding: 15px 20px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: 9999;
   }
 
-  #toast.show { opacity: 1; transform: translateY(-10px); }
+  /* show-password eye */
+  .eye {
+    position:absolute; right:12px; top:10px; height:32px; display:flex; align-items:center; gap:8px; cursor:pointer; color:rgba(255,255,255,0.7)
+  }
 
-  @media (max-width: 576px) {
-    .container { padding: 25px; border-radius: 15px; }
-    h3 { font-size: 1.3rem; }
-    .tabs span { font-size: 1rem; }
+  /* password strength */
+  .strength {
+    margin-top:6px; font-size:13px; color:rgba(255,255,255,0.85)
+  }
+  .strength .bar { height:6px; border-radius:6px; background:rgba(255,255,255,0.08); overflow:hidden; margin-top:6px }
+  .strength .bar > i { display:block; height:100%; width:0%; background:linear-gradient(90deg,#ffb86b,#ff6ec4); transition:width .35s }
+
+  /* submit button + ripple */
+  .cta {
+    margin-top:14px;
+    position:relative;
+  }
+  button.cta {
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:none;
+    background: linear-gradient(90deg,var(--g1),var(--g2));
+    color:white;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    transition: transform .14s ease, box-shadow .14s;
+  }
+  button.cta:active { transform: translateY(1px) scale(.998) }
+  button.cta.loading { color: transparent; }
+  button.cta.loading::after{
+    content:"";
+    width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,0.95); border-top-color: transparent;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); animation: spin .8s linear infinite;
+  }
+  @keyframes spin{ to{ transform: translate(-50%,-50%) rotate(360deg) } }
+
+  /* ripple effect on click */
+  button.cta::before{
+    content:""; position: absolute; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.12);
+    left:0; top:0; transform: translate(-50%,-50%); opacity:0; transition: width .45s ease, height .45s ease, opacity .45s;
+    pointer-events:none;
+  }
+
+  /* toast */
+  .toast {
+    position: fixed;
+    right:18px; bottom:18px;
+    background: rgba(0,0,0,0.7);
+    color:white; padding:10px 14px; border-radius:10px; font-weight:600;
+    opacity:0; transform: translateY(8px); transition:all .34s; z-index:9999
+  }
+  .toast.show { opacity:1; transform: translateY(0) }
+
+  /* shake */
+  @keyframes shake { 0%,100%{ transform:translateX(0) } 20%,60%{ transform:translateX(-8px) } 40%,80%{ transform:translateX(8px) } }
+  .shake { animation: shake .42s }
+
+  /* small helper */
+  .muted { font-size:13px; color:rgba(255,255,255,0.75); margin-top:8px; text-align:center }
+
+  /* responsive */
+  @media (max-width:480px){
+    .card{ padding:18px; width: 92%; border-radius:14px }
+    .logo h1{ font-size:18px }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="tabs">
-    <span id="tabRegister" class="active">Register</span>
-    <span id="tabLogin">Login</span>
-  </div>
 
-  <!-- Register Form -->
-  <form id="registrationForm">
-    <h3>Register</h3>
-    <input type="text" id="username" placeholder="Username" required>
-    <div class="message" id="usernameMsg"></div>
+  <!-- decorative moving shapes -->
+  <div class="bg-motion"></div>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
 
-    <input type="email" id="email" placeholder="Email" required>
-    <div class="message" id="emailMsg"></div>
+  <div class="card" role="main" aria-labelledby="auth-heading">
 
-    <div class="input-group">
-      <input type="password" id="password" placeholder="Password" required>
-      <span class="show-password" id="togglePassword">👁️</span>
+    <!-- LOGO (SVG) -->
+    <div class="logo" aria-hidden="false">
+      <!-- simple gradient circle + Y monogram -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" x2="1">
+            <stop offset="0" stop-color="#8e2de2"/>
+            <stop offset="1" stop-color="#ff6ec4"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="url(#lg)" />
+        <g transform="translate(0,2)">
+          <text x="50%" y="57%" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="46" fill="white" dominant-baseline="middle">YM</text>
+        </g>
+      </svg>
+
+      <div>
+        <h1 id="auth-heading">YASH-MART</h1>
+        <div class="tag">Shop smarter • Live better</div>
+      </div>
     </div>
-    <div class="strength" id="passwordStrength"></div>
 
-    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
-    <div class="message" id="confirmMsg"></div>
+    <!-- tabs -->
+    <div class="tabs" role="tablist" aria-label="Register or Login">
+      <div class="tab active" id="tab-register" role="tab" aria-selected="true">Register</div>
+      <div class="tab" id="tab-login" role="tab" aria-selected="false">Login</div>
+    </div>
 
-    <button type="submit" id="registerBtn">Register</button>
-  </form>
+    <div class="forms">
 
-  <!-- Login Form -->
-  <form id="loginForm" style="display:none;">
-    <h3>Login</h3>
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Password" required>
-    <button type="submit" id="loginBtn">Login</button>
-  </form>
-</div>
+      <!-- REGISTER FORM -->
+      <form id="form-register" autocomplete="on" novalidate>
+        <div class="field">
+          <input id="reg-username" name="username" type="text" placeholder=" " required />
+          <label for="reg-username">Username</label>
+        </div>
 
-<div id="toast"></div>
+        <div class="field">
+          <input id="reg-email" name="email" type="email" placeholder=" " required />
+          <label for="reg-email">Email</label>
+        </div>
+
+        <div class="field" style="margin-bottom:6px">
+          <input id="reg-password" name="password" type="password" placeholder=" " required />
+          <label for="reg-password">Password</label>
+          <div class="eye" id="toggleRegPass" title="Show / Hide password">👁️</div>
+        </div>
+
+        <div class="strength" id="reg-strength" aria-hidden="true">
+          <div style="font-size:13px;color:rgba(255,255,255,0.85)">Password strength</div>
+          <div class="bar"><i style="width:0%"></i></div>
+        </div>
+
+        <div class="field">
+          <input id="reg-confirm" name="confirm" type="password" placeholder=" " required />
+          <label for="reg-confirm">Confirm password</label>
+        </div>
+
+        <div class="cta">
+          <button class="cta" id="btn-register" type="submit">Create account</button>
+        </div>
+
+        <div class="muted">Already have an account? <a href="#" id="link-to-login" style="color:white;text-decoration:underline">Login</a></div>
+      </form>
+
+      <!-- LOGIN FORM (hidden initially) -->
+      <form id="form-login" class="hidden" autocomplete="on" novalidate>
+        <div class="field">
+          <input id="login-email" name="loginEmail" type="email" placeholder=" " required />
+          <label for="login-email">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="login-password" name="loginPassword" type="password" placeholder=" " required />
+          <label for="login-password">Password</label>
+          <div class="eye" id="toggleLoginPass" title="Show / Hide password">👁️</div>
+        </div>
+
+        <div class="cta">
+          <button class="cta" id="btn-login" type="submit">Login</button>
+        </div>
+
+        <div class="muted">New here? <a href="#" id="link-to-register" style="color:white;text-decoration:underline">Create account</a></div>
+      </form>
+
+    </div> <!-- forms -->
+  </div> <!-- card -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-  const tabRegister = document.getElementById('tabRegister');
-  const tabLogin = document.getElementById('tabLogin');
-  const regForm = document.getElementById('registrationForm');
-  const loginForm = document.getElementById('loginForm');
-  const toast = document.getElementById('toast');
+/* ---------------- Utilities ---------------- */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-  // Tabs switching with animation
-  function showForm(formToShow) {
-    [regForm, loginForm].forEach(f => f.style.display = 'none');
-    formToShow.style.display = 'block';
-    formToShow.style.animation = 'fadeIn 0.5s';
+/* DOM elements */
+const tabRegister = $('#tab-register'), tabLogin = $('#tab-login');
+const formRegister = $('#form-register'), formLogin = $('#form-login');
+const linkToLogin = $('#link-to-login'), linkToRegister = $('#link-to-register');
+const toast = $('#toast');
+
+function showToast(msg, tone){
+  toast.textContent = msg;
+  if(tone === 'err') toast.style.background = 'rgba(200,30,30,0.9)';
+  else if(tone === 'ok') toast.style.background = 'rgba(16,128,68,0.9)';
+  else toast.style.background = 'rgba(0,0,0,0.7)';
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> toast.classList.remove('show'), 2600);
+}
+
+/* ---------------- Tab / slide handling ---------------- */
+function setActiveTab(which){
+  if(which === 'register'){
+    tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+    formRegister.classList.remove('hidden');
+    formLogin.classList.add('hidden');
+    formRegister.style.transform = 'translateX(0)'; formRegister.style.opacity=1;
+    formLogin.style.transform = 'translateX(10px)'; formLogin.style.opacity=0;
+  } else {
+    tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+    formLogin.classList.remove('hidden'); formRegister.classList.add('hidden');
+    formLogin.style.transform = 'translateX(0)'; formLogin.style.opacity=1;
+    formRegister.style.transform = 'translateX(-10px)'; formRegister.style.opacity=0;
   }
+}
+tabRegister.addEventListener('click', ()=>setActiveTab('register'));
+tabLogin.addEventListener('click', ()=>setActiveTab('login'));
+linkToLogin.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('login'); });
+linkToRegister.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('register'); });
 
-  tabRegister.addEventListener('click', () => {
-    tabRegister.classList.add('active');
-    tabLogin.classList.remove('active');
-    showForm(regForm);
+/* init */
+setActiveTab('register');
+
+/* ---------------- Floating labels: handled by CSS using :placeholder-shown
+   but ensure inputs have placeholder=" " in HTML - already set. -------- */
+
+/* ---------------- Show / hide password ---------------- */
+function togglePassword(buttonId, inputId){
+  const b = $(buttonId), inp = $(inputId);
+  b.addEventListener('click', ()=>{
+    if(inp.type === 'password'){ inp.type = 'text'; b.textContent = '🙈'; }
+    else { inp.type = 'password'; b.textContent = '👁️'; }
+    inp.focus();
   });
+}
+togglePassword('#toggleRegPass', '#reg-password');
+togglePassword('#toggleLoginPass', '#login-password');
 
-  tabLogin.addEventListener('click', () => {
-    tabLogin.classList.add('active');
-    tabRegister.classList.remove('active');
-    showForm(loginForm);
+/* ---------------- Button ripple effect (uses CSS pseudo elem but we position) -------------- */
+$$('.cta button.cta').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // apply CSS vars to create ripple using ::before
+    btn.style.setProperty('--rx', x + 'px');
+    btn.style.setProperty('--ry', y + 'px');
+    // quick animate pseudo-element by toggling width/height via inline style on ::before not possible,
+    // so we simulate with small DOM ripple:
+    const r = document.createElement('span');
+    r.style.position='absolute';
+    r.style.left = x+'px'; r.style.top = y+'px';
+    r.style.width = r.style.height = '12px';
+    r.style.borderRadius='50%';
+    r.style.transform='translate(-50%,-50%)';
+    r.style.background='rgba(255,255,255,0.12)';
+    r.style.pointerEvents='none';
+    r.style.opacity='0.9';
+    r.style.transition='all 600ms cubic-bezier(.2,.9,.2,1)';
+    btn.appendChild(r);
+    requestAnimationFrame(()=> {
+      r.style.width = '260px'; r.style.height = '260px'; r.style.opacity='0';
+      r.style.filter='blur(8px)';
+    });
+    setTimeout(()=> r.remove(), 650);
   });
+});
 
-  // Show/Hide Password
-  document.getElementById('togglePassword').addEventListener('click', () => {
-    const passInput = document.getElementById('password');
-    passInput.type = passInput.type === 'password' ? 'text' : 'password';
-  });
+/* ---------------- Password strength (register) ---------------- */
+const regPass = $('#reg-password'), regStrength = $('#reg-strength .bar > i');
+function calcStrength(s){
+  let score=0;
+  if(s.length>=8) score+=1;
+  if(/[A-Z]/.test(s)) score+=1;
+  if(/[0-9]/.test(s)) score+=1;
+  if(/[^A-Za-z0-9]/.test(s)) score+=1;
+  return Math.min(4, score);
+}
+regPass.addEventListener('input', ()=>{
+  const v = regPass.value || '';
+  const s = calcStrength(v);
+  const perc = (s/4)*100;
+  regStrength.style.width = perc+'%';
+  // color shift for visual hint (we set gradient in CSS; simple visual via opacity)
+  if(perc<35) regStrength.parentElement.previousElementSibling.style.color = '#ff6b6b';
+  else if(perc<70) regStrength.parentElement.previousElementSibling.style.color = '#f4b400';
+  else regStrength.parentElement.previousElementSibling.style.color = '#8ef58e';
+});
 
-  // Toast Function
-  function showToast(msg, color = '#222') {
-    toast.textContent = msg;
-    toast.style.background = color;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
+/* ---------------- Registration logic ---------------- */
+const regForm = $('#form-register');
+regForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
 
-  // Form Validation
-  const username = document.getElementById('username');
-  const email = document.getElementById('email');
-  const password = document.getElementById('password');
-  const confirmPassword = document.getElementById('confirm-password');
-  const usernameMsg = document.getElementById('usernameMsg');
-  const emailMsg = document.getElementById('emailMsg');
-  const confirmMsg = document.getElementById('confirmMsg');
-  const passwordStrength = document.getElementById('passwordStrength');
+  const username = $('#reg-username').value.trim();
+  const email = $('#reg-email').value.trim();
+  const pass = $('#reg-password').value;
+  const confirm = $('#reg-confirm').value;
 
-  username.addEventListener('input', () => {
-    usernameMsg.textContent = username.value.length < 3 ? 'Username too short' : '';
-  });
+  if(username.length < 2){ showToast('Username too short', 'err'); $('#reg-username').focus(); return; }
+  if(!/^[^ ]+@[^ ]+\.[a-z]{2,}$/i.test(email)){ showToast('Enter a valid email', 'err'); $('#reg-email').focus(); return; }
+  if(pass.length < 6){ showToast('Password must be 6+ chars', 'err'); $('#reg-password').focus(); return; }
+  if(pass !== confirm){ showToast('Passwords do not match', 'err'); $('#reg-confirm').focus(); return; }
 
-  email.addEventListener('input', () => {
-    emailMsg.textContent = !email.value.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) ? 'Invalid email' : '';
-  });
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  if(users.find(u=>u.email.toLowerCase() === email.toLowerCase())){ showToast('Email already registered', 'err'); setActiveTab('login'); $('#login-email').value=email; return; }
 
-  password.addEventListener('input', () => {
-    const val = password.value;
-    if(val.length < 6) { passwordStrength.textContent='Weak'; passwordStrength.className='strength weak'; }
-    else if(val.length < 10) { passwordStrength.textContent='Medium'; passwordStrength.className='strength medium'; }
-    else { passwordStrength.textContent='Strong'; passwordStrength.className='strength strong'; }
-  });
+  users.push({ username, email, password: pass });
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Account created', 'ok');
 
-  confirmPassword.addEventListener('input', () => {
-    confirmMsg.textContent = confirmPassword.value !== password.value ? 'Passwords do not match' : '';
-  });
+  // animate button: add loading then switch to login
+  const btn = $('#btn-register');
+  btn.classList.add('loading');
+  setTimeout(()=> {
+    btn.classList.remove('loading');
+    setActiveTab('login');
+  }, 900);
+});
 
-  // Registration Logic
-  regForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let users = JSON.parse(localStorage.getItem('users')) || [];
+/* ---------------- Login logic ---------------- */
+const loginFormEl = $('#form-login');
+loginFormEl.addEventListener('submit', (e)=>{
+  e.preventDefault();
 
-    if(username.value.length < 3 || !email.value.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) || password.value.length<6 || password.value!==confirmPassword.value){
-      showToast('Please fix errors before submitting!', '#d9534f');
-      return;
-    }
+  const email = $('#login-email').value.trim();
+  const pass = $('#login-password').value;
 
-    const existingUser = users.find(u => u.email === email.value);
-    if(existingUser){
-      showToast('Email already registered! Redirecting to login...', '#f0ad4e');
-      setTimeout(() => {
-        tabLogin.click();
-        document.getElementById('loginEmail').value = email.value;
-        document.getElementById('loginPassword').focus();
-      }, 1500);
-      return;
-    }
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
 
-    users.push({username:username.value,email:email.value,password:password.value});
-    localStorage.setItem('users', JSON.stringify(users));
-    showToast('Registration successful! Please login.', '#5cb85c');
-    tabLogin.click();
-  });
+  const btn = $('#btn-login');
+  btn.classList.add('loading');
 
-  // Login Logic
-  loginForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    const loginEmail = document.getElementById('loginEmail');
-    const loginPassword = document.getElementById('loginPassword');
-    const user = users.find(u => u.email===loginEmail.value && u.password===loginPassword.value);
-
-    if(user){
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      showToast('Login successful! Redirecting...', '#5cb85c');
-      setTimeout(()=>window.location.href='webpage1.html',1500);
+  setTimeout(()=> {
+    btn.classList.remove('loading');
+    if(!user){
+      formLogin.classList.add('shake');
+      showToast('Invalid credentials', 'err');
+      setTimeout(()=> formLogin.classList.remove('shake'), 420);
     } else {
-      showToast('Invalid email or password!', '#d9534f');
+      showToast('Welcome back — redirecting...', 'ok');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      setTimeout(()=> location.href = 'webpage1.html', 900);
     }
-  });
+  }, 900);
+});
+
+/* ---------------- small UX: Enter key on forms should submit, placeholder presence already set ---------------- */
+
+/* Accessibility: allow keyboard switching with left/right arrows on tab */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'ArrowLeft') setActiveTab('register');
+  if(e.key === 'ArrowRight') setActiveTab('login');
+});
 </script>
+
 </body>
 </html>
