@@ -1,325 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome to Yashmart</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="wepsite.css">
-</head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yashmart | Register & Login</title>
 
+<style>
+  :root{
+    --g1: #8e2de2; /* purple */
+    --g2: #ff6ec4; /* pink */
+    --glass: rgba(255,255,255,0.06);
+    --glass-strong: rgba(255,255,255,0.12);
+    --accent: rgba(255,255,255,0.9);
+    --danger: #ff6b6b;
+    --success: #2ecc71;
+  }
+
+  /* ---------- Page & animated background ---------- */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, sans-serif}
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background: linear-gradient(135deg,var(--g1),var(--g2));
+    overflow:hidden;
+  }
+
+  /* moving gradient overlay for subtle motion */
+  .bg-motion {
+    position:fixed;
+    inset:-20%;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.03), transparent 10%),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.03), transparent 15%);
+    pointer-events:none;
+    mix-blend-mode: overlay;
+    animation: motion 12s linear infinite;
+    z-index:0;
+  }
+  @keyframes motion {
+    0%{ transform: rotate(0deg) translateY(0) scale(1)}
+    50%{ transform: rotate(6deg) translateY(-8px) scale(1.02)}
+    100%{ transform: rotate(0deg) translateY(0) scale(1)}
+  }
+
+  /* soft floating blobs in background (decorative) */
+  .blob {
+    position: absolute;
+    filter: blur(34px) saturate(120%);
+    opacity: 0.22;
+    pointer-events: none;
+    z-index:0;
+  }
+  .blob.a { width:420px;height:420px; background:linear-gradient(45deg,var(--g1), #5b2bbf); left:-80px; top:-120px; animation: float1 9s ease-in-out infinite; }
+  .blob.b { width:360px;height:360px; background:linear-gradient(45deg,#ff8cc7,var(--g2)); right:-90px; bottom:-130px; animation: float2 11s ease-in-out infinite; }
+  @keyframes float1 { 0%{transform:translateY(0)rotate(0)}50%{transform:translateY(-18px)rotate(8deg)}100%{transform:translateY(0)rotate(0)}}
+  @keyframes float2 { 0%{transform:translateY(0)rotate(0)}50%{transform:translateY(14px)rotate(-6deg)}100%{transform:translateY(0)rotate(0)}}
+
+  /* ---------- Card/container (full gradient box) ---------- */
+  .card {
+    position: relative;
+    width: 420px;
+    max-width: calc(100% - 40px);
+    border-radius: 18px;
+    padding: 28px;
+    z-index: 2;
+    color: var(--accent);
+    overflow: hidden;
+    /* full gradient inside card to match page (Box: B) */
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+    backdrop-filter: blur(10px);
+  }
+
+  /* gradient border glow */
+  .card::before{
+    content:"";
+    position:absolute;
+    inset: -2px;
+    background: linear-gradient(90deg,var(--g1), #b25df5, var(--g2));
+    filter: blur(18px);
+    opacity: 0.45;
+    z-index: -1;
+    transform: scale(1.02);
+  }
+
+  /* ---------- Logo ---------- */
+  .logo {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom: 8px;
+  }
+  .logo svg{height:44px;width:44px;flex-shrink:0}
+  .logo h1{font-size:20px;margin:0;color:white;letter-spacing:0.6px;font-weight:700;}
+
+  /* subtitle / small tagline */
+  .tag { font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:14px }
+
+  /* tabs */
+  .tabs { display:flex; gap:18px; margin-bottom:16px; align-items:center; justify-content:center }
+  .tab { cursor:pointer; padding-bottom:6px; font-weight:600; color:rgba(255,255,255,0.9); opacity:0.92 }
+  .tab.active{ border-bottom: 2px solid rgba(255,255,255,0.95); color:white; padding-bottom:4px }
+
+  /* forms layout */
+  .forms { position:relative; min-height:360px; }
+  form { width:100%; transition: transform .45s cubic-bezier(.2,.9,.28,1), opacity .35s; position:absolute; left:0; top:0; }
+  form.hidden { opacity:0; pointer-events:none; transform: translateX(30px) scale(.995) }
+
+  /* floating label style inputs */
+  .field {
+    position:relative;
+    margin:14px 0;
+  }
+  .field input {
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: white;
+    outline: none;
+    font-size:15px;
+    transition: box-shadow .18s, border-color .18s, background .18s;
+  }
+  .field input::placeholder { color:transparent }
+  .field label {
+    position:absolute;
+    left:14px;
+    top:12px;
+    color: rgba(255,255,255,0.7);
+    pointer-events:none;
+    font-size:13px;
+    transition: transform .18s ease, top .18s ease, font-size .18s;
+    transform-origin:left top;
+  }
+  .field input:focus { box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 12px rgba(255,255,255,0.06) inset; border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.045) }
+  .field input:focus + label,
+  .field input:not(:placeholder-shown) + label {
+    top:-8px; font-size:11px; transform: translateY(-2px);
+    color: #fff;
+  }
+
+  /* show-password eye */
+  .eye {
+    position:absolute; right:12px; top:10px; height:32px; display:flex; align-items:center; gap:8px; cursor:pointer; color:rgba(255,255,255,0.7)
+  }
+
+  /* password strength */
+  .strength {
+    margin-top:6px; font-size:13px; color:rgba(255,255,255,0.85)
+  }
+  .strength .bar { height:6px; border-radius:6px; background:rgba(255,255,255,0.08); overflow:hidden; margin-top:6px }
+  .strength .bar > i { display:block; height:100%; width:0%; background:linear-gradient(90deg,#ffb86b,#ff6ec4); transition:width .35s }
+
+  /* submit button + ripple */
+  .cta {
+    margin-top:14px;
+    position:relative;
+  }
+  button.cta {
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:none;
+    background: linear-gradient(90deg,var(--g1),var(--g2));
+    color:white;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    transition: transform .14s ease, box-shadow .14s;
+  }
+  button.cta:active { transform: translateY(1px) scale(.998) }
+  button.cta.loading { color: transparent; }
+  button.cta.loading::after{
+    content:"";
+    width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,0.95); border-top-color: transparent;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); animation: spin .8s linear infinite;
+  }
+  @keyframes spin{ to{ transform: translate(-50%,-50%) rotate(360deg) } }
+
+  /* ripple effect on click */
+  button.cta::before{
+    content:""; position: absolute; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.12);
+    left:0; top:0; transform: translate(-50%,-50%); opacity:0; transition: width .45s ease, height .45s ease, opacity .45s;
+    pointer-events:none;
+  }
+
+  /* toast */
+  .toast {
+    position: fixed;
+    right:18px; bottom:18px;
+    background: rgba(0,0,0,0.7);
+    color:white; padding:10px 14px; border-radius:10px; font-weight:600;
+    opacity:0; transform: translateY(8px); transition:all .34s; z-index:9999
+  }
+  .toast.show { opacity:1; transform: translateY(0) }
+
+  /* shake */
+  @keyframes shake { 0%,100%{ transform:translateX(0) } 20%,60%{ transform:translateX(-8px) } 40%,80%{ transform:translateX(8px) } }
+  .shake { animation: shake .42s }
+
+  /* small helper */
+  .muted { font-size:13px; color:rgba(255,255,255,0.75); margin-top:8px; text-align:center }
+
+  /* responsive */
+  @media (max-width:480px){
+    .card{ padding:18px; width: 92%; border-radius:14px }
+    .logo h1{ font-size:18px }
+  }
+</style>
+</head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-light fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- decorative moving shapes -->
+  <div class="bg-motion"></div>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
 
-    <div class="d-flex align-items-center ms-auto gap-3">
-      <!-- Search -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
+  <div class="card" role="main" aria-labelledby="auth-heading">
+
+    <!-- LOGO (SVG) -->
+    <div class="logo" aria-hidden="false">
+      <!-- simple gradient circle + Y monogram -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" x2="1">
+            <stop offset="0" stop-color="#8e2de2"/>
+            <stop offset="1" stop-color="#ff6ec4"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="url(#lg)" />
+        <g transform="translate(0,2)">
+          <text x="50%" y="57%" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="46" fill="white" dominant-baseline="middle">YM</text>
+        </g>
+      </svg>
+
+      <div>
+        <h1 id="auth-heading">YASH-MART</h1>
+        <div class="tag">Shop smarter • Live better</div>
+      </div>
+    </div>
+
+    <!-- tabs -->
+    <div class="tabs" role="tablist" aria-label="Register or Login">
+      <div class="tab active" id="tab-register" role="tab" aria-selected="true">Register</div>
+      <div class="tab" id="tab-login" role="tab" aria-selected="false">Login</div>
+    </div>
+
+    <div class="forms">
+
+      <!-- REGISTER FORM -->
+      <form id="form-register" autocomplete="on" novalidate>
+        <div class="field">
+          <input id="reg-username" name="username" type="text" placeholder=" " required />
+          <label for="reg-username">Username</label>
+        </div>
+
+        <div class="field">
+          <input id="reg-email" name="email" type="email" placeholder=" " required />
+          <label for="reg-email">Email</label>
+        </div>
+
+        <div class="field" style="margin-bottom:6px">
+          <input id="reg-password" name="password" type="password" placeholder=" " required />
+          <label for="reg-password">Password</label>
+          <div class="eye" id="toggleRegPass" title="Show / Hide password">👁️</div>
+        </div>
+
+        <div class="strength" id="reg-strength" aria-hidden="true">
+          <div style="font-size:13px;color:rgba(255,255,255,0.85)">Password strength</div>
+          <div class="bar"><i style="width:0%"></i></div>
+        </div>
+
+        <div class="field">
+          <input id="reg-confirm" name="confirm" type="password" placeholder=" " required />
+          <label for="reg-confirm">Confirm password</label>
+        </div>
+
+        <div class="cta">
+          <button class="cta" id="btn-register" type="submit">Create account</button>
+        </div>
+
+        <div class="muted">Already have an account? <a href="#" id="link-to-login" style="color:white;text-decoration:underline">Login</a></div>
       </form>
 
-      <!-- Profile -->
-      <div class="d-flex flex-column align-items-center" id="profileSection">
-        <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-        <span class="hi" id="profileName">Profile</span>
-      </div>
-
-      <!-- Cart -->
-      <div class="d-flex flex-column align-items-center">
-        <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
-        <span class="hi" id="cartCount">0</span>
-      </div>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="all.html">All</a></li>
-        <li class="nav-item"><a class="nav-link" href="cafe.html">Cafe</a></li>
-        <li class="nav-item"><a class="nav-link" href="toys.html">Toys</a></li>
-        <li class="nav-item"><a class="nav-link" href="fresh.html">Fresh</a></li>
-        <li class="nav-item"><a class="nav-link" href="electronic.html">Electronic</a></li>
-        <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
-        <li class="nav-item"><a class="nav-link" href="fashion.html">Fashion</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<br><br><br><br><br>
-
-<section class="bg-dark text-white text-center p-5">
-  <div class="banner-text">
-    <h1>WELCOME TO YASH-MART</h1>
-    <p>Your one-stop shop for quality, convenience, and style.</p>
-  </div>
-</section>
-
-<!-- Featured Categories -->
-<div class="container my-5">
-  <h2 class="text-center mb-4">Shop by Categories</h2>
-  <div class="row row-cols-2 row-cols-md-4 g-4">
-    <div class="col">
-      <div class="card h-100 text-center">
-        <a href="toys.html"><img src="c20.webp" class="card-img-top" alt="Toys" height="290"></a>
-        <div class="card-body"><h5 class="card-title">Toys</h5></div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 text-center">
-        <a href="fashion.html"><img src="c24.webp" class="card-img-top" alt="Fashion" height="290"></a>
-        <div class="card-body"><h5 class="card-title">Fashion</h5></div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 text-center">
-        <a href="electronic.html"><img src="c28.webp" class="card-img-top" alt="Electronics" height="290"></a>
-        <div class="card-body"><h5 class="card-title">Electronics</h5></div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 text-center">
-        <a href="fresh.html"><img src="c26.webp" class="card-img-top" alt="Fresh" height="290"></a>
-        <div class="card-body"><h5 class="card-title">Fresh</h5></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Best Selling Products -->
-<div class="container my-5" id="productList">
-  <h2 class="text-center mb-4">Best Selling Products</h2>
-  <div class="row row-cols-1 row-cols-md-4 g-4">
-
-    <div class="col">
-      <div class="card h-100">
-        <img src="c29.webp" class="card-img-top" alt="Smart Watch">
-        <div class="card-body text-center">
-          <h5>Smart Watch</h5>
-          <p>₹2,999</p>
-          <button class="btn btn-dark add-cart" data-name="Smart Watch" data-price="2999" data-image="c29.webp">Add to Cart</button>
+      <!-- LOGIN FORM (hidden initially) -->
+      <form id="form-login" class="hidden" autocomplete="on" novalidate>
+        <div class="field">
+          <input id="login-email" name="loginEmail" type="email" placeholder=" " required />
+          <label for="login-email">Email</label>
         </div>
-      </div>
-    </div>
 
-    <div class="col">
-      <div class="card h-100">
-        <img src="c34.webp" class="card-img-top" alt="Teddy Bear" height="230">
-        <div class="card-body text-center">
-          <h5>Teddy Bear</h5>
-          <p>₹799</p>
-          <button class="btn btn-dark add-cart" data-name="Teddy Bear" data-price="799" data-image="c34.webp">Add to Cart</button>
+        <div class="field">
+          <input id="login-password" name="loginPassword" type="password" placeholder=" " required />
+          <label for="login-password">Password</label>
+          <div class="eye" id="toggleLoginPass" title="Show / Hide password">👁️</div>
         </div>
-      </div>
-    </div>
 
-    <div class="col">
-      <div class="card h-100">
-        <img src="c35.webp" class="card-img-top" alt="Casual Shoes" height="270">
-        <div class="card-body text-center">
-          <h5>Casual Shoes</h5>
-          <p>₹1,499</p>
-          <button class="btn btn-dark add-cart" data-name="Casual Shoes" data-price="1499" data-image="c35.webp">Add to Cart</button>
+        <div class="cta">
+          <button class="cta" id="btn-login" type="submit">Login</button>
         </div>
-      </div>
-    </div>
 
-    <div class="col">
-      <div class="card h-100">
-        <img src="c30.jpg" class="card-img-top" alt="Face Cream" height="270">
-        <div class="card-body text-center">
-          <h5>Face Cream</h5>
-          <p>₹499</p>
-          <button class="btn btn-dark add-cart" data-name="Face Cream" data-price="499" data-image="c30.jpg">Add to Cart</button>
-        </div>
-      </div>
-    </div>
+        <div class="muted">New here? <a href="#" id="link-to-register" style="color:white;text-decoration:underline">Create account</a></div>
+      </form>
 
-  </div>
-</div>
+    </div> <!-- forms -->
+  </div> <!-- card -->
 
-<!-- Offer Banner -->
-<div class="bg-warning text-dark text-center p-4 my-5">
-  <h3>🔥 Special Offer: Get 50% Off on Fashion Today Only!</h3>
-  <a href="fashion.html" class="btn btn-dark mt-2">Shop Now</a>
-</div>
-
-<!-- Carousel -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active"><img src="cepto1.webp" class="d-block w-100" alt="slide1"></div>
-    <div class="carousel-item"><img src="cepto7.webp" class="d-block w-100" alt="slide2"></div>
-    <div class="carousel-item"><img src="cepto6.webp" class="d-block w-100" alt="slide3"></div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-</div>
-
-<!-- Why Shop With Us -->
-<div class="container my-5">
-  <h2 class="text-center mb-5">Why Shop With Us?</h2>
-  <div class="row text-center">
-    <div class="col-md-3"><h4>🚚 Free Delivery</h4><p>On all orders above ₹499</p></div>
-    <div class="col-md-3"><h4>💳 Secure Payment</h4><p>100% safe transactions</p></div>
-    <div class="col-md-3"><h4>⭐ Quality Products</h4><p>Trusted by thousands</p></div>
-    <div class="col-md-3"><h4>📞 24/7 Support</h4><p>We’re always here for you</p></div>
-  </div>
-</div>
-
-<!-- Newsletter -->
-<div class="bg-dark text-white text-center p-4">
-  <h4>Subscribe for more offers</h4>
-  <form class="d-flex justify-content-center mt-3" id="subscribeForm">
-    <input type="email" class="form-control w-25 me-2" placeholder="Enter your email" id="subscribeEmail">
-    <button class="btn btn-warning" type="submit">Subscribe</button>
-  </form>
-</div>
-
-
-<!-- Add to Cart Modal -->
-<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-danger text-white">
-      <div class="modal-header border-0">
-        <h5 class="modal-title" id="cartModalLabel">🛒 Item Added to Cart</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="cartModalBody"></div>
-      <div class="modal-footer border-0">
-        <a href="cart.html" class="btn btn-dark">Go to Cart</a>
-        <button type="button" class="btn btn-light text-dark" data-bs-dismiss="modal">Continue Shopping</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-     <!-- Footer -->
-    <footer class="bg-light text-center text-dark mt-4">
-      <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
-    </footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+/* ---------------- Utilities ---------------- */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-  /* ---------------------- PROFILE ---------------------- */
-  const profileName = document.getElementById('profileName');
-  const profileLink = document.querySelector('#profileSection a');
+/* DOM elements */
+const tabRegister = $('#tab-register'), tabLogin = $('#tab-login');
+const formRegister = $('#form-register'), formLogin = $('#form-login');
+const linkToLogin = $('#link-to-login'), linkToRegister = $('#link-to-register');
+const toast = $('#toast');
 
-  const updateProfile = () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    profileName.textContent = currentUser ? `Hi, ${currentUser.username}` : 'Profile';
-  };
-  updateProfile();
+function showToast(msg, tone){
+  toast.textContent = msg;
+  if(tone === 'err') toast.style.background = 'rgba(200,30,30,0.9)';
+  else if(tone === 'ok') toast.style.background = 'rgba(16,128,68,0.9)';
+  else toast.style.background = 'rgba(0,0,0,0.7)';
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> toast.classList.remove('show'), 2600);
+}
 
-  profileLink.addEventListener('click', (e) => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-      e.preventDefault();
-      alert('Please login first!');
-      window.location.href = 'login.html';
-    }
-  });
-
-
-
-  /* ---------------------- CART SYSTEM ---------------------- */
-  const cartCount = document.getElementById("cartCount");
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function updateCartCount() {
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+/* ---------------- Tab / slide handling ---------------- */
+function setActiveTab(which){
+  if(which === 'register'){
+    tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+    formRegister.classList.remove('hidden');
+    formLogin.classList.add('hidden');
+    formRegister.style.transform = 'translateX(0)'; formRegister.style.opacity=1;
+    formLogin.style.transform = 'translateX(10px)'; formLogin.style.opacity=0;
+  } else {
+    tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+    formLogin.classList.remove('hidden'); formRegister.classList.add('hidden');
+    formLogin.style.transform = 'translateX(0)'; formLogin.style.opacity=1;
+    formRegister.style.transform = 'translateX(-10px)'; formRegister.style.opacity=0;
   }
-  updateCartCount();
+}
+tabRegister.addEventListener('click', ()=>setActiveTab('register'));
+tabLogin.addEventListener('click', ()=>setActiveTab('login'));
+linkToLogin.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('login'); });
+linkToRegister.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('register'); });
 
-  document.querySelectorAll(".add-cart").forEach(btn => {
-    btn.addEventListener("click", () => {
+/* init */
+setActiveTab('register');
 
-      const name = btn.dataset.name || "";
-      const image = btn.dataset.image || "";
-      const price = Number(btn.dataset.price) || 0; // FIXED – No NaN possible
+/* ---------------- Floating labels: handled by CSS using :placeholder-shown
+   but ensure inputs have placeholder=" " in HTML - already set. -------- */
 
-      const existing = cart.find(i => i.name === name);
+/* ---------------- Show / hide password ---------------- */
+function togglePassword(buttonId, inputId){
+  const b = $(buttonId), inp = $(inputId);
+  b.addEventListener('click', ()=>{
+    if(inp.type === 'password'){ inp.type = 'text'; b.textContent = '🙈'; }
+    else { inp.type = 'password'; b.textContent = '👁️'; }
+    inp.focus();
+  });
+}
+togglePassword('#toggleRegPass', '#reg-password');
+togglePassword('#toggleLoginPass', '#login-password');
 
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ name, price, image, quantity: 1 });
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount();
-
-
-      /* ---------------- SHOW MODAL ---------------- */
-      const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-      const cartModalBody = document.getElementById('cartModalBody');
-
-      cartModalBody.innerHTML = `
-        <div class="d-flex align-items-center">
-          <img src="${image}" width="60" class="me-3">
-          <div>
-            <p class="mb-1"><strong>${name}</strong></p>
-            <p class="mb-0">Added Successfully!</p>
-          </div>
-        </div>
-      `;
-
-      cartModal.show();
+/* ---------------- Button ripple effect (uses CSS pseudo elem but we position) -------------- */
+$$('.cta button.cta').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // apply CSS vars to create ripple using ::before
+    btn.style.setProperty('--rx', x + 'px');
+    btn.style.setProperty('--ry', y + 'px');
+    // quick animate pseudo-element by toggling width/height via inline style on ::before not possible,
+    // so we simulate with small DOM ripple:
+    const r = document.createElement('span');
+    r.style.position='absolute';
+    r.style.left = x+'px'; r.style.top = y+'px';
+    r.style.width = r.style.height = '12px';
+    r.style.borderRadius='50%';
+    r.style.transform='translate(-50%,-50%)';
+    r.style.background='rgba(255,255,255,0.12)';
+    r.style.pointerEvents='none';
+    r.style.opacity='0.9';
+    r.style.transition='all 600ms cubic-bezier(.2,.9,.2,1)';
+    btn.appendChild(r);
+    requestAnimationFrame(()=> {
+      r.style.width = '260px'; r.style.height = '260px'; r.style.opacity='0';
+      r.style.filter='blur(8px)';
     });
+    setTimeout(()=> r.remove(), 650);
   });
+});
 
+/* ---------------- Password strength (register) ---------------- */
+const regPass = $('#reg-password'), regStrength = $('#reg-strength .bar > i');
+function calcStrength(s){
+  let score=0;
+  if(s.length>=8) score+=1;
+  if(/[A-Z]/.test(s)) score+=1;
+  if(/[0-9]/.test(s)) score+=1;
+  if(/[^A-Za-z0-9]/.test(s)) score+=1;
+  return Math.min(4, score);
+}
+regPass.addEventListener('input', ()=>{
+  const v = regPass.value || '';
+  const s = calcStrength(v);
+  const perc = (s/4)*100;
+  regStrength.style.width = perc+'%';
+  // color shift for visual hint (we set gradient in CSS; simple visual via opacity)
+  if(perc<35) regStrength.parentElement.previousElementSibling.style.color = '#ff6b6b';
+  else if(perc<70) regStrength.parentElement.previousElementSibling.style.color = '#f4b400';
+  else regStrength.parentElement.previousElementSibling.style.color = '#8ef58e';
+});
 
+/* ---------------- Registration logic ---------------- */
+const regForm = $('#form-register');
+regForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
 
-  /* ---------------------- SEARCH ---------------------- */
-  const searchForm = document.querySelector('form[role="search"]');
-  const searchInput = searchForm.querySelector('input[type="search"]');
-  const cards = document.querySelectorAll('#productList .card');
+  const username = $('#reg-username').value.trim();
+  const email = $('#reg-email').value.trim();
+  const pass = $('#reg-password').value;
+  const confirm = $('#reg-confirm').value;
 
-  searchForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const query = searchInput.value.toLowerCase().trim();
-    let found = false;
+  if(username.length < 2){ showToast('Username too short', 'err'); $('#reg-username').focus(); return; }
+  if(!/^[^ ]+@[^ ]+\.[a-z]{2,}$/i.test(email)){ showToast('Enter a valid email', 'err'); $('#reg-email').focus(); return; }
+  if(pass.length < 6){ showToast('Password must be 6+ chars', 'err'); $('#reg-password').focus(); return; }
+  if(pass !== confirm){ showToast('Passwords do not match', 'err'); $('#reg-confirm').focus(); return; }
 
-    cards.forEach(card => {
-      const name = card.querySelector("h5").textContent.toLowerCase();
-      if (name.includes(query)) {
-        card.scrollIntoView({ behavior: "smooth", block: "center" });
-        found = true;
-      }
-    });
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  if(users.find(u=>u.email.toLowerCase() === email.toLowerCase())){ showToast('Email already registered', 'err'); setActiveTab('login'); $('#login-email').value=email; return; }
 
-    if (!found) alert("❌ Product not found!");
-  });
+  users.push({ username, email, password: pass });
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Account created', 'ok');
 
+  // animate button: add loading then switch to login
+  const btn = $('#btn-register');
+  btn.classList.add('loading');
+  setTimeout(()=> {
+    btn.classList.remove('loading');
+    setActiveTab('login');
+  }, 900);
+});
 
+/* ---------------- Login logic ---------------- */
+const loginFormEl = $('#form-login');
+loginFormEl.addEventListener('submit', (e)=>{
+  e.preventDefault();
 
-  /* ---------------------- SUBSCRIBE ---------------------- */
-  const subscribeForm = document.getElementById('subscribeForm');
-  const subscribeEmail = document.getElementById('subscribeEmail');
+  const email = $('#login-email').value.trim();
+  const pass = $('#login-password').value;
 
-  subscribeForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = subscribeEmail.value.trim();
-    if (email === "") { alert("Please enter email"); return; }
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
 
-    alert(`🎉 Thank you for subscribing, ${email}!`);
-    subscribeEmail.value = "";
-  });
+  const btn = $('#btn-login');
+  btn.classList.add('loading');
 
+  setTimeout(()=> {
+    btn.classList.remove('loading');
+    if(!user){
+      formLogin.classList.add('shake');
+      showToast('Invalid credentials', 'err');
+      setTimeout(()=> formLogin.classList.remove('shake'), 420);
+    } else {
+      showToast('Welcome back — redirecting...', 'ok');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      setTimeout(()=> location.href = 'webpage1.html', 900);
+    }
+  }, 900);
+});
+
+/* ---------------- small UX: Enter key on forms should submit, placeholder presence already set ---------------- */
+
+/* Accessibility: allow keyboard switching with left/right arrows on tab */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'ArrowLeft') setActiveTab('register');
+  if(e.key === 'ArrowRight') setActiveTab('login');
 });
 </script>
 
