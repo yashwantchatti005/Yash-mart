@@ -97,6 +97,7 @@
 <div class="container my-5" id="productList">
   <h2 class="text-center mb-4">Best Selling Products</h2>
   <div class="row row-cols-1 row-cols-md-4 g-4">
+
     <div class="col">
       <div class="card h-100">
         <img src="c29.webp" class="card-img-top" alt="Smart Watch">
@@ -107,9 +108,10 @@
         </div>
       </div>
     </div>
+
     <div class="col">
       <div class="card h-100">
-        <img src="c34.webp" class="card-img-top" alt="Teddy" height="230">
+        <img src="c34.webp" class="card-img-top" alt="Teddy Bear" height="230">
         <div class="card-body text-center">
           <h5>Teddy Bear</h5>
           <p>₹799</p>
@@ -117,9 +119,10 @@
         </div>
       </div>
     </div>
+
     <div class="col">
       <div class="card h-100">
-        <img src="c35.webp" class="card-img-top" alt="Shoes" height="270">
+        <img src="c35.webp" class="card-img-top" alt="Casual Shoes" height="270">
         <div class="card-body text-center">
           <h5>Casual Shoes</h5>
           <p>₹1,499</p>
@@ -127,6 +130,7 @@
         </div>
       </div>
     </div>
+
     <div class="col">
       <div class="card h-100">
         <img src="c30.jpg" class="card-img-top" alt="Face Cream" height="270">
@@ -137,6 +141,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -181,6 +186,7 @@
   </form>
 </div>
 
+
 <!-- Add to Cart Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -189,9 +195,7 @@
         <h5 class="modal-title" id="cartModalLabel">🛒 Item Added to Cart</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="cartModalBody">
-        <!-- Dynamic content goes here -->
-      </div>
+      <div class="modal-body" id="cartModalBody"></div>
       <div class="modal-footer border-0">
         <a href="cart.html" class="btn btn-dark">Go to Cart</a>
         <button type="button" class="btn btn-light text-dark" data-bs-dismiss="modal">Continue Shopping</button>
@@ -200,19 +204,27 @@
   </div>
 </div>
 
+     <!-- Footer -->
+    <footer class="bg-light text-center text-dark mt-4">
+      <p class="mb-0">&copy; 2025 YASHMART - All Rights Reserved</p>
+    </footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Profile Section
+
+  /* ---------------------- PROFILE ---------------------- */
   const profileName = document.getElementById('profileName');
   const profileLink = document.querySelector('#profileSection a');
+
   const updateProfile = () => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     profileName.textContent = currentUser ? `Hi, ${currentUser.username}` : 'Profile';
   };
   updateProfile();
+
   profileLink.addEventListener('click', (e) => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) {
@@ -222,42 +234,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Cart Section with duplicate prevention
+
+
+  /* ---------------------- CART SYSTEM ---------------------- */
   const cartCount = document.getElementById("cartCount");
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const updateCartCount = () => cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  function updateCartCount() {
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
   updateCartCount();
 
   document.querySelectorAll(".add-cart").forEach(btn => {
     btn.addEventListener("click", () => {
-      const itemName = btn.dataset.name;
-      const existingItem = cart.find(item => item.name === itemName);
-      if (existingItem) {
-        existingItem.quantity += 1;
+
+      const name = btn.dataset.name || "";
+      const image = btn.dataset.image || "";
+      const price = Number(btn.dataset.price) || 0; // FIXED – No NaN possible
+
+      const existing = cart.find(i => i.name === name);
+
+      if (existing) {
+        existing.quantity += 1;
       } else {
-        cart.push({ name: itemName, price: parseInt(btn.dataset.price), image: btn.dataset.image, quantity: 1 });
+        cart.push({ name, price, image, quantity: 1 });
       }
+
       localStorage.setItem("cart", JSON.stringify(cart));
       updateCartCount();
-     const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-const cartModalBody = document.getElementById('cartModalBody');
 
-cartModalBody.innerHTML = `
-  <div class="d-flex align-items-center">
-    <img src="${btn.dataset.image}" alt="${itemName}" width="60" class="me-3">
-    <div>
-      <p class="mb-1"><strong>${itemName}</strong></p>
-      <p class="mb-0">Quantity: ${existingItem ? existingItem.quantity : 1}</p>
-    </div>
-  </div>
-`;
-cartModal.show();
 
+      /* ---------------- SHOW MODAL ---------------- */
+      const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+      const cartModalBody = document.getElementById('cartModalBody');
+
+      cartModalBody.innerHTML = `
+        <div class="d-flex align-items-center">
+          <img src="${image}" width="60" class="me-3">
+          <div>
+            <p class="mb-1"><strong>${name}</strong></p>
+            <p class="mb-0">Added Successfully!</p>
+          </div>
+        </div>
+      `;
+
+      cartModal.show();
     });
   });
-  
 
-  // Search Section
+
+
+  /* ---------------------- SEARCH ---------------------- */
   const searchForm = document.querySelector('form[role="search"]');
   const searchInput = searchForm.querySelector('input[type="search"]');
   const cards = document.querySelectorAll('#productList .card');
@@ -266,28 +293,33 @@ cartModal.show();
     e.preventDefault();
     const query = searchInput.value.toLowerCase().trim();
     let found = false;
+
     cards.forEach(card => {
       const name = card.querySelector("h5").textContent.toLowerCase();
       if (name.includes(query)) {
         card.scrollIntoView({ behavior: "smooth", block: "center" });
-        card.classList.add("border", "border-success", "border-3");
-        setTimeout(() => card.classList.remove("border", "border-success", "border-3"), 2000);
         found = true;
       }
     });
+
     if (!found) alert("❌ Product not found!");
   });
 
-  // Subscribe Form
+
+
+  /* ---------------------- SUBSCRIBE ---------------------- */
   const subscribeForm = document.getElementById('subscribeForm');
   const subscribeEmail = document.getElementById('subscribeEmail');
+
   subscribeForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = subscribeEmail.value.trim();
-    if (email === "") { alert("Please enter your email!"); return; }
+    if (email === "") { alert("Please enter email"); return; }
+
     alert(`🎉 Thank you for subscribing, ${email}!`);
     subscribeEmail.value = "";
   });
+
 });
 </script>
 
