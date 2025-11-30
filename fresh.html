@@ -352,6 +352,28 @@
 
 
 <script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------------------- PROFILE ---------------------- */
+  const profileName = document.getElementById('profileName');
+  const profileLink = document.querySelector('#profileSection a');
+
+  const updateProfile = () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    profileName.textContent = currentUser ? `Hi, ${currentUser.username}` : 'Profile';
+  };
+  updateProfile();
+
+  profileLink.addEventListener('click', (e) => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+      e.preventDefault();
+      alert('Please login first!');
+      window.location.href = 'login.html';
+    }
+  });
+
 // ✅ CART SYSTEM WITH POPUP
 const cartCount = document.getElementById("cartCount");
 const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
