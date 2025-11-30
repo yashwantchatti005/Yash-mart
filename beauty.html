@@ -32,9 +32,11 @@
 
       <!-- Profile -->
 <div class="d-flex flex-column align-items-center" id="profileSection">
-  <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
+  <a href="profile.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
   <span class="hi" id="profileName">Profile</span>
 </div>
+
+
       <!-- Cart -->
       <div class="d-flex flex-column align-items-center">
         <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
@@ -587,30 +589,6 @@
 
 
 <script>
-
-  document.addEventListener('DOMContentLoaded', () => {
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  const profileName = document.getElementById('profileName');
-  const profileLink = document.querySelector('#profileSection a');
-
-  const updateProfile = () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    profileName.textContent = currentUser ? `Hi, ${currentUser.username}` : 'Profile';
-  };
-  updateProfile();
-
-  profileLink.addEventListener('click', (e) => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-      e.preventDefault();
-      alert('Please login first!');
-      window.location.href = 'login.html';
-    }
-  });
-
-});
 // ✅ CART SYSTEM WITH POPUP
 const cartCount = document.getElementById("cartCount");
 const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
@@ -715,6 +693,24 @@ document.querySelector('form[role="search"]').addEventListener('submit', functio
 
 
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const profileName = document.getElementById('profileName');
+  const profileSection = document.getElementById('profileSection');
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+  if (currentUser) {
+    profileName.textContent = `Hi, ${currentUser.username}`;
+  } else {
+    profileName.textContent = "Profile";
+  }
+
+});
+</script>
+
 
 
 
