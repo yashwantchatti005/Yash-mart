@@ -1,16 +1,16 @@
-🛒 Yash-Mart
+# 🛒 Yash-Mart
 
 Yash-Mart is a modern, responsive e-commerce frontend web application built using **HTML, CSS, JavaScript, and Bootstrap**.  
 It simulates a real online shopping experience with product categories, cart management, and dynamic UI updates.
 
 ---
 
-🌐 Live Demo
+## 🌐 Live Demo
 🔗 https://yashwantchatti005.github.io/Yash-mart/
 
 ---
 
-✨ Features
+## ✨ Features
 - 🛍️ Multiple product categories (Fashion, Beauty, Cafe, Toys, Electronics, Fresh)
 - 🛒 Add to Cart functionality using **localStorage**
 - ➕➖ Quantity control and remove items from cart
@@ -22,7 +22,7 @@ It simulates a real online shopping experience with product categories, cart man
 
 ---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 - **HTML5**
 - **CSS3**
 - **JavaScript (ES6)**
@@ -32,7 +32,7 @@ It simulates a real online shopping experience with product categories, cart man
 
 ---
 
-🧠 Learning Outcomes
+## 🧠 Learning Outcomes
 - Built a complete frontend e-commerce flow
 - Worked with DOM manipulation and localStorage
 - Solved real-world deployment issues (GitHub Pages)
@@ -40,6 +40,6 @@ It simulates a real online shopping experience with product categories, cart man
 
 ---
 
-👤 Author
+## 👤 Author
 **Yashwant Chatti**  
 Aspiring Full Stack Developer 🚀
