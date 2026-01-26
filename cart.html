@@ -1,1056 +1,856 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Welcome to Yashmart</title>
-   <style>
-.cafe-card {
-  border: none;
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transition: transform 0.15s ease;
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart | Yashmart</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" type="image/svg" href="cart-dash.svg">
+<link rel="stylesheet" href="wepsite.css">
+
+<style>
+body { background:#f8f9fa; }
+
+/* Card */
+.card {
+  transition: .3s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-.cafe-card:hover {
-  transform: translateY(-2px);
+/* Price summary */
+.price-box {
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 12px 28px rgba(106,17,203,.18);
+}
+.price-box p {
+  display:flex;
+  justify-content:space-between;
+}
+.price-box h5 {
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
 }
 
-.cafe-card img {
-  height: 140px;
-  object-fit: cover;
-  border-radius: 14px 14px 0 0;
+/* Sticky summary */
+@media (min-width:992px){
+  .price-wrapper {
+    position:sticky;
+    top:90px;
+  }
 }
 
-.cafe-card .card-body {
-  padding: 12px;
+/* Empty cart */
+.empty-cart {
+  text-align:center;
+  padding:40px;
 }
 
-.cafe-card .card-title {
-  font-size: 15px;
+/* Progress */
+.progress { height:22px; }
+
+/* Van animation */
+.van-container { height:120px; overflow:hidden; }
+.van {
+  width:140px;
+  position:absolute;
+  animation: drive 2s linear infinite;
+}
+@keyframes drive {
+  from { left:-160px }
+  to { left:110% }
+}
+/* ==============================
+   💜 YASHMART CART – PREMIUM UI
+============================== */
+
+/* Page */
+body {
+  background: linear-gradient(135deg, #f4f0ff, #fdfbff);
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(135deg, #3f1651, #6a11cb) !important;
+  box-shadow: 0 6px 20px rgba(106,17,203,.35);
+}
+
+.navbar-brand {
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg,#c77dff,#9d4edd,#5a189a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Navbar buttons */
+.navbar .btn {
+  border-radius: 20px;
   font-weight: 600;
 }
 
-.cafe-card .card-text {
-  font-size: 13px;
-  color: #555;
+/* ==============================
+   🛒 CART CARDS
+============================== */
+
+.card {
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(145deg,#ffffff,#f6f1ff);
+  box-shadow: 0 12px 28px rgba(155,92,255,.18);
+  transition: all .35s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(155,92,255,.35);
+}
+
+/* Product image */
+.card-img-top {
+  height: 180px;
+  object-fit: contain;
+  padding: 12px;
+  background: #fff;
+}
+
+/* Product text */
+.card h6 {
+  font-weight: 700;
+  color: #3f1651;
+}
+
+.card p {
+  font-weight: 700;
+  color: #8e44ad;
+}
+
+/* Quantity buttons */
+.card .btn-outline-secondary {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+/* Remove button */
+.card .btn-danger {
+  border-radius: 18px;
+  font-size: 12px;
+}
+
+/* ==============================
+   💰 PRICE SUMMARY BOX
+============================== */
+
+.price-box {
+  background: linear-gradient(145deg,#ffffff,#f6f1ff);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 18px 40px rgba(106,17,203,.25);
+}
+
+.price-box h5 {
+  font-size: 20px;
+  color: #3f1651;
+}
+
+/* Coupon input */
+#couponInput {
+  border-radius: 20px;
+  border: 1px solid #d8b4e2;
+}
+
+.price-box .btn-primary {
+  background: linear-gradient(135deg,#6a11cb,#9b5cff);
+  border-radius: 22px;
+  font-weight: 700;
+}
+
+.price-box .btn-primary:hover {
+  box-shadow: 0 0 16px rgba(155,92,255,.6);
+}
+
+/* Checkout button */
+.price-box .btn-success {
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+  border-radius: 22px;
+  font-weight: 800;
+}
+
+/* Clear cart */
+.price-box .btn-danger {
+  border-radius: 22px;
+}
+
+/* ==============================
+   🚚 DELIVERY PROGRESS
+============================== */
+
+.progress {
+  height: 16px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg,#6a11cb,#c77dff);
+  font-weight: 700;
+}
+
+/* ==============================
+   🛍 EMPTY CART
+============================== */
+
+.empty-cart {
+  background: linear-gradient(145deg,#ffffff,#f6f1ff);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 12px 30px rgba(155,92,255,.2);
+}
+
+.empty-cart h5 {
+  color: #3f1651;
+}
+
+/* ==============================
+   📱 MOBILE TWEAKS
+============================== */
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px;
+  }
+
+  .price-box {
+    margin-top: 20px;
+  }
+}
+/* =====================================================
+   🛒 CART CARDS – CLEAN & SIMPLE (FINAL FIX)
+===================================================== */
+
+/* RESET everything for cart cards */
+#cartContainer .card {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+  transform: none !important;
+  transition: box-shadow 0.25s ease !important;
+}
+
+/* Simple hover (NO zoom) */
+#cartContainer .card:hover {
+  transform: none !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12) !important;
+}
+
+/* Image – clean & same as products */
+#cartContainer .card-img-top {
+  height: 180px !important;
+  object-fit: contain !important;
+  padding: 10px !important;
+  background: #ffffff !important;
+}
+
+/* Product name */
+#cartContainer .card h6 {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
   margin-bottom: 4px;
 }
 
-.cafe-price {
+/* Price */
+#cartContainer .card p {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #16a34a !important;
+  margin-bottom: 6px;
+}
+
+/* Quantity controls – normal */
+#cartContainer .btn-outline-secondary {
+  border-radius: 6px !important;
+  padding: 2px 8px !important;
+  font-size: 14px !important;
+}
+
+/* Quantity input */
+#cartContainer input[type="number"] {
+  height: 30px;
   font-size: 14px;
-  font-weight: 700;
-  color: #111;
-}
-.cafe-add {
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 6px 0;
-  background: #e9f5ee;
-  color: #0f5132;
-  border: 1px solid #badbcc;
 }
 
-.cafe-add:hover {
-  background: #d1e7dd;
-  color: #0f5132;
+/* Remove button – simple */
+#cartContainer .btn-danger {
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  padding: 4px 10px !important;
+}
+/* =====================================================
+   🛒 CART CARDS – CLEAN & SIMPLE (FINAL FIX)
+===================================================== */
+
+/* RESET everything for cart cards */
+#cartContainer .card {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+  transform: none !important;
+  transition: box-shadow 0.25s ease !important;
 }
 
-@media (max-width: 576px) {
-  .cafe-card img {
-    height: 140px;
-  }
-  .cafe-add {
-    font-size: 14px;
-  }
-}
-/* ☕ Real Cafe App Background */
-.cafe-section {
-  background: #f7f8fa;
-  border-radius: 20px;
+/* Simple hover (NO zoom) */
+#cartContainer .card:hover {
+  transform: none !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12) !important;
 }
 
-.cafe-chip {
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* Image – clean & same as products */
+#cartContainer .card-img-top {
+  height: 180px !important;
+  object-fit: contain !important;
+  padding: 10px !important;
+  background: #ffffff !important;
 }
 
-.cafe-chip:hover {
-  background: #e9ecef;
-  transform: scale(1.05);
+/* Product name */
+#cartContainer .card h6 {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+  margin-bottom: 4px;
 }
 
-@media (max-width: 576px) {
-  .cafe-card img {
-    height: 120px;
-  }
-  .cafe-card .card-title {
-    font-size: 14px;
-  }
-}
-/* 🎥 Cafe Video Styling */
-.cafe-video-hero {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 20px auto;
+/* Price */
+#cartContainer .card p {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #16a34a !important;
+  margin-bottom: 6px;
 }
 
-.cafe-video-hero video {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
+/* Quantity controls – normal */
+#cartContainer .btn-outline-secondary {
+  border-radius: 6px !important;
+  padding: 2px 8px !important;
+  font-size: 14px !important;
 }
 
-.cafe-video-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
+/* Quantity input */
+#cartContainer input[type="number"] {
+  height: 30px;
+  font-size: 14px;
 }
 
-.cafe-video-overlay h2 {
-  font-weight: 800;
-  font-size: 2rem;
+/* Remove button – simple */
+#cartContainer .btn-danger {
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  padding: 4px 10px !important;
 }
+/* =====================================
+   🚫 REMOVE NUMBER INPUT ARROWS (CART)
+===================================== */
 
-/* 🎥 Video cards = SAME SIZE AS PRODUCT CARDS */
-.cafe-video-card {
-  height: 100%;
-}
-
-.cafe-video-card video {
-  width: 100%;
-  height: 140px;           /* 🔥 EXACT SAME AS IMAGE */
-  object-fit: cover;
-  border-radius: 14px 14px 0 0;
-  display: block;
-}
-
-.cafe-video-card .card-body {
-  padding: 12px;           /* same as product card */
-}
-
-.cafe-video-card h6 {
-  font-size: 15px;         /* same visual weight */
-  font-weight: 600;
+/* Chrome, Edge, Safari */
+#cartContainer input[type="number"]::-webkit-inner-spin-button,
+#cartContainer input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
 }
 
-.cafe-section {
-  background: linear-gradient(#ffffff, #f5f3ef);
-  border-radius: 24px;
+/* Firefox */
+#cartContainer input[type="number"] {
+  -moz-appearance: textfield;
 }
-.cafe-section h3 {
-  font-weight: 700;
-  letter-spacing: 1px;
+/* =====================================
+   📱 NAVBAR – FORCE SINGLE LINE (MOBILE)
+===================================== */
+
+.navbar .container-fluid {
+  flex-wrap: nowrap !important;
 }
 
-.cafe-section p {
-  color: #777;
-}
-.cafe-video-card {
-  cursor: pointer;
+.navbar-brand {
+  font-size: 16px;          /* smaller logo for mobile */
+  white-space: nowrap;     /* prevent breaking */
 }
 
-.cafe-video-card:hover video {
-  transform: scale(1.05);
-  transition: transform 0.4s ease;
-}
-
-.cafe-video-card::after {
-  content: "▶";
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 40px;
-  color: rgba(255,255,255,0.85);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.cafe-video-card:hover::after {
-  opacity: 1;
-}
-.cafe-add {
-  background: var(--cafe-primary);
-  color: #fff;
-  border: none;
-}
-
-.cafe-add:hover {
-  background: var(--cafe-accent);
-  color: #111;
-}
-
-/* 🖥️ Desktop fix: make video cards match product cards */
-@media (min-width: 768px) {
-  .cafe-video-card {
-    max-width: 100%;
-  }
-
-  .cafe-video-card video {
-    height: 140px; /* EXACT same as image cards */
+@media (max-width: 576px) {
+  .navbar .btn {
+    padding: 4px 8px;
+    font-size: 12px;
   }
 }
-/* 🔒 FORCE video cards to EXACTLY match product cards */
-.cafe-video-card {
-  display: flex;
-  flex-direction: column;
+/* 🚫 Disable hover animation for BIG CART CARD */
+#cartContainer > .col-12 > .card:hover {
+  transform: none !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+}
+#cartContainer {
+  scroll-behavior: smooth;
+}
+/* 🧾 Make BIG CART CARD scrollable */
+#cartContainer > .col-12 > .card {
+  max-height: 480px;        /* control height */
+  overflow-y: auto;         /* enable vertical scroll */
+  overflow-x: hidden;
 }
 
-.cafe-video-card video {
-  width: 100%;
-  height: 140px;          /* SAME as image cards */
-  object-fit: cover;
-  flex-shrink: 0;
+/* Smooth scrolling inside cart */
+#cartContainer > .col-12 > .card {
+  scroll-behavior: smooth;
 }
 
-.cafe-video-card .card-body {
-  flex: 1;                /* fill remaining space */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
+/* Optional: clean scrollbar (Chrome / Edge) */
+#cartContainer > .col-12 > .card::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* 🖥️ Desktop: lock equal card heights */
-@media (min-width: 768px) {
-  .row > .col {
-    display: flex;
+#cartContainer > .col-12 > .card::-webkit-scrollbar-thumb {
+  background: #9b5cff;
+  border-radius: 10px;
+}
+
+#cartContainer > .col-12 > .card::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Scrollable cart cards */
+.cart-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+.cart-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-scroll::-webkit-scrollbar-thumb {
+  background: #9b5cff;
+  border-radius: 10px;
+}
+.cart-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* ===============================
+   📱 MOBILE CART SPACING FIX
+================================ */
+@media (max-width: 576px) {
+
+  /* Reduce card height for mobile */
+  .cart-scroll {
+    max-height: 260px;
+    padding: 12px !important;
   }
 
-  .row > .col > .card {
+  /* Section headings */
+  .cart-scroll h5 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  /* Each cart item row */
+  .cart-scroll .d-flex.align-items-center.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+
+  /* Image + name row */
+  .cart-scroll .d-flex.align-items-center.gap-3 {
+    gap: 10px;
+  }
+
+  /* Product name */
+  .cart-scroll .fw-semibold {
+    font-size: 14px;
+  }
+
+  /* Price */
+  .cart-scroll .text-success {
+    font-size: 13px;
+  }
+
+  /* Buttons row */
+  .cart-scroll .d-flex.align-items-center.gap-2 {
     width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Quantity buttons */
+  .cart-scroll .btn-outline-secondary {
+    padding: 4px 10px;
+    font-size: 14px;
+  }
+
+  /* Remove button */
+  .cart-scroll .btn-danger {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  /* Quantity box */
+  .cart-scroll input {
+    width: 42px !important;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  /* Overall spacing between cards */
+  #cartContainer .col-12 {
+    margin-bottom: 14px;
   }
 }
 
+</style>
+</head>
 
-   </style>    
-   <link rel="icon" type="image/svg" href="bag-fill.svg">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="wepsite.css">
-  </head>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  <body>
-<!-- Navbar -->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-light fixed-top">
-  <div class="container-fluid">
-<a class="navbar-brand luxury-purple fs-5" href="webpage1.html">
-  YASH-MART
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid d-flex align-items-center justify-content-between flex-nowrap">
+
+    <!-- LOGO -->
+    <a class="navbar-brand luxury-purple mb-0" href="webpage1.html">
+      YASH-MART
+    </a>
+
+    <!-- ACTION BUTTONS -->
+    <div class="d-flex align-items-center gap-2 flex-nowrap">
+      <a href="orders.html" class="btn btn-outline-info btn-sm">
+        📦 Orders
+      </a>
+<a href="webpage1.html" class="btn btn-outline-light btn-sm">
+  🛒
 </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="d-flex align-items-center ms-auto gap-3">
-       <!-- SEARCH BELOW BRAND -->
-      <form class="search-box" role="search">
-        <input type="search" placeholder="Search products">
-        <button type="submit">🔍</button>
-      </form>
-
-      <!-- Profile -->
-      <div class="d-flex flex-column align-items-center " id="profileSection">
-        <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-        <span class="hi" id="profileName">Profile</span>
-      </div>
-
-      <!-- Cart -->
-      <div class="d-flex flex-column align-items-center">
-        <a href="cart.html"><img src="cart-dash.svg" alt="Cart" width="25"></a>
-        <span class="hi" id="cartCount">0</span>
-      </div>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="all.html">All</a></li>
-        <li class="nav-item"><a class="nav-link" href="cafe.html">Cafe</a></li>
-        <li class="nav-item"><a class="nav-link" href="toys.html">Toys</a></li>
-        <li class="nav-item"><a class="nav-link" href="fresh.html">Fresh</a></li>
-        <li class="nav-item"><a class="nav-link" href="electronic.html">Electronic</a></li>
-        <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
-        <li class="nav-item"><a class="nav-link" href="fashion.html">Fashion</a></li>
-      </ul>
-    </div>
   </div>
 </nav>
-<br><br><br><br><br>
-
-    <!-- Heading -->
-  <section class="bg-dark text-white text-center p-5 hero">
-       <div class="banner-text">
-      <h1>CAFE</h1>
-          <span class="badge bg-success mb-3">🟢 Open Now • 8 AM – 11 PM</span>
-      <p>Order now for instant delivery</p>
-       </div>
-    </section><br>
 
 
 
-    <div class="container">
-  <div class="cafe-video-hero shadow">
-    <video autoplay muted loop playsinline>
-      <source src="Images/food-hero..mp4" type="video/mp4">
-    </video>
-    <div class="cafe-video-overlay">
-      <div>
-        <h2>Freshly Brewed ☕</h2>
-        <p>Hot food • Fast delivery • Cafe vibes</p>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="container my-4">
+  <h3 class="text-center mb-4">🛒 Your Shopping Cart</h3>
 
+  <div class="row">
+    <!-- CART ITEMS -->
+    <div class="col-lg-8">
+      <div id="cartContainer" class="row g-3"></div>
 
-    <div class="d-flex gap-2 justify-content-center mb-4 flex-wrap">
- <span class="badge bg-light text-dark px-3 py-2 rounded-pill cafe-chip">☕ Coffee</span>
-  <span class="badge bg-light text-dark px-3 py-2 rounded-pill cafe-chip">🍔 Snacks</span>
-  <span class="badge bg-light text-dark px-3 py-2 rounded-pill cafe-chip">🍰 Desserts</span>
-  <span class="badge bg-light text-dark px-3 py-2 rounded-pill cafe-chip">🍦 Ice Cream</span>
-</div>
-
-
-
-    <section class="cafe-section py-4">
-
-      
-      <div class="container my-5">
-  <h3 class="text-center mb-4">HOT & COLD COFFEE</h3>
-  <p class="text-center mb-4">"Freshly brewed & comforting"</p>
-  <div class="row row-cols-1 row-cols-md-3 g-5">
-
-        <div class="col">
-      <div class="card cafe-card cafe-video-card h-100">
-        <video autoplay muted loop playsinline>
-          <source src="Images/coffee-video.mp4" type="video/mp4">
-        </video>
-        <div class="card-body text-center">
-          <h6>Barista Style Coffee</h6>
+      <!-- DELIVERY PROGRESS -->
+      <div class="mt-4">
+        <div class="progress">
+          <div id="progressBar" class="progress-bar bg-success">0%</div>
         </div>
+        <p id="deliveryMsg" class="fw-bold text-center mt-2"></p>
+        <p id="deliveryDate" class="text-muted text-center"></p>
       </div>
     </div>
 
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/coffee_hot1.jpg" class="card-img-top" alt="Cappuccino" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Cappuccino</h5>
-          <p class="card-text">"Rich & frothy coffee."</p>
-          <p class="card-text">₹120</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/coffee_hot2.jpg" class="card-img-top" alt="Latte" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Latte</h5>
-          <p class="card-text">"Smooth & milky."</p>
-          <p class="card-text">₹130</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/coffee_hot3.jpg" class="card-img-top" alt="Hot Chocolate" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Hot Chocolate</h5>
-          <p class="card-text">"Warm chocolate bliss."</p>
-          <p class="card-text">₹140</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-           <div class="col">
- <div class="card cafe-card h-100">
-<img src="Images/c37.webp" class="card-img-top" alt="Coffee" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Cold Coffee</h5>
-      <p class="card-text">"Cool vibes in every sip."</p>
-      <p class="card-text">₹110</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-
-  </div>
-</div>
-
-
-<!-- 1st card -->
-   <div class="container my-5">
-      <h3 class="text-center mb-4">FAST FOOD</h3>
-  <p class="text-center mb-4">"Hot, crispy & filling"</p>
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-        
-    <div class="col">
-      <div class="card cafe-card cafe-video-card h-100">
-        <video autoplay muted loop playsinline>
-          <source src="Images/burger-video.mp4" type="video/mp4">
-        </video>
-        <div class="card-body text-center">
-          <h6>Hot & Cheesy Bites</h6>
-        </div>
-      </div>
-    </div>
-
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c38.jpg" class="card-img-top" alt="Sandwich" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Sandwich</h5>
-      <p class="card-text">"Fresh, cheesy & filling."</p>
-      <p class="card-text">₹70</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c39.webp" class="card-img-top" alt="Burger" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Cheese Burger</h5>
-      <p class="card-text">"Bite into cheesy delight."</p>
-      <p class="card-text">₹85</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/fast1.jpg" class="card-img-top" alt="French Fries" height="205">
-        <div class="card-body">
-          <h5 class="card-title">French Fries</h5>
-          <p class="card-text">"Crispy & golden."</p>
-          <p class="card-text">₹90</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/fast2.jpg" class="card-img-top" alt="Cheese Fries" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Cheese Fries</h5>
-          <p class="card-text">"Loaded with cheese."</p>
-          <p class="card-text">₹120</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/fast3.jpg" class="card-img-top" alt="Veg Nuggets" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Veg Nuggets</h5>
-          <p class="card-text">"Crunchy bites."</p>
-          <p class="card-text">₹80</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c40.webp" class="card-img-top" alt="Pizza" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Pizza</h5>
-      <p class="card-text">"Cheesy slices, endless joy."</p>
-      <p class="card-text">₹220</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-      </div>
-   </div>
-
-   <div class="container my-5">
-  <h3 class="text-center mb-4">INSTANT FOOD</h3>
-  <p class="text-center mb-4">"Quick hunger fix"</p>
-  <div class="row row-cols-1 row-cols-md-3 g-5">
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/instant1.jpg" class="card-img-top" alt="Cup Noodles" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Cup Noodles</h5>
-          <p class="card-text">"Hot & ready."</p>
-          <p class="card-text">₹60</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/instant2.jpg" class="card-img-top" alt="Maggi" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Maggi</h5>
-          <p class="card-text">"Classic comfort."</p>
-          <p class="card-text">₹50</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/instant3.jpg" class="card-img-top" alt="Pasta Cup" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Pasta Cup</h5>
-          <p class="card-text">"Cheesy & filling."</p>
-          <p class="card-text">₹70</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-<!--Second card-->
-    <div class="container my-5">
-<h3 class="text-center mb-4">Street Style Chats</h3>
-<p class="text-center mb-4">Crunchy, tangy & full of flavour</p>
-
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-      <!-- Samosa -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c53.jpg" class="card-img-top" alt="Samosa" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Samosa</h5>
-      <p class="card-text">"Crispy & spicy delight."</p>
-      <p class="card-text">₹25</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Bhel Puri -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c54.jpg" class="card-img-top" alt="Bhel Puri" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Bhel Puri</h5>
-      <p class="card-text">"Tangy & crunchy treat."</p>
-      <p class="card-text">₹40</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Pani Puri -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c55.jpg" class="card-img-top" alt="Pani Puri" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Pani Puri</h5>
-      <p class="card-text">"Burst of flavors in every bite."</p>
-      <p class="card-text">₹60</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Puff -->
-<div class="col">
- <div class="card cafe-card h-100">
-
-    <img src="Images/c56.jpg" class="card-img-top" alt="Puff" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Puff</h5>
-      <p class="card-text">"Veggies-packed flaky snack."</p>
-      <p class="card-text">₹20</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-
-      </div>
-    </div><br><br>
-
-    
-
-
-<!--3 rd card-->
-   <div class="container my-5">
- <h3 class="text-center mb-4">Dessert Corner</h3>
-<p class="text-center mb-4">Sweet treats to end on a high note</p>
-
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-        <!-- Choco Lava Cake -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c49.webp" class="card-img-top" alt="Choco Lava Cake" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Choco Lava Cake</h5>
-      <p class="card-text">"Molten chocolate heaven!"</p>
-      <p class="card-text">₹95</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-    <div class="col">
-      <div class="card cafe-card cafe-video-card h-100">
-        <video autoplay muted loop playsinline>
-          <source src="Images/dessert-video.mp4" type="video/mp4">
-        </video>
-        <div class="card-body text-center">
-          <h6>Sweet Desserts</h6>
-        </div>
-      </div>
-    </div>
-
-<!-- Cake -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c50.jpeg" class="card-img-top" alt="Cake" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Cake</h5>
-      <p class="card-text">"Black Forest delight."</p>
-      <p class="card-text">₹50</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Chocolate Brownie -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c51.webp" class="card-img-top" alt="Chocolate Brownie" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Chocolate Brownie</h5>
-      <p class="card-text">"Rich chocolate indulgence."</p>
-      <p class="card-text">₹60</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Fruit Cake -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c52.jpg" class="card-img-top" alt="Fruit Cake" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Fruit Cake</h5>
-      <p class="card-text">"Fruity goodness in every bite."</p>
-      <p class="card-text">₹15</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/choco1.jpg" class="card-img-top" alt="Dairy Milk" height="205">
-        <div class="card-body">
-          <h5 class="card-title">Dairy Milk</h5>
-          <p class="card-text">"Silky smooth."</p>
-          <p class="card-text">₹40</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/choco2.jpg" class="card-img-top" alt="KitKat" height="205">
-        <div class="card-body">
-          <h5 class="card-title">KitKat</h5>
-          <p class="card-text">"Have a break."</p>
-          <p class="card-text">₹30</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card cafe-card h-100">
-        <img src="Images/choco3.jpg" class="card-img-top" alt="5 Star" height="205">
-        <div class="card-body">
-          <h5 class="card-title">5 Star</h5>
-          <p class="card-text">"Chewy caramel."</p>
-          <p class="card-text">₹25</p>
-          <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-        </div>
-      </div>
-    </div>
-
-      </div>
-    </div><br><br>
-    
-    <!--fifth card-->
-  <div class="container my-5">
-<h3 class="text-center mb-4">Crunchy Snacks</h3>
-<p class="text-center mb-4">Light, crispy & anytime munchies</p>
-
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-      <!-- Lay's Magic Masala -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c41.webp" class="card-img-top" alt="Lay's Magic Masala" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Lay's</h5>
-      <p class="card-text">"Spice up your snack time!"</p>
-      <p class="card-text">₹20</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Lay's Cream & Onion -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c42.webp" class="card-img-top" alt="Lay's Cream & Onion" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Lay's</h5>
-      <p class="card-text">"Crispy onion delight!"</p>
-      <p class="card-text">₹20</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Lay's Spanish Tomato Tango -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c43.webp" class="card-img-top" alt="Lay's Spanish Tomato Tango" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Lay's</h5>
-      <p class="card-text">"Tangy tomato twist!"</p>
-      <p class="card-text">₹20</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-<!-- Lay's Sweet Chilli -->
-<div class="col">
-<div class="card cafe-card h-100">
-
-    <img src="Images/c45.webp" class="card-img-top" alt="Lay's Sweet Chilli" height="205">
-    <div class="card-body">
-      <h5 class="card-title">Lay's</h5>
-      <p class="card-text">"Sweet & spicy crunch!"</p>
-      <p class="card-text">₹20</p>
-      <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-    </div>
-  </div>
-</div>
-
-      </div>
-    </div><br><br>
-
-       <!--fourth card-->
-  <div class="container my-5">
-<h3 class="text-center mb-4">Frozen Delights</h3>
-<p class="text-center mb-4">Scoops of happiness, delivered cold</p>
-
-      <div class="row row-cols-1 row-cols-md-3 g-5">
-
-        <!--stick ice-->
-        <div class="col">
-        <div class="card cafe-card h-100">
-
-            <img src="Images/c48.webp" class="card-img-top" alt="Coffee"  height="180">
-            <div class="card-body">
-              <h5 class="card-title">Stick Ice Cream</h5>
-              <p class="card-text">Havmor Zulubar Candy Bar.</p>
-              <p class="card-text">₹50</p><br>
-              <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-            </div>
-          </div>
+    <!-- PRICE SUMMARY -->
+    <div class="col-lg-4 price-wrapper">
+      <div class="price-box">
+        <p>Subtotal <span id="subtotalPrice">₹0</span></p>
+        <p>Discount <span id="discountPrice">₹0</span></p>
+        <p>Delivery <span class="text-success">FREE</span></p>
+        <hr>
+        <h5>Grand Total <span id="grandTotal">₹0</span></h5>
+
+        <!-- Coupon -->
+        <div class="mt-3">
+          <input id="couponInput" class="form-control mb-2" placeholder="Coupon code">
+          <button class="btn btn-primary w-100" onclick="applyCoupon()">Apply Coupon</button>
+          <p id="couponMsg" class="fw-bold mt-2"></p>
         </div>
 
-         <!--cup ice-->
-        <div class="col">
-        <div class="card cafe-card h-100">
+        <p id="youSaved" class="fw-bold text-success mt-2"></p>
 
-            <img src="Images/c44.webp" class="card-img-top" alt="Sandwich" width="100" height="170">
-            <div class="card-body">
-              <h5 class="card-title">Cup Ice</h5>
-              <p class="card-text">Amul Fruit 'N' Nut Fantasy Ice Cream.</p>
-              <p class="card-text">₹30</p><br>
-              <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-            </div>
-          </div>
-        </div>
-        
-         <!--cone ice-->
-        <div class="col">
-        <div class="card cafe-card h-100">
+        <!-- Buttons -->
+        <button class="btn btn-success w-100 mt-2" onclick="checkout()">Checkout</button>
+        <button class="btn btn-danger w-100 mt-2" onclick="clearCart()">Clear Cart</button>
 
-            <img src="Images/c47.webp" class="card-img-top" alt="Burger" width="50">
-            <div class="card-body">
-              <h5 class="card-title">Tub Ice</h5>
-              <p class="card-text">Amul Chocolate Brownie Ice Cream Tub.</p>
-              <p class="card-text">₹90</p><br>
-              <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-            </div>
-          </div>
-        </div>
-        
-         <!--large ice-->
-        <div class="col">
-        <div class="card cafe-card h-100">
-
-            <img src="Images/c46.webp" class="card-img-top" alt="Pizza" height="220">
-            <div class="card-body">
-              <h5 class="card-title">Cone Ice</h5>
-              <p class="card-text">Havmor Cone Ice Cream Dark Chocolate 110 ml</p>
-              <p class="card-text">₹60</p><br>
-              <a href="#" class="btn btn-primary w-100 cafe-add">Add</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><br><br> 
-    </section> 
-
-<!-- Add to Cart Modal -->
-<div class="modal fade custom-modal" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-zoom">
-    <div class="modal-content text-white gradient-bg shadow-lg" id="cartModalContent">
-      <div class="modal-header border-0">
-        <h5 class="modal-title fw-bold" id="cartModalLabel">🛒 Item Added to Cart</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body" id="cartModalBody"></div>
-      <div class="modal-footer border-0">
-        <a href="cart.html" class="btn btn-dark px-4">Go to Cart</a>
-        <button type="button" class="btn btn-light text-dark px-4" data-bs-dismiss="modal">Continue Shopping</button>
+        <!-- Trust -->
+        <p class="text-muted text-center small mt-3">
+          🔒 Secure Payments | COD • UPI • Wallets
+        </p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ADDRESS MODAL -->
+<div class="modal fade" id="addressModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Delivery Details</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm">
+          <input class="form-control mb-2" placeholder="Full Name" required>
+          <input class="form-control mb-2" placeholder="Phone Number" required>
+          <textarea class="form-control mb-2" placeholder="Address" required></textarea>
+             <select class="form-select mb-3" required>
+            <option value="">Payment Method</option>
+            <option>Cash on Delivery</option>
+            <option>UPI</option>
+          </select>
 
- <!-- Footer -->
-<footer class="bg-dark text-light text-center py-4 mt-5">
-  <p class="mb-1 fw-bold">YASHMART CAFE ☕</p>
-  <p class="mb-1">Freshly brewed • Fast delivery</p>
-  <small>© 2025 Yashmart. Crafted with ❤️</small>
-</footer>
+          <button class="btn btn-dark w-100">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- SUCCESS -->
+<div class="modal fade" id="successModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-body">
+        <div class="van-container position-relative">
+          <img src="Images/van.gif" class="van">
+        </div>
+        <h5 class="text-success mt-3">🎉 Order Placed Successfully!</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-// ✅ CART SYSTEM WITH POPUP (FIXED)
-const cartCount = document.getElementById("cartCount");
-const cartModalEl = document.getElementById("cartModal");
-const cartModalBody = document.getElementById("cartModalBody");
-const cartModalContent = document.getElementById("cartModalContent");
-
-const cartModal = cartModalEl ? new bootstrap.Modal(cartModalEl) : null;
+/* =========================
+   🛒 CART LOGIC – FINAL FIX
+========================= */
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+let appliedCoupon = "";
 
-function updateCartTotal() {
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * (item.quantity || 1),
-    0
-  );
-  localStorage.setItem("cartTotal", total);
-  return total;
-}
+/* DOM refs */
+const cartContainer = document.getElementById("cartContainer");
+const subtotalPrice = document.getElementById("subtotalPrice");
+const discountPrice = document.getElementById("discountPrice");
+const grandTotal = document.getElementById("grandTotal");
+const progressBar = document.getElementById("progressBar");
+const deliveryMsg = document.getElementById("deliveryMsg");
+const deliveryDate = document.getElementById("deliveryDate");
+const youSaved = document.getElementById("youSaved");
+
+const addressModal = new bootstrap.Modal(document.getElementById("addressModal"));
+const successModal = new bootstrap.Modal(document.getElementById("successModal"));
+
+/* Delivery date */
+const d = new Date();
+d.setDate(d.getDate() + 3);
+deliveryDate.innerText = "📦 Delivery by " + d.toDateString();
 
 /* =========================
-   ADD TO CART
+   DISPLAY CART
 ========================= */
-document.querySelectorAll(".cafe-add").forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
+function displayCart() {
+  cartContainer.innerHTML = "";
+  let total = 0;
 
-    const card = btn.closest(".card");
-    if (!card) return;
+  if (!cart.length) {
+    cartContainer.innerHTML = `
+      <div class="empty-cart">
+        <h5>Your cart is empty</h5>
+        <a href="webpage1.html" class="btn btn-primary mt-2">Shop Now</a>
+      </div>`;
+    subtotalPrice.innerText = discountPrice.innerText = grandTotal.innerText = "₹0";
+    progressBar.style.width = "0%";
+    progressBar.innerText = "0%";
+    deliveryMsg.innerText = "";
+    return;
+  }
 
-    const name =
-      card.querySelector(".card-title")?.textContent.trim() || "Unknown";
+  const cafeItems = cart.filter(i => i.category?.toLowerCase() === "cafe");
+  const otherItems = cart.filter(i => i.category?.toLowerCase() !== "cafe");
 
-    // ✅ Price = last .card-text containing ₹
-    const priceTexts = card.querySelectorAll(".card-text");
-    const lastText = priceTexts[priceTexts.length - 1]?.textContent || "";
-    const priceMatch = lastText.match(/₹\s*([\d,]+)/);
-    const price = priceMatch ? parseInt(priceMatch[1].replace(/,/g, "")) : 0;
+  /* ================= ITEMS CARD ================= */
+  if (otherItems.length) {
+    let itemsHTML = "";
+    otherItems.forEach(item => {
+      item.quantity ||= 1;
+      total += item.price * item.quantity;
+      const index = cart.indexOf(item);
 
-    const image = card.querySelector("img")?.getAttribute("src") || "";
-
-    let existingItem = cart.find(item => item.name === name);
-
-    if (existingItem) {
-      existingItem.quantity = (existingItem.quantity || 1) + 1;
-      existingItem.category = "cafe";
-    } else {
-      cart.push({
-        name,
-        price,
-        image,
-        quantity: 1,
-        category: "cafe"
-      });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    const total = updateCartTotal();
-
-    cartCount.textContent = cart.reduce(
-      (sum, item) => sum + item.quantity,
-      0
-    );
-
-    if (cartModal && cartModalBody) {
-      cartModalBody.innerHTML = `
-        <div class="d-flex align-items-center gap-3">
-           <img src="${image}" alt="${name}" width="80" height="80" class="rounded">
-          <div>
-            <h6 class="mb-1">${name}</h6>
-            <p class="mb-0">Price: ₹${price}</p>
-            <small class="text-light">Added to your cart successfully!</small>
+      itemsHTML += `
+        <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-2">
+          <div class="d-flex align-items-center gap-3">
+            <img src="${item.image}" width="60" height="60" class="rounded">
+            <div>
+              <div class="fw-semibold">${item.name}</div>
+              <div class="text-success fw-bold">₹${item.price}</div>
+            </div>
           </div>
-        </div>
-        <hr>
-        <p class="mt-2 mb-0"><b>Total Cart Value:</b> ₹${total}</p>
-      `;
 
-      // 🎨 Random gradient
-      const gradients = [
-        "gradient-red",
-        "gradient-blue",
-        "gradient-green",
-        "gradient-purple",
-        "gradient-orange"
-      ];
-      gradients.forEach(g => cartModalContent?.classList.remove(g));
-      cartModalContent?.classList.add(
-        gradients[Math.floor(Math.random() * gradients.length)]
-      );
-
-      cartModal.show();
-    }
-
-    // ✅ Button feedback
-    btn.textContent = "✅ Added!";
-    btn.classList.replace("btn-primary", "btn-success");
-
-    setTimeout(() => {
-      btn.textContent = "Add";
-      btn.classList.replace("btn-success", "btn-primary");
-    }, 1500);
-  });
-});
-
-/* =========================
-   SEARCH FUNCTIONALITY (SAFE)
-========================= */
-const searchForm = document.querySelector('form[role="search"]');
-
-if (searchForm) {
-  searchForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const query = this.querySelector('input[type="search"]')
-      ?.value.toLowerCase().trim();
-
-    const cards = document.querySelectorAll(".card");
-    let found = false;
-
-    cards.forEach(card => {
-      // ❌ Skip video cards
-      if (card.classList.contains("cafe-video-card")) return;
-
-      const title =
-        card.querySelector(".card-title")?.textContent.toLowerCase() || "";
-      const text =
-        card.querySelector(".card-text")?.textContent.toLowerCase() || "";
-
-      const match = title.includes(query) || text.includes(query);
-      card.parentElement.style.display = match || query === "" ? "block" : "none";
-      if (match) found = true;
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index},-1)">−</button>
+            <input type="text" value="${item.quantity}" class="form-control text-center" style="width:45px" readonly>
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index},1)">+</button>
+            <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">✕</button>
+          </div>
+        </div>`;
     });
 
-    if (!found && query) {
-      alert(`No results found for "${query}" 😕`);
-    }
-  });
+    cartContainer.innerHTML += `
+      <div class="col-12 mb-3">
+        <div class="card p-3 cart-scroll">
+          <h5 class="fw-bold">🛍 Items</h5>
+          <hr>
+          ${itemsHTML}
+        </div>
+      </div>`;
+  }
+
+  /* ================= CAFE CARD ================= */
+  if (cafeItems.length) {
+    let cafeHTML = "";
+    cafeItems.forEach(item => {
+      item.quantity ||= 1;
+      total += item.price * item.quantity;
+      const index = cart.indexOf(item);
+
+      cafeHTML += `
+        <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-2">
+          <div class="d-flex align-items-center gap-3">
+            <img src="${item.image}" width="60" height="60" class="rounded">
+            <div>
+              <div class="fw-semibold">${item.name}</div>
+              <div class="text-success fw-bold">₹${item.price}</div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index},-1)">−</button>
+            <input type="text" value="${item.quantity}" class="form-control text-center" style="width:45px" readonly>
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index},1)">+</button>
+            <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">✕</button>
+          </div>
+        </div>`;
+    });
+
+    cartContainer.innerHTML += `
+      <div class="col-12">
+        <div class="card p-3 cart-scroll">
+          <h5 class="fw-bold">☕ Cafe Items</h5>
+          <hr>
+          ${cafeHTML}
+        </div>
+      </div>`;
+  }
+
+  /* ================= TOTALS ================= */
+  let discount = appliedCoupon === "WELCOME10" ? total * 0.1 : 0;
+  let final = total - discount;
+
+  subtotalPrice.innerText = "₹" + total;
+  discountPrice.innerText = "-₹" + Math.floor(discount);
+  grandTotal.innerText = "₹" + Math.floor(final);
+  youSaved.innerText = discount ? `🎉 You saved ₹${Math.floor(discount)}` : "";
+
+  let percent = Math.min((total / 499) * 100, 100);
+  progressBar.style.width = percent + "%";
+  progressBar.innerText = Math.floor(percent) + "%";
+  deliveryMsg.innerText =
+    total >= 499 ? "🎉 Free Delivery!" : `Add ₹${499 - total} more`;
 }
-</script>
 
-<script>
-// 👤 PROFILE HANDLING (SAFE)
-document.addEventListener("DOMContentLoaded", () => {
-  const profileName = document.getElementById("profileName");
-  const profileLink = document.querySelector("#profileSection a");
 
-  if (!profileName || !profileLink) return;
+/* =========================
+   ACTIONS
+========================= */
+function changeQty(i, d) {
+  if (!cart[i]) return;
+  cart[i].quantity = Math.max(1, cart[i].quantity + d);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCart();
+}
 
-  const updateProfile = () => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    profileName.textContent = currentUser
-      ? `Hi, ${currentUser.username}`
-      : "Profile";
+function removeItem(i) {
+  cart.splice(i, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCart();
+}
+
+function clearCart() {
+  if (confirm("Clear cart?")) {
+    localStorage.removeItem("cart");
+    cart = [];
+    displayCart();
+  }
+}
+
+function applyCoupon() {
+  const c = document.getElementById("couponInput").value.trim();
+  appliedCoupon = c === "WELCOME10" ? c : "";
+  displayCart();
+}
+
+function checkout() {
+  if (!cart.length) return alert("Cart empty!");
+  addressModal.show();
+}
+
+/* =========================
+   PLACE ORDER
+========================= */
+document.getElementById("orderForm").onsubmit = (e) => {
+  e.preventDefault();
+
+  const inputs = e.target.querySelectorAll("input, textarea");
+  const payment = e.target.querySelector("select");
+
+  const order = {
+    id: "ORD" + Date.now(),
+    date: new Date().toLocaleString(),
+    total: grandTotal.innerText,
+    status: "Placed",
+    customer: {
+      name: inputs[0].value,
+      phone: inputs[1].value,
+      address: inputs[2].value
+    },
+    payment: payment.value,
+    items: cart
   };
 
-  updateProfile();
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push(order);
+  localStorage.setItem("orders", JSON.stringify(orders));
 
-  profileLink.addEventListener("click", (e) => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser) {
-      e.preventDefault();
-      alert("Please login first!");
-      window.location.href = "login.html";
-    }
-  });
-});
+  addressModal.hide();
+  successModal.show();
+
+  setTimeout(() => {
+    successModal.hide();
+    localStorage.removeItem("cart");
+    cart = [];
+    displayCart();
+  }, 2000);
+};
+
+/* INIT */
+displayCart();
 </script>
 
 
-
-  </body>
+</body>
 </html>
