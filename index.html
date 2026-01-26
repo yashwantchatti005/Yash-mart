@@ -1,522 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Yashmart | Register & Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yashmart | Login</title>
 
 <style>
-/* ================= NEON PURPLE THEME ================= */
+/* ================= YASHMART BRAND ================= */
 :root{
-  --p1:#6A00FF;
-  --p2:#B14CFF;
-  --pink:#FF3CAC;
-  --glass:rgba(255,255,255,.12);
+  --p1:#2a1036;
+  --p2:#5a1f6f;
+  --accent:#c084fc;
+  --btn:#8e44ad;
+  --text:#2a1036;
+  --bg:#f6edf9;
 }
 
 /* RESET */
 *{box-sizing:border-box}
-html,body{
-  height:100%;
+body{
   margin:0;
   font-family:Inter,Poppins,system-ui,sans-serif;
+  background:var(--bg);
 }
 
-/* BACKGROUND */
-body{
+/* ===== LAYOUT ===== */
+.auth-wrapper{
   display:flex;
-  justify-content:center;
-  align-items:center;
-  background:
-    radial-gradient(circle at 20% 20%, #7b2cff44, transparent 40%),
-    radial-gradient(circle at 80% 80%, #ff3cac44, transparent 40%),
-    linear-gradient(135deg,#0b001a,#180032,#2b0057);
-  overflow:hidden;
+  min-height:100vh;
 }
 
-/* FLOATING NEON ORBS */
-.orb{
-  position:absolute;
-  width:380px;
-  height:380px;
-  filter:blur(60px);
-  opacity:.55;
-  z-index:0;
-}
-.orb.one{background:#7b2cff;top:-120px;left:-120px;}
-.orb.two{background:#ff3cac;bottom:-120px;right:-120px;}
-
-/* CARD */
-.card{
-  position:relative;
-  width:420px;
-  max-width:95%;
-  padding:30px;
-  border-radius:22px;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08));
-  backdrop-filter: blur(18px);
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.7),
-    0 0 40px rgba(122,44,255,.45);
-  color:white;
-  z-index:1;
-}
-
-/* NEON BORDER */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-4px;
-  border-radius:26px;
-  background:
-    linear-gradient(120deg,#7b2cff,#b14cff,#ff3cac);
-  filter:blur(28px);
-  opacity:.85;
-  z-index:-1;
-}
-
-/* LOGO */
-.logo{
+/* ===== LEFT BRAND ===== */
+.auth-left{
+  flex:1;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  color:#fff;
+  padding:60px;
   display:flex;
-  gap:12px;
   align-items:center;
-  margin-bottom:8px;
 }
-.logo svg{width:48px;height:48px}
-.logo h1{
-  font-size:22px;
-  letter-spacing:1px;
+
+.brand h1{
+  font-size:40px;
+  letter-spacing:2px;
   margin:0;
 }
-.tag{
-  font-size:12px;
+
+.brand .tagline{
+  margin:12px 0 30px;
   opacity:.9;
-  margin-bottom:18px;
 }
 
-/* TABS */
-.tabs{
+.benefits{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.benefits li{
+  font-size:18px;
+  margin-bottom:14px;
+}
+
+/* ===== RIGHT AUTH ===== */
+.auth-right{
+  flex:1;
   display:flex;
+  align-items:center;
   justify-content:center;
-  gap:30px;
+  padding:40px;
+}
+
+/* CARD */
+.auth-card{
+  width:100%;
+  max-width:380px;
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.auth-card h2{
+  margin:0;
+  color:var(--text);
+}
+.sub{
+  font-size:14px;
+  color:#6b2f85;
   margin-bottom:20px;
 }
-.tab{
-  cursor:pointer;
-  font-weight:700;
-  opacity:.65;
-  position:relative;
-}
-.tab.active{
-  opacity:1;
-}
-.tab.active::after{
-  content:"";
-  position:absolute;
-  left:0;right:0;bottom:-6px;
-  height:3px;
-  border-radius:3px;
-  background:linear-gradient(90deg,#7b2cff,#ff3cac);
-  box-shadow:0 0 10px #ff3cac;
-}
 
-/* FORMS */
-.forms{position:relative;min-height:340px}
-form{
-  position:absolute;
-  width:100%;
-  transition:.45s cubic-bezier(.4,0,.2,1);
-}
-.hidden{
-  opacity:0;
-  pointer-events:none;
-  transform:translateX(40px);
-}
-
-/* INPUTS */
+/* FIELDS */
 .field{
   position:relative;
-  margin:14px 0;
+  margin-bottom:16px;
 }
 .field input{
   width:100%;
-  padding:13px 14px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.3);
-  background:rgba(255,255,255,.1);
-  color:white;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #ddd;
   outline:none;
 }
 .field label{
   position:absolute;
+  top:14px;
   left:14px;
-  top:13px;
   font-size:13px;
-  opacity:.7;
-  transition:.25s;
+  color:#777;
   pointer-events:none;
-}
-.field input:focus{
-  border-color:#b14cff;
-  box-shadow:0 0 0 3px #7b2cff55;
+  transition:.2s;
+  background:#fff;
+  padding:0 6px;
 }
 .field input:focus+label,
 .field input:not(:placeholder-shown)+label{
   top:-8px;
   font-size:11px;
-  opacity:1;
-}
-
-/* PASSWORD EYE */
-.eye{
-  position:absolute;
-  right:12px;
-  top:13px;
-  cursor:pointer;
+  color:var(--btn);
 }
 
 /* BUTTON */
 button.cta{
   width:100%;
   padding:14px;
-  margin-top:16px;
   border:none;
-  border-radius:14px;
-  font-weight:800;
-  color:white;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--btn),var(--accent));
+  color:#fff;
+  font-weight:700;
   cursor:pointer;
-  background:
-    linear-gradient(90deg,#7b2cff,#ff3cac);
-  box-shadow:
-    0 0 22px #7b2cff,
-    0 0 32px #ff3cac;
+  margin-top:10px;
 }
 button.cta:hover{
-  transform:translateY(-1px);
-  box-shadow:
-    0 0 30px #7b2cff,
-    0 0 45px #ff3cac;
+  opacity:.9;
 }
 
-/* LINKS */
-.muted{
+/* SWITCH */
+.switch{
+  margin-top:16px;
+  font-size:14px;
+  text-align:center;
+}
+.switch a{
+  color:var(--btn);
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* SECURITY */
+.secure{
   margin-top:12px;
   font-size:13px;
-}
-.muted a{
-  color:#ff9ad5;
-  font-weight:600;
+  text-align:center;
+  color:#555;
 }
 
-/* MOBILE */
-@media(max-width:480px){
-  .card{padding:22px}
-}
-
-/* ---------- TOAST (BOTTOM CENTER) ---------- */
+/* TOAST */
 .toast{
   position:fixed;
+  bottom:20px;
   left:50%;
-  bottom:24px;
-  transform:translateX(-50%) translateY(20px);
+  transform:translateX(-50%);
+  background:#000;
+  color:#fff;
   padding:12px 18px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:600;
-  color:white;
-  background:rgba(0,0,0,0.75);
-  backdrop-filter: blur(10px);
+  border-radius:10px;
   opacity:0;
-  transition:.35s ease;
-  z-index:9999;
-  box-shadow:0 0 20px rgba(255,60,172,.5);
+  transition:.3s;
+}
+.toast.show{opacity:1}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .auth-wrapper{
+    flex-direction:column;
+  }
+  .auth-left{
+    padding:40px 20px;
+    text-align:center;
+  }
+  .auth-right{
+    padding:20px;
+  }
 }
 
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
+/* PASSWORD EYE */
+.password-field{
+  position:relative;
 }
+
+.eye{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:18px;
+  user-select:none;
+  opacity:0.7;
+}
+
+.eye:hover{
+  opacity:1;
+}
+
+/* ===== BRAND HERO POLISH ===== */
+
+.brand-badge{
+  display:inline-block;
+  padding:7px 16px;        /* a bit more breathing space */
+  border-radius:20px;
+  background:rgba(255,255,255,0.18);
+  font-size:13px;          /* ↑ from 12 */
+  font-weight:600;
+  letter-spacing:1px;
+  margin-bottom:22px;
+}
+
+.brand-badge{
+  text-transform:uppercase;
+}
+
+.brand-title{
+  font-size:42px;
+  line-height:1.1;
+  margin:0 0 16px;
+}
+
+.brand-title span{
+  color:#ffd6ff;
+}
+
+.tagline{
+  font-size:13px;          /* smaller */
+  opacity:0.8;             /* softer */
+  letter-spacing:0.3px;
+  margin-bottom:24px;
+}
+
+.tagline{
+  font-size:12.5px;
+  opacity:0.75;
+  font-weight:500;
+}
+
+
+/* BENEFITS LIST */
+.benefits{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.benefits li{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+
+.benefits .icon{
+  font-size:22px;
+  background:rgba(255,255,255,0.18);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.benefits strong{
+  display:block;
+  font-size:16px;
+}
+
+.benefits small{
+  font-size:13px;
+  opacity:0.8;
+}
+
+
 
 </style>
 </head>
+
 <body>
 
-  <!-- decorative moving shapes -->
-  <div class="bg-motion"></div>
-  <div class="blob a"></div>
-  <div class="blob b"></div>
+<div class="auth-wrapper">
 
-  <div class="card" role="main" aria-labelledby="auth-heading">
+  <!-- LEFT -->
+<div class="auth-left">
+  <div class="brand">
 
-    <!-- LOGO (SVG) -->
-    <div class="logo" aria-hidden="false">
-      <!-- simple gradient circle + Y monogram -->
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="lg" x1="0" x2="1">
-            <stop offset="0" stop-color="#8e2de2"/>
-            <stop offset="1" stop-color="#ff6ec4"/>
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="46" fill="url(#lg)" />
-        <g transform="translate(0,2)">
-          <text x="50%" y="57%" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="46" fill="white" dominant-baseline="middle">YM</text>
-        </g>
-      </svg>
+    <span class="brand-badge">Yash-mart</span>
 
-      <div>
-        <h1 id="auth-heading">YASH-MART</h1>
-        <div class="tag">Shop smarter • Live better</div>
-      </div>
-    </div>
+    <h1 class="brand-title">
+      Shop <span>Smarter</span><br>
+      Live <span>Better</span>
+    </h1>
 
-    <!-- tabs -->
-    <div class="tabs" role="tablist" aria-label="Register or Login">
-      <div class="tab active" id="tab-register" role="tab" aria-selected="true">Register</div>
-      <div class="tab" id="tab-login" role="tab" aria-selected="false">Login</div>
-    </div>
+    <p class="tagline">
+      Everything you need — groceries, fashion, electronics — delivered fast.
+    </p>
 
-    <div class="forms">
-
-      <!-- REGISTER FORM -->
-      <form id="form-register" autocomplete="on" novalidate>
-        <div class="field">
-          <input id="reg-username" name="username" type="text" placeholder=" " required />
-          <label for="reg-username">Username</label>
+    <ul class="benefits">
+      <li>
+        <span class="icon">⚡</span>
+        <div>
+          <strong>Fast Delivery</strong>
+          <small>Quick doorstep delivery</small>
         </div>
-
-        <div class="field">
-          <input id="reg-email" name="email" type="email" placeholder=" " required />
-          <label for="reg-email">Email</label>
+      </li>
+      <li>
+        <span class="icon">🔒</span>
+        <div>
+          <strong>Secure Payments</strong>
+          <small>100% safe & trusted</small>
         </div>
-
-        <div class="field" style="margin-bottom:6px">
-          <input id="reg-password" name="password" type="password" placeholder=" " required />
-          <label for="reg-password">Password</label>
-          <div class="eye" id="toggleRegPass" title="Show / Hide password">👁️</div>
+      </li>
+      <li>
+        <span class="icon">💸</span>
+        <div>
+          <strong>Best Prices</strong>
+          <small>Unbeatable daily deals</small>
         </div>
+      </li>
+    </ul>
 
-        <div class="strength" id="reg-strength" aria-hidden="true">
-          <div style="font-size:13px;color:rgba(255,255,255,0.85)">Password strength</div>
-          <div class="bar"><i style="width:0%"></i></div>
-        </div>
+  </div>
+</div>
+
+
+  <!-- RIGHT -->
+  <div class="auth-right">
+    <div class="auth-card">
+      <h2>Welcome back 👋</h2>
+      <p class="sub">Login to continue shopping</p>
+
+      <form id="loginForm">
 
         <div class="field">
-          <input id="reg-confirm" name="confirm" type="password" placeholder=" " required />
-          <label for="reg-confirm">Confirm password</label>
-        </div>
+  <input type="text" id="username" placeholder=" " required>
+  <label>Username</label>
+</div>
 
-        <div class="cta">
-          <button class="cta" id="btn-register" type="submit">Create account</button>
+        <div class="field">
+          <input type="email" id="email" placeholder=" " required>
+          <label>Email</label>
         </div>
+<div class="field password-field">
+  <input type="password" id="password" placeholder=" " required>
+  <label>Password</label>
 
-        <div class="muted">Already have an account? <a href="#" id="link-to-login" style="color:white;text-decoration:underline">Login</a></div>
+  <!-- Eye toggle -->
+  <span class="eye" id="togglePassword">
+    👁️
+  </span>
+</div>
+
+
+        <button class="cta" type="submit">Login</button>
       </form>
 
-      <!-- LOGIN FORM (hidden initially) -->
-      <form id="form-login" class="hidden" autocomplete="on" novalidate>
-        <div class="field">
-          <input id="login-email" name="loginEmail" type="email" placeholder=" " required />
-          <label for="login-email">Email</label>
-        </div>
+      <p class="switch">
+        New to Yashmart?
+        <a href="#" id="goRegister">Create account</a>
+      </p>
 
-        <div class="field">
-          <input id="login-password" name="loginPassword" type="password" placeholder=" " required />
-          <label for="login-password">Password</label>
-          <div class="eye" id="toggleLoginPass" title="Show / Hide password">👁️</div>
-        </div>
+      <p class="secure">🔒 100% secure login</p>
+    </div>
+  </div>
 
-        <div class="cta">
-          <button class="cta" id="btn-login" type="submit">Login</button>
-        </div>
+</div>
 
-        <div class="muted">New here? <a href="#" id="link-to-register" style="color:white;text-decoration:underline">Create account</a></div>
-      </form>
-
-    </div> <!-- forms -->
-  </div> <!-- card -->
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* ---------------- Utilities ---------------- */
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
+const toast = document.getElementById("toast");
 
-/* DOM elements */
-const tabRegister = $('#tab-register'), tabLogin = $('#tab-login');
-const formRegister = $('#form-register'), formLogin = $('#form-login');
-const linkToLogin = $('#link-to-login'), linkToRegister = $('#link-to-register');
-const toast = $('#toast');
-
-function showToast(msg, tone){
+function showToast(msg){
   toast.textContent = msg;
-  if(tone === 'err') toast.style.background = 'rgba(200,30,30,0.9)';
-  else if(tone === 'ok') toast.style.background = 'rgba(16,128,68,0.9)';
-  else toast.style.background = 'rgba(0,0,0,0.7)';
-  toast.classList.add('show');
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=> toast.classList.remove('show'), 2600);
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),2000);
 }
 
-/* ---------------- Tab / slide handling ---------------- */
-function setActiveTab(which){
-  if(which === 'register'){
-    tabRegister.classList.add('active'); tabLogin.classList.remove('active');
-    formRegister.classList.remove('hidden');
-    formLogin.classList.add('hidden');
-    formRegister.style.transform = 'translateX(0)'; formRegister.style.opacity=1;
-    formLogin.style.transform = 'translateX(10px)'; formLogin.style.opacity=0;
-  } else {
-    tabLogin.classList.add('active'); tabRegister.classList.remove('active');
-    formLogin.classList.remove('hidden'); formRegister.classList.add('hidden');
-    formLogin.style.transform = 'translateX(0)'; formLogin.style.opacity=1;
-    formRegister.style.transform = 'translateX(-10px)'; formRegister.style.opacity=0;
+document.getElementById("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if(!username || !email || !password){
+    showToast("Fill all fields");
+    return;
   }
-}
-tabRegister.addEventListener('click', ()=>setActiveTab('register'));
-tabLogin.addEventListener('click', ()=>setActiveTab('login'));
-linkToLogin.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('login'); });
-linkToRegister.addEventListener('click', (e)=>{ e.preventDefault(); setActiveTab('register'); });
 
-/* init */
-setActiveTab('register');
+  // 🔥 SAVE USER LIKE OLD PAGE
+  const user = { username, email };
 
-/* ---------------- Floating labels: handled by CSS using :placeholder-shown
-   but ensure inputs have placeholder=" " in HTML - already set. -------- */
+  localStorage.setItem("currentUser", JSON.stringify(user));
 
-/* ---------------- Show / hide password ---------------- */
-function togglePassword(buttonId, inputId){
-  const b = $(buttonId), inp = $(inputId);
-  b.addEventListener('click', ()=>{
-    if(inp.type === 'password'){ inp.type = 'text'; b.textContent = '🙈'; }
-    else { inp.type = 'password'; b.textContent = '👁️'; }
-    inp.focus();
-  });
-}
-togglePassword('#toggleRegPass', '#reg-password');
-togglePassword('#toggleLoginPass', '#login-password');
+  showToast(`Welcome ${username}!`);
 
-/* ---------------- Button ripple effect (uses CSS pseudo elem but we position) -------------- */
-$$('.cta button.cta').forEach(btn=>{
-  btn.addEventListener('click', (e)=>{
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    // apply CSS vars to create ripple using ::before
-    btn.style.setProperty('--rx', x + 'px');
-    btn.style.setProperty('--ry', y + 'px');
-    // quick animate pseudo-element by toggling width/height via inline style on ::before not possible,
-    // so we simulate with small DOM ripple:
-    const r = document.createElement('span');
-    r.style.position='absolute';
-    r.style.left = x+'px'; r.style.top = y+'px';
-    r.style.width = r.style.height = '12px';
-    r.style.borderRadius='50%';
-    r.style.transform='translate(-50%,-50%)';
-    r.style.background='rgba(255,255,255,0.12)';
-    r.style.pointerEvents='none';
-    r.style.opacity='0.9';
-    r.style.transition='all 600ms cubic-bezier(.2,.9,.2,1)';
-    btn.appendChild(r);
-    requestAnimationFrame(()=> {
-      r.style.width = '260px'; r.style.height = '260px'; r.style.opacity='0';
-      r.style.filter='blur(8px)';
-    });
-    setTimeout(()=> r.remove(), 650);
-  });
+  setTimeout(() => {
+    window.location.href = "webpage1.html";
+  }, 1200);
 });
 
-/* ---------------- Password strength (register) ---------------- */
-const regPass = $('#reg-password'), regStrength = $('#reg-strength .bar > i');
-function calcStrength(s){
-  let score=0;
-  if(s.length>=8) score+=1;
-  if(/[A-Z]/.test(s)) score+=1;
-  if(/[0-9]/.test(s)) score+=1;
-  if(/[^A-Za-z0-9]/.test(s)) score+=1;
-  return Math.min(4, score);
-}
-regPass.addEventListener('input', ()=>{
-  const v = regPass.value || '';
-  const s = calcStrength(v);
-  const perc = (s/4)*100;
-  regStrength.style.width = perc+'%';
-  // color shift for visual hint (we set gradient in CSS; simple visual via opacity)
-  if(perc<35) regStrength.parentElement.previousElementSibling.style.color = '#ff6b6b';
-  else if(perc<70) regStrength.parentElement.previousElementSibling.style.color = '#f4b400';
-  else regStrength.parentElement.previousElementSibling.style.color = '#8ef58e';
-});
 
-/* ---------------- Registration logic ---------------- */
-const regForm = $('#form-register');
-regForm.addEventListener('submit', (e)=>{
-  e.preventDefault();
+</script>
 
-  const username = $('#reg-username').value.trim();
-  const email = $('#reg-email').value.trim();
-  const pass = $('#reg-password').value;
-  const confirm = $('#reg-confirm').value;
+<script>
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
 
-  if(username.length < 2){ showToast('Username too short', 'err'); $('#reg-username').focus(); return; }
-  if(!/^[^ ]+@[^ ]+\.[a-z]{2,}$/i.test(email)){ showToast('Enter a valid email', 'err'); $('#reg-email').focus(); return; }
-  if(pass.length < 6){ showToast('Password must be 6+ chars', 'err'); $('#reg-password').focus(); return; }
-  if(pass !== confirm){ showToast('Passwords do not match', 'err'); $('#reg-confirm').focus(); return; }
-
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  if(users.find(u=>u.email.toLowerCase() === email.toLowerCase())){ showToast('Email already registered', 'err'); setActiveTab('login'); $('#login-email').value=email; return; }
-
-  users.push({ username, email, password: pass });
-  localStorage.setItem('users', JSON.stringify(users));
-  showToast('Account created', 'ok');
-
-  // animate button: add loading then switch to login
-  const btn = $('#btn-register');
-  btn.classList.add('loading');
-  setTimeout(()=> {
-    btn.classList.remove('loading');
-    setActiveTab('login');
-  }, 900);
-});
-
-/* ---------------- Login logic ---------------- */
-const loginFormEl = $('#form-login');
-loginFormEl.addEventListener('submit', (e)=>{
-  e.preventDefault();
-
-  const email = $('#login-email').value.trim();
-  const pass = $('#login-password').value;
-
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
-
-  const btn = $('#btn-login');
-  btn.classList.add('loading');
-
-  setTimeout(()=> {
-    btn.classList.remove('loading');
-    if(!user){
-      formLogin.classList.add('shake');
-      showToast('Invalid credentials', 'err');
-      setTimeout(()=> formLogin.classList.remove('shake'), 420);
-    } else {
-      showToast('Welcome back — redirecting...', 'ok');
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      setTimeout(()=> location.href = 'webpage1.html', 900);
-    }
-  }, 900);
-});
-
-/* ---------------- small UX: Enter key on forms should submit, placeholder presence already set ---------------- */
-
-/* Accessibility: allow keyboard switching with left/right arrows on tab */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'ArrowLeft') setActiveTab('register');
-  if(e.key === 'ArrowRight') setActiveTab('login');
+togglePassword.addEventListener("click", () => {
+  if(passwordInput.type === "password"){
+    passwordInput.type = "text";
+    togglePassword.textContent = "🙈"; // monkey when visible
+  } else {
+    passwordInput.type = "password";
+    togglePassword.textContent = "👁️"; // eye when hidden
+  }
 });
 </script>
+
 
 </body>
 </html>
