@@ -1,7 +1,6 @@
 # 🛒 Yash-Mart
 
-Yash-Mart is a modern, responsive e-commerce frontend web application built using **HTML, CSS, JavaScript, and Bootstrap**.  
-It simulates a real online shopping experience with product categories, cart management, and dynamic UI updates.
+Yash-Mart is a modern, responsive e-commerce frontend web application built using **HTML, CSS, JavaScript, and Bootstrap**.  It simulates a real online shopping experience with product categories, cart management, and dynamic UI updates.
 
 ---
 
