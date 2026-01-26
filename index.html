@@ -284,6 +284,53 @@ button.cta:hover{
   opacity:0.8;
 }
 
+/* ===== FLIP CARD ===== */
+.flip-container{
+  perspective:1000px;
+}
+
+.flip-card{
+  width:100%;
+  transform-style:preserve-3d;
+  transition:transform .7s;
+  position:relative;
+}
+
+.flip-card.flip{
+  transform:rotateY(180deg);
+}
+
+.flip-side{
+  backface-visibility:hidden;
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+}
+
+.flip-back{
+  transform:rotateY(180deg);
+}
+
+/* ===== FIX FLIP CARD HEIGHT ISSUE ===== */
+
+.auth-card{
+  overflow:hidden;
+}
+
+.flip-card{
+  min-height:420px; /* 🔥 THIS FIXES EVERYTHING */
+}
+
+.flip-side{
+  position:absolute;
+  height:100%;
+}
+
+.flip-front,
+.flip-back{
+  width:100%;
+}
 
 
 </style>
@@ -337,99 +384,198 @@ button.cta:hover{
 
 
   <!-- RIGHT -->
-  <div class="auth-right">
-    <div class="auth-card">
-      <h2>Welcome back 👋</h2>
-      <p class="sub">Login to continue shopping</p>
+<div class="auth-right">
 
-      <form id="loginForm">
+  <div class="auth-card flip-container">
 
-        <div class="field">
-  <input type="text" id="username" placeholder=" " required>
+    <div class="flip-card" id="flipCard">
+
+      <!-- 🔐 LOGIN -->
+     <div class="flip-side flip-front">
+
+        <h2>Welcome back 👋</h2>
+        <p class="sub">Login to continue shopping</p>
+
+        <form id="loginForm">
+
+      <div class="field">
+  <input type="email" id="loginEmail" placeholder=" " required>
+  <label>Email</label>
+</div>
+
+
+          <div class="field password-field">
+            <input type="password" id="loginPassword" placeholder=" " required>
+            <label>Password</label>
+            <span class="eye" id="loginEye">👁️</span>
+          </div>
+
+          <button class="cta">Login</button>
+        </form>
+
+        <p class="switch">
+          New to Yashmart?
+          <a href="#" id="goRegister">Create account</a>
+        </p>
+
+        <p class="secure">🔒 100% secure login</p>
+      </div>
+
+      <!-- 📝 REGISTER -->
+      <div class="flip-side flip-back">
+
+        <h2>Create Account ✨</h2>
+        <p class="sub">Join Yashmart today</p>
+
+        <form id="registerForm">
+
+
+          <div class="field">
+  <input type="text" id="regUsername" placeholder=" " required>
   <label>Username</label>
 </div>
 
-        <div class="field">
-          <input type="email" id="email" placeholder=" " required>
-          <label>Email</label>
-        </div>
-<div class="field password-field">
-  <input type="password" id="password" placeholder=" " required>
-  <label>Password</label>
 
-  <!-- Eye toggle -->
-  <span class="eye" id="togglePassword">
-    👁️
-  </span>
-</div>
+          <div class="field">
+            <input type="email" id="regEmail" placeholder=" " required>
+            <label>Email</label>
+          </div>
 
+          <div class="field password-field">
+            <input type="password" id="regPassword" placeholder=" " required>
+            <label>Password</label>
+            <span class="eye" id="regEye">👁️</span>
+          </div>
 
-        <button class="cta" type="submit">Login</button>
-      </form>
+          <button class="cta">Create Account</button>
+        </form>
 
-      <p class="switch">
-        New to Yashmart?
-        <a href="#" id="goRegister">Create account</a>
-      </p>
+        <p class="switch">
+          Already have an account?
+          <a href="#" id="goLogin">Login</a>
+        </p>
 
-      <p class="secure">🔒 100% secure login</p>
+        <p class="secure">🔐 Your data is safe</p>
+      </div>
+
     </div>
   </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
+
+
 <script>
+
+  
+/* ========= ELEMENTS ========= */
+const flipCard = document.getElementById("flipCard");
 const toast = document.getElementById("toast");
 
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+
+const goRegister = document.getElementById("goRegister");
+const goLogin = document.getElementById("goLogin");
+
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("loginPassword");
+
+const regUsername = document.getElementById("regUsername");
+const regEmail = document.getElementById("regEmail");
+const regPassword = document.getElementById("regPassword");
+
+const loginEye = document.getElementById("loginEye");
+const regEye = document.getElementById("regEye");
+
+/* ========= TOAST ========= */
 function showToast(msg){
   toast.textContent = msg;
   toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),2000);
+  setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-document.getElementById("loginForm").addEventListener("submit", e => {
+/* ========= FLIP ========= */
+goRegister.onclick = e => {
+  e.preventDefault();
+  flipCard.classList.add("flip");
+};
+
+goLogin.onclick = e => {
+  e.preventDefault();
+  flipCard.classList.remove("flip");
+};
+
+/* ========= REGISTER ========= */
+registerForm.onsubmit = e => {
   e.preventDefault();
 
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const user = {
+    username: regUsername.value.trim(),
+    email: regEmail.value.trim(),
+    password: regPassword.value.trim()
+  };
 
-  if(!username || !email || !password){
-    showToast("Fill all fields");
+  if(!user.username || !user.email || !user.password){
+    showToast("Fill all fields ❌");
     return;
   }
 
-  // 🔥 SAVE USER LIKE OLD PAGE
-  const user = { username, email };
+  localStorage.setItem("yashmartUser", JSON.stringify(user));
+  showToast("Account created 🎉");
 
-  localStorage.setItem("currentUser", JSON.stringify(user));
+  setTimeout(() => flipCard.classList.remove("flip"), 1000);
+};
 
-  showToast(`Welcome ${username}!`);
+/* ========= LOGIN ========= */
+loginForm.onsubmit = e => {
+  e.preventDefault();
 
-  setTimeout(() => {
-    window.location.href = "webpage1.html";
-  }, 1200);
-});
+  const saved = JSON.parse(localStorage.getItem("yashmartUser"));
 
-
-</script>
-
-<script>
-const togglePassword = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
-
-togglePassword.addEventListener("click", () => {
-  if(passwordInput.type === "password"){
-    passwordInput.type = "text";
-    togglePassword.textContent = "🙈"; // monkey when visible
-  } else {
-    passwordInput.type = "password";
-    togglePassword.textContent = "👁️"; // eye when hidden
+  if(!saved){
+    showToast("No account found 😕");
+    return;
   }
-});
+
+  if(
+    loginEmail.value.trim() === saved.email &&
+    loginPassword.value === saved.password
+  ){
+    localStorage.setItem("currentUser", JSON.stringify(saved));
+    showToast(`Welcome ${saved.username} 👋`);
+
+    setTimeout(() => {
+      window.location.href = "webpage1.html";
+    }, 1200);
+  } else {
+    showToast("Invalid email or password ❌");
+  }
+};
+
+/* ========= PASSWORD TOGGLE ========= */
+loginEye.onclick = () => {
+  if(loginPassword.type === "password"){
+    loginPassword.type = "text";
+    loginEye.textContent = "🙈";
+  } else {
+    loginPassword.type = "password";
+    loginEye.textContent = "👁️";
+  }
+};
+
+regEye.onclick = () => {
+  if(regPassword.type === "password"){
+    regPassword.type = "text";
+    regEye.textContent = "🙈";
+  } else {
+    regPassword.type = "password";
+    regEye.textContent = "👁️";
+  }
+};
 </script>
+
 
 
 </body>
