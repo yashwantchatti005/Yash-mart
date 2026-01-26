@@ -14,26 +14,25 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
   <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand" href="webpage1.html">YASH-MART</a>
+<a class="navbar-brand luxury-purple fs-5" href="webpage1.html">
+  YASH-MART
+</a>
 
-    <!-- Hamburger button for mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Everything visible on all screen sizes -->
     <div class="d-flex align-items-center ms-auto gap-3">
-      <!-- Search -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
+       <!-- SEARCH BELOW BRAND -->
+      <form class="search-box" role="search">
+        <input type="search" placeholder="Search products">
+        <button type="submit">🔍</button>
       </form>
 
       <!-- Profile -->
-      <div class="d-flex flex-column align-items-center">
-        <a href="profile.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
-        <span class="hi">Profile</span>
+      <div class="d-flex flex-column align-items-center " id="profileSection">
+        <a href="index.html"><img src="person-circle.svg" alt="Profile" width="25"></a>
+        <span class="hi" id="profileName">Profile</span>
       </div>
 
       <!-- Cart -->
@@ -43,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Collapsible menu for links -->
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link active" href="webpage1.html">Home</a></li>
@@ -58,11 +56,10 @@
     </div>
   </div>
 </nav>
-
-<br><br><br><br>
+<br><br><br><br><br>
 
     <!-- Heading -->
-    <section class="bg-dark text-white text-center p-5">
+  <section class="bg-dark text-white text-center p-5 hero">
        <div class="banner-text">
       <h1>FRESH</h1>
       <p>Order now for instant delivery</p>
@@ -75,7 +72,7 @@
 
                          <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="3-tomato-png-image-picture-download.png" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/3-tomato-png-image-picture-download.png" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Tomato</h5>
               <p class="card-text">"Adds taste to every dish."<br><strong>₹40/kg</strong></p>
@@ -86,7 +83,7 @@
 
            <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="3-cauliflower-png-image.png" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/3-cauliflower-png-image.png" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Cauliflower</h5>
               <p class="card-text">"A flower you can eat."<br><strong>₹55/kg</strong></p>
@@ -97,7 +94,7 @@
 
            <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="8-onion-png-image.png" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/8-onion-png-image.png" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Onion</h5>
               <p class="card-text">"Brings flavor and tears."<br><strong>₹30/kg</strong></p>
@@ -108,7 +105,7 @@
 
            <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="12-broccoli-png-image-with-transparent-background.png" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/12-broccoli-png-image-with-transparent-background.png" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Broccoli</h5>
               <p class="card-text">"Little green trees."<br><strong>₹120/kg</strong></p>
@@ -119,7 +116,7 @@
 
            <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="carrot.jpg" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/carrot.jpg" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Carrot</h5>
               <p class="card-text">"Crunchy and sweet."<br><strong>₹60/kg</strong></p>
@@ -130,7 +127,7 @@
 
            <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="14-eggplant-png-images-download.png" class="card-img-top" alt="Blocks" height="200">
+            <img src="images/14-eggplant-png-images-download.png" class="card-img-top" alt="Blocks" height="200">
             <div class="card-body">
               <h5 class="card-title">Brinjal</h5>
               <p class="card-text">"The purple king."<br><strong>₹45/kg</strong></p>
@@ -145,22 +142,22 @@
      </div>
 
 
-         <!--image slides-->
+         <!-- image slides
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
  <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="vegetables.webp" class="d-block w-100" alt="..." height="400">
+      <img src="images/vegetables.webp" class="d-block w-100" alt="..." height="400">
       <div class="carousel-caption d-none d-md-block text-white">
         <h2>Vegetables and Fruits</h2>
         <p>Order now for instand delivery.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="fruits.jpg" class="d-block w-100" alt="..." height="400">
+      <img src="images/fruits.jpg" class="d-block w-100" alt="..." height="400">
     </div>
     <div class="carousel-item">
-      <img src="leaf.webp" class="d-block w-100" alt="..." height="400">
+      <img src="images/leaf.webp" class="d-block w-100" alt="..." height="400">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -171,7 +168,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+</div> -->
 
 
 <!--fruits-->
@@ -181,7 +178,7 @@
 
               <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="24454-5-apple-fruit-transparent-image.png" class="card-img-top" alt="Apple" height="200">
+            <img src="images/24454-5-apple-fruit-transparent-image.png" class="card-img-top" alt="Apple" height="200">
             <div class="card-body">
               <h5 class="card-title">Apple</h5>
               <p class="card-text">"An apple a day."<br><strong>₹150/kg</strong></p>
@@ -192,7 +189,7 @@
 
                <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="31668-7-banana-icon.png" class="card-img-top" alt="Banana" height="200">
+            <img src="images/31668-7-banana-icon.png" class="card-img-top" alt="Banana" height="200">
             <div class="card-body">
               <h5 class="card-title">Banana</h5>
               <p class="card-text">"Energy on the go."<br><strong>₹60/dozen</strong></p>
@@ -203,7 +200,7 @@
 
                <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="34386-3-blueberry-transparent.png" class="card-img-top" alt="Blueberry" height="200">
+            <img src="images/34386-3-blueberry-transparent.png" class="card-img-top" alt="Blueberry" height="200">
             <div class="card-body">
               <h5 class="card-title">Blueberry</h5>
               <p class="card-text">"Tiny but mighty."<br><strong>₹250/box</strong></p>
@@ -214,7 +211,7 @@
 
                <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="24424-7-papaya-transparent-background.png" class="card-img-top" alt="Papaya" height="200">
+            <img src="images/24424-7-papaya-transparent-background.png" class="card-img-top" alt="Papaya" height="200">
             <div class="card-body">
               <h5 class="card-title">Papaya</h5>
               <p class="card-text">"Good for digestion."<br><strong>₹45/kg</strong></p>
@@ -225,7 +222,7 @@
 
                <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="23102-2-artichokes-transparent.png" class="card-img-top" alt="Sitaphal" height="200">
+            <img src="images/23102-2-artichokes-transparent.png" class="card-img-top" alt="Sitaphal" height="200">
             <div class="card-body">
               <h5 class="card-title">Sitaphal</h5>
               <p class="card-text">"Sweet and creamy."<br><strong>₹180/kg</strong></p>
@@ -236,7 +233,7 @@
 
                <div class="col">
           <div class="card h-100 shadow-sm">
-            <img src="22588-9-transparent-pineapple.png" class="card-img-top" alt="Pineapple" height="200">
+            <img src="images/22588-9-transparent-pineapple.png" class="card-img-top" alt="Pineapple" height="200">
             <div class="card-body">
               <h5 class="card-title">Pineapple</h5>
               <p class="card-text">"Tropical sweetness."<br><strong>₹90/piece</strong></p>
@@ -259,7 +256,7 @@
 
              <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="1-tree-png-image-download-picture.png" class="card-img-top" alt="Mango Tree" height="145">
+    <img src="images/1-tree-png-image-download-picture.png" class="card-img-top" alt="Mango Tree" height="145">
     <div class="card-body">
       <h5 class="card-title">Mango Tree</h5>
       <p class="card-text">"King of fruits’ home."<br><strong>₹1200/plant</strong></p>
@@ -270,7 +267,7 @@
 
 <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="20-tree-png-image-download-picture.png" class="card-img-top" alt="Neem Tree" height="145">
+    <img src="images/20-tree-png-image-download-picture.png" class="card-img-top" alt="Neem Tree" height="145">
     <div class="card-body">
       <h5 class="card-title">Neem Tree</h5>
       <p class="card-text">"Nature’s medicine."<br><strong>₹900/plant</strong></p>
@@ -281,7 +278,7 @@
 
 <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="leaf.webp" class="card-img-top" alt="Green Leaf"  height="164">
+    <img src="images/leaf.webp" class="card-img-top" alt="Green Leaf"  height="164">
     <div class="card-body">
       <h5 class="card-title">Green Leaf</h5>
       <p class="card-text">"Fresh and natural."<br><strong>₹30/bunch</strong></p>
@@ -292,7 +289,7 @@
 
 <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="leaf1.webp" class="card-img-top" alt="Tulsi Leaves"  height="164">
+    <img src="images/leaf1.webp" class="card-img-top" alt="Tulsi Leaves"  height="164">
     <div class="card-body">
       <h5 class="card-title">Tulsi Leaves</h5>
       <p class="card-text">"Sacred & healing."<br><strong>₹50/bunch</strong></p>
@@ -303,7 +300,7 @@
 
 <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="flow.webp" class="card-img-top" alt="Rose Flower" height="164">
+    <img src="images/flow.webp" class="card-img-top" alt="Rose Flower" height="164">
     <div class="card-body">
       <h5 class="card-title">Rose Flower</h5>
       <p class="card-text">"Symbol of love."<br><strong>₹20/piece</strong></p>
@@ -314,7 +311,7 @@
 
 <div class="col">
   <div class="card h-100 shadow-sm">
-    <img src="lotus.webp" class="card-img-top" alt="Lotus Flower"  height="164">
+    <img src="images/lotus.webp" class="card-img-top" alt="Lotus Flower"  height="164">
     <div class="card-body">
       <h5 class="card-title">Lotus Flower</h5>
       <p class="card-text">"Pure and divine."<br><strong>₹40/piece</strong></p>
@@ -326,6 +323,23 @@
 
          </div>
     </div>
+<!-- Add to Cart Modal -->
+<div class="modal fade custom-modal" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-zoom">
+    <div class="modal-content text-white gradient-bg shadow-lg" id="cartModalContent">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="cartModalLabel">🛒 Item Added to Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="cartModalBody"></div>
+      <div class="modal-footer border-0">
+        <a href="cart.html" class="btn btn-dark px-4">Go to Cart</a>
+        <button type="button" class="btn btn-light text-dark px-4" data-bs-dismiss="modal">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
      <!-- Footer -->
@@ -335,32 +349,70 @@
 
 
 <script>
-// CART SYSTEM
+// ✅ CART SYSTEM WITH POPUP
 const cartCount = document.getElementById("cartCount");
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cartCount.textContent = cart.length;
+const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+const cartModalBody = document.getElementById("cartModalBody");
 
-// Grab all Add to Cart buttons
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cartCount.textContent = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+function updateCartTotal() {
+  let total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  localStorage.setItem("cartTotal", total);
+  return total;
+}
+
 document.querySelectorAll(".btn.btn-primary").forEach(btn => {
   btn.addEventListener("click", (e) => {
-    e.preventDefault(); // prevent page reload
-
+    e.preventDefault();
     const card = btn.closest(".card");
-    const name = card.querySelector(".card-title").textContent.trim();
+    if (!card) return;
 
-    // Get price from <strong> inside <p>
-    const priceText = card.querySelector(".card-text strong").textContent.trim();
-    const price = parseInt(priceText.replace(/[^0-9]/g, "")); // remove non-digit chars
+    const name = card.querySelector(".card-title")?.textContent.trim() || "Unknown";
+    const priceText = card.querySelector(".card-text")?.textContent.match(/₹[0-9,]+/);
+    const price = priceText ? parseInt(priceText[0].replace(/[₹,]/g, "")) : 0;
+    const image = card.querySelector("img")?.getAttribute("src") || "";
 
-    const image = card.querySelector("img").getAttribute("src");
+    let existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      cart.push({ name, price, image, quantity: 1 });
+    }
 
-    // Add to cart
-    const item = { name, price, image };
-    cart.push(item);
     localStorage.setItem("cart", JSON.stringify(cart));
-    cartCount.textContent = cart.length;
+    const total = updateCartTotal();
 
-    // Feedback
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    cartModalBody.innerHTML = `
+      <div class="d-flex align-items-center gap-3">
+        <img src="${image}" alt="${name}" width="80" height="80" class="rounded">
+        <div>
+          <h6 class="mb-1">${name}</h6>
+          <p class="mb-0">Price: ₹${price}</p>
+          <small class="text-light">Added to your cart successfully!</small>
+        </div>
+      </div>
+      <hr>
+      <p class="mt-2 mb-0"><b>Total Cart Value:</b> ₹${total}</p>
+    `;
+    // 🟢 Random gradient color each time modal shows
+const modalContent = document.getElementById("cartModalContent");
+const colors = ["gradient-red", "gradient-blue", "gradient-green", "gradient-purple", "gradient-orange"];
+const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+// Remove any old gradient color classes
+colors.forEach(c => modalContent.classList.remove(c));
+
+// Add new one
+modalContent.classList.add(randomColor);
+
+// Show the modal
+cartModal.show();
+
+
     btn.textContent = "✅ Added!";
     btn.classList.replace("btn-primary", "btn-success");
     setTimeout(() => {
@@ -395,6 +447,24 @@ searchForm.addEventListener("submit", (e) => {
   }
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const profileName = document.getElementById('profileName');
+  const profileSection = document.getElementById('profileSection');
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+  if (currentUser) {
+    profileName.textContent = `Hi, ${currentUser.username}`;
+  } else {
+    profileName.textContent = "Profile";
+  }
+
+});
+</script>
+
 
 
   </body>

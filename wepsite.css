@@ -274,3 +274,1481 @@ section {
   }
 }
 
+/* 🌈 Base Gradient Background */
+.gradient-bg {
+  color: white;
+  border-radius: 15px;
+  border: none;
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease infinite, fadeIn 0.4s ease-in-out;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* 🎨 Different Gradient Color Options */
+.gradient-red {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+}
+.gradient-blue {
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+}
+.gradient-green {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+}
+.gradient-purple {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+}
+.gradient-orange {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+/* 🔁 Gradient Movement Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✨ Modal Animation */
+.modal.fade .modal-dialog {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.modal.fade.show .modal-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* 💫 Fade In Content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-close-white {
+  filter: brightness(0) invert(1);
+}
+
+
+/* ===============================
+   PRODUCT CARDS – PREMIUM LOOK
+================================ */
+
+/* Card base */
+#productList .card {
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff, #f3f3f3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+/* Image styling */
+#productList .card img {
+  transition: transform 0.4s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Hover image zoom */
+#productList .card:hover img {
+  transform: scale(1.08);
+}
+
+/* Card hover lift */
+#productList .card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Card body */
+#productList .card-body {
+  padding: 18px;
+  background: #ffffff;
+}
+
+/* Product name */
+#productList .card h5 {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1c2541;
+}
+
+/* Price styling */
+#productList .card p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ff6f00;
+  margin-bottom: 12px;
+}
+
+/* Add to Cart button */
+#productList .add-cart {
+  border-radius: 25px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0b132b, #1c2541);
+  border: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Button hover */
+#productList .add-cart:hover {
+  background: linear-gradient(135deg, #ff6f00, #ff9100);
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Subtle badge effect
+#productList .card::after {
+  content: "BEST SELLER";
+  position: absolute;
+  top: 12px;
+  left: -40px;
+  background: #ff6f00;
+  color: #000;
+  padding: 5px 50px;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+} */
+
+
+
+/* Show badge on hover */
+#productList .card:hover::after {
+  opacity: 1;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+  #productList .card {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+}
+
+/* ==============================
+   ALL PRODUCT CARDS – FINAL LOOK
+================================ */
+
+/* Base card */
+.card {
+  border: none !important;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff, #f4f6fb);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+}
+
+/* Card image */
+.card img {
+  transition: transform 0.4s ease;
+  object-fit: contain;
+  background: #fff;
+}
+
+/* Image zoom */
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* Card body */
+.card-body {
+  padding: 18px;
+  text-align: center;
+}
+
+/* Product title */
+.card-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #1c2541;
+  margin-bottom: 6px;
+}
+
+/* Tagline */
+.card-text {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 6px;
+}
+
+/* Price */
+.card-text:last-of-type,
+.card span.text-success {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6f00 !important;
+}
+
+/* Strike price */
+.card del {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Buttons */
+.card .btn {
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #0b132b, #1c2541);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Button hover */
+.card .btn:hover {
+  background: linear-gradient(135deg, #ff6f00, #ff9100);
+  color: #000;
+  transform: scale(1.06);
+}
+
+/* DEAL badge */
+.card::before {
+  content: "🔥 HOT DEAL";
+  position: absolute;
+  top: 14px;
+  right: -50px;
+  background: #ff6f00;
+  color: #000;
+  padding: 6px 55px;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show badge on hover */
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Mobile polish */
+@media (max-width: 768px) {
+  .card {
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+}
+
+
+/* ==============================
+   MAKE ALL CARD IMAGES SAME SIZE
+================================ */
+
+/* Card image wrapper */
+.card-img-top {
+  width: 100%;
+  height: 200px;          /* SAME HEIGHT FOR ALL */
+  object-fit: contain;   /* Keeps full image without cutting */
+  padding: 12px;         /* Nice spacing inside card */
+  background: #ffffff;   /* Clean background */
+}
+
+/* Bigger images on desktop */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px;
+  }
+}
+
+/* Smaller images on very small phones */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px;
+    padding: 8px;
+  }
+}
+/* ===============================
+   SMALL SEARCH BOX
+================================ */
+
+.search-box {
+  position: relative;
+  width: 180px;   /* 🔥 SMALL WIDTH */
+}
+
+.search-box input {
+  width: 100%;
+  height: 34px;               /* smaller height */
+  padding: 6px 36px 6px 12px; /* space for icon */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  font-size: 12px;
+}
+
+/* Button inside input */
+.search-box button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: #212529;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #ff6f00;
+}
+
+/* 📱 Even smaller on mobile */
+@media (max-width: 576px) {
+  .search-box {
+    width: 150px;
+  }
+}
+
+
+/* ============================= */
+/* 🔥 GLOBAL CARD GRID FIX */
+/* ============================= */
+
+/* Force 2 cards per row on mobile */
+@media (max-width: 767px) {
+  .row {
+    --bs-gutter-x: 0.75rem;
+  }
+
+  .row > .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* ============================= */
+/* 🖼️ CARD IMAGE CONSISTENCY */
+/* ============================= */
+
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain;
+  padding: 10px;
+  background: #fff;
+}
+
+/* ============================= */
+/* ✨ CARD DESIGN ENHANCEMENT */
+/* ============================= */
+
+.card {
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.15);
+}
+
+/* ============================= */
+/* 📝 CARD BODY */
+/* ============================= */
+
+.card-body {
+  padding: 12px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* ============================= */
+/* 💰 PRICE STYLE */
+/* ============================= */
+
+.card-text:last-of-type {
+  font-weight: 700;
+  color: #198754;
+}
+
+/* ============================= */
+/* 🛒 BUTTON STYLE */
+/* ============================= */
+
+.card .btn {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 8px;
+}
+
+.card .btn-primary {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+}
+
+.card .btn-primary:hover {
+  background: linear-gradient(135deg, #5b0fb8, #1f63d1);
+}
+
+/* ============================= */
+/* 📱 SMALLER MOBILE TWEAK */
+/* ============================= */
+
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 170px !important;
+  }
+
+  .card-title {
+    font-size: 15px;
+  }
+
+  .card-text {
+    font-size: 13px;
+  }
+}
+
+/* ==============================
+   PROFILE NAME INLINE FIX
+================================ */
+
+/* Make profile container horizontal */
+#profileSection {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Profile text inline */
+#profileName {
+  display: inline;
+  white-space: nowrap; /* 🔥 prevents line break */
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Optional: slightly smaller on mobile */
+@media (max-width: 576px) {
+  #profileName {
+    font-size: 13px;
+  }
+}
+
+/* ================================
+   🧸 TOY CARDS – FINAL FIX
+================================ */
+
+/* FORCE 2 CARDS PER ROW ON MOBILE (TOYS INCLUDED) */
+@media (max-width: 767px) {
+  .row > .col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* ================================
+   🖼️ TOY IMAGE SIZE NORMALIZATION
+================================ */
+
+/* Override ALL inline height="165" etc */
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain !important;
+  padding: 10px;
+  background: #ffffff;
+}
+
+/* Desktop toys slightly bigger */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px !important;
+    padding: 8px;
+  }
+}
+
+/* ================================
+   🧸 TOY CARD BODY BALANCE
+================================ */
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.card-text {
+  font-size: 14px;
+}
+
+/* ================================
+   🛒 BUTTON CONSISTENCY
+================================ */
+
+.card .btn {
+  width: 100%;
+  border-radius: 22px;
+  font-weight: 600;
+}
+
+/* ================================
+   🥬🍎 FRESH / FRUITS / LEAFY CARDS
+================================ */
+
+/* FORCE 2 CARDS PER ROW ON MOBILE */
+@media (max-width: 767px) {
+  .row > .col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* ================================
+   🖼️ IMAGE SIZE – ALL FRESH ITEMS
+================================ */
+
+/* Override ALL inline height attributes */
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain !important;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* Desktop – little bigger */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px !important;
+    padding: 8px;
+  }
+}
+
+/* ================================
+   🥬 CARD BODY CLEAN LOOK
+================================ */
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c2541;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Price highlight */
+.card-text strong {
+  font-size: 17px;
+  color: #198754;
+}
+
+/* ================================
+   🛒 BUTTON CONSISTENCY
+================================ */
+
+.card .btn {
+  width: 100%;
+  border-radius: 22px;
+  font-weight: 600;
+}
+
+
+/* =================================
+   📱 ELECTRONICS – FIGURE FIX
+================================= */
+
+.figure {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.figure-img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #fff;
+  padding: 15px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.figure:hover .figure-img {
+  transform: scale(1.05);
+}
+
+.figure-caption {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff6f00 !important;
+}
+
+/* Mobile – 2 figures per row */
+@media (max-width: 767px) {
+  .figure {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* =================================
+   ⚡ ELECTRONICS PRODUCT CARDS
+================================= */
+
+/* Force same image size */
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain !important;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px !important;
+    padding: 8px;
+  }
+}
+
+/* Card body alignment */
+.card-body {
+  text-align: center;
+}
+
+/* Product title */
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c2541;
+}
+
+/* Description */
+.card-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Price */
+.card-text:last-of-type {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6f00;
+}
+
+/* Button */
+.card .btn {
+  width: 100%;
+  border-radius: 22px;
+  font-weight: 600;
+}
+
+/* =================================
+   📱 GRID FIX – MOBILE
+================================= */
+
+/* 2 cards per row on mobile */
+@media (max-width: 767px) {
+  .row > .col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+
+/* =================================
+   💄 BEAUTY / JEWELLERY CARD FIX
+================================= */
+
+/* FORCE 2 CARDS PER ROW ON MOBILE */
+@media (max-width: 767px) {
+  .row > .col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* =================================
+   🖼️ IMAGE CONSISTENCY (ALL BEAUTY)
+================================= */
+
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain !important;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px !important;
+    padding: 8px;
+  }
+}
+
+/* =================================
+   🧴 CARD BODY CLEAN STYLE
+================================= */
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c2541;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* PRICE STYLE */
+.card-text:last-of-type {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6f00;
+}
+
+/* =================================
+   🛒 BUTTON POLISH
+================================= */
+
+.card .btn {
+  width: 100%;
+  border-radius: 22px;
+  font-weight: 600;
+}
+
+/* =================================
+   👗 FASHION PAGE – GLOBAL FIX
+================================= */
+
+/* FORCE 2 CARDS PER ROW ON MOBILE */
+@media (max-width: 767px) {
+  .row > .col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* =================================
+   🖼️ FASHION IMAGE CONSISTENCY
+================================= */
+
+.card-img-top {
+  height: 200px !important;
+  object-fit: contain !important;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 220px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px !important;
+    padding: 8px;
+  }
+}
+
+/* =================================
+   🧥 CARD BODY ALIGNMENT
+================================= */
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c2541;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* PRICE STYLE */
+.card-text:last-of-type {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6f00;
+}
+
+/* =================================
+   🛒 BUTTON STYLE
+================================= */
+
+.card .btn {
+  width: 100%;
+  border-radius: 22px;
+  font-weight: 600;
+}
+
+/* =================================
+   🖼️ NEW MODELS IMAGE POLISH
+================================= */
+
+.position-relative img {
+  transition: transform 0.4s ease;
+}
+
+.position-relative:hover img {
+  transform: scale(1.05);
+}
+
+.position-absolute {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ================================
+   👕 FASHION – NEW MODELS SECTION
+================================ */
+
+/* Image container polish */
+.position-relative {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* Image animation */
+.position-relative img {
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+/* Hover zoom effect */
+.position-relative:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.85);
+}
+
+/* Text overlay styling */
+.position-absolute {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+/* ================================
+   📱 MOBILE VIEW FIX
+================================ */
+
+@media (max-width: 767px) {
+  .row.g-4 > .col-12 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .position-absolute {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+}
+
+/* ================================
+   🖥 DESKTOP POLISH
+================================ */
+
+@media (min-width: 768px) {
+  .position-absolute {
+    font-size: 18px;
+  }
+}
+
+/* ==============================
+   💜 NYKAA PURPLE LUXURY THEME
+   (COLOR OVERRIDE ONLY)
+================================ */
+
+/* 🌍 BODY */
+body {
+  background: #f6edf9 !important;
+  color: #2a1036 !important;
+}
+
+/* 🧭 NAVBAR */
+.container-fluid,
+.custom-navbar {
+  background: linear-gradient(135deg, #3f1651, #5a1f6f) !important;
+}
+
+.navbar-brand {
+  color: #ffb3ec !important;
+}
+
+.nav-link {
+  color: #ffffff !important;
+}
+
+.nav-link:hover {
+  color: #ffb3ec !important;
+}
+
+/* 🔍 SEARCH BOX */
+.search-box input {
+  background: #ffffff !important;
+  border: 1px solid #d8b4e2 !important;
+  color: #3f1651 !important;
+}
+
+.search-box button {
+  background: #8e44ad !important;
+}
+
+.search-box button:hover {
+  background: #c084fc !important;
+}
+
+/* 🎀 SECTION / BANNERS */
+section {
+  background: linear-gradient(135deg, #3f1651, #8e44ad) !important;
+  color: #ffffff !important;
+}
+
+.banner-text h1,
+.banner-text p {
+  color: #ffffff !important;
+}
+
+/* 🃏 CARDS */
+.card {
+  background: linear-gradient(145deg, #ffffff, #f7eefe) !important;
+  box-shadow: 0 12px 30px rgba(142, 68, 173, 0.25) !important;
+}
+
+.card-title {
+  color: #3f1651 !important;
+}
+
+.card-text {
+  color: #6b2f85 !important;
+}
+
+.card-text:last-of-type,
+.card-text strong {
+  color: #8e44ad !important;
+}
+
+/* 🛒 BUTTONS */
+.card .btn,
+.btn-primary {
+  background: linear-gradient(135deg, #8e44ad, #c084fc) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.card .btn:hover,
+.btn-primary:hover {
+  background: linear-gradient(135deg, #6d28d9, #a855f7) !important;
+  color: #ffffff !important;
+}
+
+/* 💎 BADGES */
+.card::before {
+  background: #c084fc !important;
+  color: #3f1651 !important;
+}
+
+/* 🧴 FIGURES (ELECTRONICS / FASHION TOP) */
+.figure-img {
+  background: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(142, 68, 173, 0.25) !important;
+}
+
+.figure-caption {
+  color: #8e44ad !important;
+}
+
+/* 👗 FASHION OVERLAY TEXT */
+.position-absolute {
+  background: rgba(63, 22, 81, 0.7) !important;
+  color: #ffffff !important;
+}
+
+/* 🪞 MODAL */
+.gradient-bg {
+  background: linear-gradient(135deg, #3f1651, #8e44ad) !important;
+}
+
+/* 👤 PROFILE / CART TEXT */
+.hi,
+#profileName {
+  color: #ffffff !important;
+}
+
+/* 📦 PRICE HIGHLIGHT */
+.card-text:last-of-type {
+  font-weight: 700;
+  color: #8e44ad !important;
+}
+
+/* 🌸 FOOTER (if any) */
+footer {
+  background: #3f1651 !important;
+  color: #ffffff !important;
+}
+.btn:active {
+  transform: scale(0.96);
+}
+.card:hover {
+  box-shadow:
+    0 0 0 rgba(0,0,0,0),
+    0 10px 25px rgba(0,0,0,0.15),
+    0 0 18px rgba(181, 93, 255, 0.35);
+}
+
+.card .btn {
+  background: linear-gradient(135deg, #6a11cb, #9b5cff);
+}
+
+.card .btn:hover {
+  box-shadow: 0 0 14px rgba(155, 92, 255, 0.6);
+}
+h1, h3 {
+  position: relative;
+}
+
+h1::after, h3::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 6px auto 0;
+  background: linear-gradient(90deg, #6a11cb, #9b5cff);
+  border-radius: 10px;
+}
+.search-box input {
+  background: #f4f0ff;
+  border: none;
+}
+
+.search-box input:focus {
+  box-shadow: 0 0 0 3px rgba(155, 92, 255, 0.35);
+}
+.card-text:last-of-type {
+  background: rgba(155, 92, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: inline-block;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* =================================================
+   📦 ORDER HISTORY – FORCE SMALL COMPACT CARDS
+   (OVERRIDES ALL GLOBAL .card STYLES)
+================================================= */
+
+.order-history .card {
+  all: unset;                       /* 🔥 RESET EVERYTHING */
+  display: block;
+  background: linear-gradient(145deg, #ffffff, #f7eefe);
+  border-radius: 12px;
+  border-left: 4px solid #8e44ad;
+  box-shadow: 0 6px 14px rgba(142, 68, 173, 0.2);
+  margin-bottom: 12px;
+}
+
+/* Disable ALL hover madness */
+.order-history .card:hover {
+  transform: none !important;
+  box-shadow: 0 8px 18px rgba(155, 92, 255, 0.3);
+}
+
+/* Compact body */
+.order-history .card-body {
+  padding: 10px 12px;
+}
+
+/* Title */
+.order-history .card h5 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3f1651;
+  margin-bottom: 4px;
+}
+
+/* Text */
+.order-history .card p {
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: #6b2f85;
+}
+
+/* Item list */
+.order-history .card ul {
+  padding-left: 16px;
+  margin-bottom: 4px;
+}
+
+.order-history .card ul li {
+  font-size: 12px;
+}
+
+/* Total */
+.order-history .card h6 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8e44ad;
+  margin-top: 6px;
+}
+
+/* Desktop width (PREVENT BIG CARDS) */
+@media (min-width: 768px) {
+  .order-history .card {
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .order-history .card {
+    margin-bottom: 10px;
+  }
+}
+/* =====================================
+   🚫 REMOVE HOT DEAL FROM ORDER HISTORY
+===================================== */
+
+/* Disable badge */
+.order-history .card::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Just in case you used ::after anywhere */
+.order-history .card::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =================================================
+   📦 ORDER HISTORY – FINAL GUARANTEED FIX
+================================================= */
+
+.order-history .card {
+  all: unset;
+  display: block;
+  background: linear-gradient(145deg, #ffffff, #f7eefe);
+  border-left: 4px solid #8e44ad;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(142, 68, 173, 0.25);
+  margin-bottom: 12px;
+}
+
+/* Disable HOT DEAL & other pseudo elements */
+.order-history .card::before,
+.order-history .card::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Card body */
+.order-history .card-body {
+  padding: 10px 12px;
+}
+
+/* Title */
+.order-history h5 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3f1651;
+  margin-bottom: 4px;
+}
+
+/* Text */
+.order-history p {
+  font-size: 12px;
+  color: #6b2f85;
+  margin-bottom: 3px;
+}
+
+/* Items */
+.order-history ul {
+  padding-left: 16px;
+  margin-bottom: 4px;
+}
+
+.order-history ul li {
+  font-size: 12px;
+}
+
+/* Total */
+.order-history h6 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8e44ad;
+}
+
+/* Desktop width */
+@media (min-width: 768px) {
+  .order-history .card {
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =====================================
+   📦 ORDER HISTORY – LEFT ALIGN DETAILS
+===================================== */
+
+/* Keep card centered, but text LEFT */
+.order-history .card-body {
+  text-align: left !important;
+}
+
+/* Lists also left aligned */
+.order-history ul {
+  text-align: left !important;
+}
+
+/* Order ID & total alignment */
+.order-history h5 {
+  text-align: left !important;
+}
+
+.order-history h6 {
+  text-align: right !important; /* total on right looks professional */
+}
+/* ================= CART MODAL – MATCH GLOBAL MODAL ================= */
+.cart-modal{
+  background: linear-gradient(135deg, #3f1651, #8e44ad) !important;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(142, 68, 173, 0.45);
+  color: #ffffff;
+}
+
+.cart-modal .modal-header,
+.cart-modal .modal-footer{
+  border: none;
+}
+
+.cart-modal .modal-title{
+  color: #ffffff;
+}
+
+/* Buttons */
+.cart-modal .btn-dark{
+  background: linear-gradient(135deg, #2a1036, #3f1651);
+  border: none;
+  color: #ffffff;
+}
+
+.cart-modal .btn-dark:hover{
+  background: linear-gradient(135deg, #3f1651, #5a1f6f);
+}
+
+.cart-modal .btn-light{
+  background: #ffffff;
+  color: #3f1651;
+  font-weight: 600;
+}
+
+.cart-modal .btn-light:hover{
+  background: #f4e8fb;
+}
+
+/* =====================================
+   🚫 REMOVE HOT DEAL FROM CART PAGE
+===================================== */
+
+/* Cart page – disable badge */
+#cartContainer .card::before,
+#cartContainer .card::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Also remove hover effects specific to deal badge */
+#cartContainer .card:hover::before,
+#cartContainer .card:hover::after {
+  content: none !important;
+  display: none !important;
+}
+/* ================================
+   📦 ORDER HISTORY – DESKTOP FLOW
+================================ */
+
+/* Full-width stacked cards on desktop */
+@media (min-width: 768px) {
+  .order-history .card {
+    max-width: 100% !important;   /* remove centering */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+/* Card hover animation */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Product image zoom */
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+.navbar {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.hero h1 {
+  animation: fadeDown 1s ease forwards;
+}
+
+.hero p {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.add-cart {
+  transition: all 0.2s ease;
+}
+
+.add-cart:active {
+  transform: scale(0.95);
+}
+@media (max-width: 576px) {
+  .row > div {
+    margin-bottom: 20px;
+  }
+}
+/* 💖 YASHMART LOGO */
+.luxury-purple {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+
+  background: linear-gradient(
+    90deg,
+    #ff4ecd,
+    #ff2fa0,
+    #ff77d9
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 0 10px rgba(255, 77, 205, 0.5);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* 🤍 WHITE HOVER */
+.luxury-purple:hover {
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+}
+/* Navbar brand size fix */
+.navbar-brand.luxury-purple {
+  font-size: 1.3rem;   /* default is ~1.5rem */
+  font-weight: 600;
+}
+.cafe-section {
+  background: #f7f8fa; /* Zepto-style soft gray */
+}
+
