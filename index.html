@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yashmart | Login</title>
-
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <style>
 /* ================= YASHMART BRAND ================= */
 :root{
@@ -533,26 +533,49 @@ loginForm.onsubmit = e => {
   e.preventDefault();
 
   const saved = JSON.parse(localStorage.getItem("yashmartUser"));
-
-  if(!saved){
+  if (!saved) {
     showToast("No account found 😕");
     return;
   }
 
-  if(
-    loginEmail.value.trim() === saved.email &&
+  const enteredEmail = loginEmail.value.trim().toLowerCase();
+  const savedEmail = saved.email.trim().toLowerCase();
+
+  if (
+    enteredEmail === savedEmail &&
     loginPassword.value === saved.password
-  ){
+  ) {
     localStorage.setItem("currentUser", JSON.stringify(saved));
+
+    // 🔑 normalized email key
+    const loginMailKey = `loginMailSent_${savedEmail}`;
+
+    // 📧 send email ONLY ONCE EVER
+    if (!localStorage.getItem(loginMailKey)) {
+      emailjs.send("service_0jrirjw", "template_r5uo73j", {
+        username: saved.username,
+        email: savedEmail
+      })
+      .then(() => {
+        console.log("First-time login email sent ✅");
+        localStorage.setItem(loginMailKey, "true");
+      })
+      .catch(err => {
+        console.log("Email failed ❌", err);
+      });
+    }
+
     showToast(`Welcome ${saved.username} 👋`);
 
     setTimeout(() => {
       window.location.href = "webpage1.html";
     }, 1200);
+
   } else {
     showToast("Invalid email or password ❌");
   }
 };
+
 
 /* ========= PASSWORD TOGGLE ========= */
 loginEye.onclick = () => {
@@ -576,7 +599,16 @@ regEye.onclick = () => {
 };
 </script>
 
-
+<script>
+  (function(){
+    emailjs.init("N1tGg7nzdurtsxXpK"); // from EmailJS dashboard
+  })();
+</script>
 
 </body>
 </html>
+
+
+
+
+
