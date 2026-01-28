@@ -430,6 +430,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+<script>
+  if (!localStorage.getItem("currentUser")) {
+    window.location.href = "login.html";
+  }
+</script>
+
 
 
 </body>
