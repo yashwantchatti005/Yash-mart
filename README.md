@@ -1,44 +1,95 @@
-# 🛒 Yash-Mart
+## 🔍 Google Clone (React)
 
-Yash-Mart is a modern, responsive e-commerce frontend web application built using **HTML, CSS, JavaScript, and Bootstrap**.  It simulates a real online shopping experience with product categories, cart management, and dynamic UI updates.
+🌐 Live Demo:
+👉 https://google-clone-ds6l.vercel.app/
 
----
-
-## 🌐 Live Demo
-🔗 https://yashwantchatti005.github.io/Yash-mart/
-
----
+A responsive Google Search Clone built using React (Create React App).
+This project replicates the core Google Search UI with additional features like dark mode, search history, and keyboard shortcuts.
 
 ## ✨ Features
-- 🛍️ Multiple product categories (Fashion, Beauty, Cafe, Toys, Electronics, Fresh)
-- 🛒 Add to Cart functionality using **localStorage**
-- ➕➖ Quantity control and remove items from cart
-- 💰 Dynamic price calculation & coupon support
-- 📱 Fully responsive design (mobile + desktop)
-- 🔍 Product search functionality
-- 🎨 Clean UI with Bootstrap components
-- 🚀 Deployed using **GitHub Pages**
 
----
+🔎 Google-style search interface
+
+🌗 Light / Dark mode (saved in localStorage)
+
+⌨️ Keyboard shortcut: Ctrl + L to focus search input
+
+🕘 Recent search history (reuse & remove items)
+
+❌ Clear search input button
+
+🌍 Real Google search redirection
+
+📱 Fully responsive design
+
+🚀 Deployed on Vercel
 
 ## 🛠️ Tech Stack
-- **HTML5**
-- **CSS3**
-- **JavaScript (ES6)**
-- **Bootstrap 5**
-- **Git & GitHub**
-- **GitHub Pages**
 
----
+React (Create React App)
 
-## 🧠 Learning Outcomes
-- Built a complete frontend e-commerce flow
-- Worked with DOM manipulation and localStorage
-- Solved real-world deployment issues (GitHub Pages)
-- Improved debugging and Git workflow skills
+JavaScript (ES6+)
 
----
+HTML5
+
+CSS3
+
+Vercel (Deployment)
+
+## 🚀 Getting Started (Local Setup)
+
+Clone the repository:
+git clone https://github.com/yashwantchatti005/Google-Clone.git
+cd Google-Clone
+
+Install dependencies
+npm install
+
+Run the app
+npm start
+
+
+## The app will run at:
+👉 http://localhost:3000
+
+🏗️ Build for Production
+npm run build
+
+
+This creates an optimized production build inside the build/ folder.
+
+## 🌍 Deployment
+
+The project is deployed using Vercel.
+
+Framework Preset: Create React App
+
+Build Command: npm run build
+
+Output Directory: build
+
+## 🔗 Live URL:
+👉 https://google-clone-ds6l.vercel.app/
+
+## 🧠 What I Learned
+
+Handling production build errors (ESLint warnings treated as errors)
+
+Proper React deployment configuration on Vercel
+
+Managing UI state using React Hooks (useState, useEffect, useRef)
+
+Improving UX with keyboard shortcuts and localStorage
 
 ## 👤 Author
-**Yashwant Chatti**  
-Aspiring Full Stack Developer 🚀
+
+Yashwant chatti
+
+🌐 Portfolio: https://yashwantchatti005.github.io/Portfolio/
+
+💻 GitHub: https://github.com/yashwantchatti005
+
+## 📄 License
+
+This project is for learning and portfolio purposes only.
+Google branding and assets belong to Google.
