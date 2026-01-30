@@ -545,26 +545,29 @@ loginForm.onsubmit = e => {
     enteredEmail === savedEmail &&
     loginPassword.value === saved.password
   ) {
+
+    // 📧 SEND MAIL ONLY ONCE
+if (!saved.mailSent) {
+
+  // ✅ MARK AS SENT IMMEDIATELY
+  saved.mailSent = true;
+  localStorage.setItem("yashmartUser", JSON.stringify(saved));
+
+  // 📤 THEN SEND EMAIL (async)
+  emailjs.send("service_0jrirjw", "template_r5uo73j", {
+    username: saved.username,
+    email: savedEmail
+  })
+  .then(() => {
+    console.log("Login mail sent ✅");
+  })
+  .catch(err => {
+    console.log("Email failed ❌", err);
+  });
+}
+
+
     localStorage.setItem("currentUser", JSON.stringify(saved));
-
-    // 🔑 normalized email key
-    const loginMailKey = `loginMailSent_${savedEmail}`;
-
-    // 📧 send email ONLY ONCE EVER
-    if (!localStorage.getItem(loginMailKey)) {
-      emailjs.send("service_0jrirjw", "template_r5uo73j", {
-        username: saved.username,
-        email: savedEmail
-      })
-      .then(() => {
-        console.log("First-time login email sent ✅");
-        localStorage.setItem(loginMailKey, "true");
-      })
-      .catch(err => {
-        console.log("Email failed ❌", err);
-      });
-    }
-
     showToast(`Welcome ${saved.username} 👋`);
 
     setTimeout(() => {
@@ -575,6 +578,7 @@ loginForm.onsubmit = e => {
     showToast("Invalid email or password ❌");
   }
 };
+
 
 
 /* ========= PASSWORD TOGGLE ========= */
